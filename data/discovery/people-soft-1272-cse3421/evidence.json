@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "researchStatus": "VERIFIED_LAST_NAME_MATCH",
+  "termCode": "1272",
+  "termLabel": "Spring 2027",
+  "campus": "COL",
+  "subject": "CSE",
+  "catalogNumber": "3421",
+  "verifiedLastName": "Lee",
+  "verifiedFullName": null,
+  "classNumbers": [
+    "6248",
+    "36012"
+  ],
+  "matchedBy": [
+    "termCode",
+    "classNumber"
+  ],
+  "interpretation": "Exact instructor surname Lee returns these current-term TBA classes; a nonsense exact surname returns no matches. This verifies the surname only. No given name is inferred from prior terms or candidate rosters.",
+  "queries": [
+    {
+      "label": "baseline",
+      "fetchedAt": "2026-10-20T17:26:57Z",
+      "method": "POST",
+      "publicEndpoint": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL",
+      "criteria": {
+        "termCode": "1272",
+        "campus": "COL",
+        "subject": "CSE",
+        "catalogNumber": "3421",
+        "openOnly": false,
+        "surnameOperator": "E",
+        "surname": ""
+      },
+      "matchedClassNumbers": [
+        "6248",
+        "36012"
+      ],
+      "visibleInstructor": "To be Announced",
+      "responseTextFile": "baseline-response.txt",
+      "rawResponseSha256": "fbaba0eadd5b5a0d9f7f464bfdd71b092a58613e37407fe1e2209351835523e7"
+    },
+    {
+      "label": "Lee",
+      "fetchedAt": "2026-10-20T17:27:44Z",
+      "method": "POST",
+      "publicEndpoint": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL",
+      "criteria": {
+        "termCode": "1272",
+        "campus": "COL",
+        "subject": "CSE",
+        "catalogNumber": "3421",
+        "openOnly": false,
+        "surnameOperator": "E",
+        "surname": "Lee"
+      },
+      "matchedClassNumbers": [
+        "6248",
+        "36012"
+      ],
+      "visibleInstructor": "To be Announced",
+      "responseTextFile": "exact-lee-response.txt",
+      "rawResponseSha256": "c80fc7ff677c7917945e63a07fd5f875d5f9455a31a1fc68c378bd5ffd7603db"
+    },
+    {
+      "label": "OsuNegativeControlZzz",
+      "fetchedAt": "2026-10-20T17:27:00Z",
+      "method": "POST",
+      "publicEndpoint": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL",
+      "criteria": {
+        "termCode": "1272",
+        "campus": "COL",
+        "subject": "CSE",
+        "catalogNumber": "3421",
+        "openOnly": false,
+        "surnameOperator": "E",
+        "surname": "OsuNegativeControlZzz"
+      },
+      "matchedClassNumbers": [],
+      "visibleInstructor": null,
+      "responseTextFile": "negative-control-response.txt",
+      "rawResponseSha256": "361b3b4bdd9f40dc84756ee812f4c6f51bae9f9944056d8726ab91fe7d406ed0"
+    }
+  ],
+  "limitations": [
+    "Assignments are provisional and may change.",
+    "The public result and class detail still display To be Announced.",
+    "No first-name filter or directly published full identity was found.",
+    "The evidence supports surname Lee, not a specific person named Lee."
+  ]
+}

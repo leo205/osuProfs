@@ -1,0 +1,55 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Course Number is exactly '
+3521
+',  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+TORKU
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+2 class section(s) found
+CSE 3521 - Survey of Artificial Intelligence I: Basic Techniques
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6254
+0010-LEC
+Regular
+MoWe 5:30PM - 6:50PM
+Scott Lab E125
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6605
+0030-LEC
+Regular
+TuTh 5:30PM - 6:50PM
+Baker Systems 180
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

@@ -1,0 +1,151 @@
+{
+  "operator": "B",
+  "termCode": "1272",
+  "campus": "COL",
+  "subject": "CSE",
+  "catalogNumber": "3521",
+  "results": [
+    {
+      "prefix": "A",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "B",
+      "classNumbers": [
+        "10933",
+        "36014"
+      ],
+      "error": null
+    },
+    {
+      "prefix": "C",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "D",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "E",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "F",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "G",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "H",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "I",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "J",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "K",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "L",
+      "classNumbers": [
+        "11751"
+      ],
+      "error": null
+    },
+    {
+      "prefix": "M",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "N",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "O",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "P",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "Q",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "R",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "S",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "T",
+      "classNumbers": [
+        "6254",
+        "6605"
+      ],
+      "error": null
+    },
+    {
+      "prefix": "U",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "V",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "W",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "X",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "Y",
+      "classNumbers": [],
+      "error": null
+    },
+    {
+      "prefix": "Z",
+      "classNumbers": [
+        "10483",
+        "12303"
+      ],
+      "error": null
+    }
+  ],
+  "allReturnedScopesVerified": true
+}

@@ -1,0 +1,18 @@
+# Optional API only. The static frontend does not need this service to run.
+# Creating this Blueprint in Render deploys it; adding this file locally does not.
+services:
+  - type: web
+    name: osu-profs-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    autoDeployTrigger: 'off'
+    healthCheckPath: /api/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: local
+      - key: APP_CATALOG_PATH
+        value: /app/data/catalog.json
+      - key: APP_CORS_ORIGINS
+        sync: false

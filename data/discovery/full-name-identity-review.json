@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20T17:51:38Z",
+  "scope": {
+    "termCode": "1272",
+    "campus": "col",
+    "subject": "CSE",
+    "catalogNumber": "3421",
+    "classNumbers": [
+      "6248",
+      "36012"
+    ]
+  },
+  "verifiedSurname": "Lee",
+  "directFullSectionIdentityProven": false,
+  "reviewedLikelyCandidate": {
+    "name": "Rubao Lee",
+    "profileUrl": "https://cse.osu.edu/people/lee.11875",
+    "currentAcademicYearTeachingSourceUrl": "https://engineering.osu.edu/news/2026/08/meet-colleges-2026-2027-new-faculty-cohort",
+    "evidence": "The official2026\u201327faculty cohort announcement associates Rubao Lee with Computer Architecture teaching this academic year. Current PeopleSoft exact-surname results associate Lee with the target Spring 2027 sections. This is a reviewed likely full-name candidate, not a directly published full-name section assignment."
+  },
+  "knownSameSurnameAlternative": {
+    "name": "Yoonkyung Lee",
+    "profileUrl": "https://cse.osu.edu/people/lee.2272",
+    "additionalProfileUrl": "https://u.osu.edu/lee.2272/",
+    "context": "Official profiles identify a statistics professor with a courtesy CSE appointment. No current architecture teaching association or exact target-section full-identity evidence was found. This alternative is not disproven by a surname search."
+  },
+  "otherChecks": [
+    {
+      "sourceUrl": "https://rubaolee.github.io/",
+      "finding": "Officially linked personal homepage lists Autumn 2026 CSE 3421 and CSE 2431 teaching; it does not list Spring 2027 target sections."
+    },
+    {
+      "sourceUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY",
+      "finding": "Public class 6248 detail remains To be Announced; surname-only form provides no given-name lookup. Exact Rubao, Rubao Lee, and Lee, Rubao surname queries returned no matches; exact Lee returned 6248 and 36012."
+    }
+  ],
+  "publicationPolicy": "fullNameMatches contains reviewed LIKELY candidates with primary profile sources. Official instructors arrays are unchanged. Profiles verify people, not assignments. Candidate list is curated and incomplete; same-surname people may exist outside it."
+}

@@ -1,0 +1,19 @@
+Class Search
+Groupbox
+Search for Classes
+Enter Search Criteria
+Name
+The search returns no results that match the criteria specified.
+Search for Classes
+Class Search Criteria
+The Ohio State University
+
+Verified returned form selections:
+Term: 1272
+Campus: COL
+Subject: CSE
+Course number: 3421
+Open classes only: N
+Surname operator: E (is exactly)
+Surname: OsuNegativeControlZzz
+

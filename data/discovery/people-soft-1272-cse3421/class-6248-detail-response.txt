@@ -1,0 +1,95 @@
+Class Search
+Groupbox
+Search for Classes
+Class Detail
+CSE 3421 - 0010   Introduction to Computer Architecture
+The Ohio State University | Spring 2027 | Lecture
+Class Details
+Status
+Open
+Class Number
+6248
+Session
+Regular Academic Term
+1
+Units
+3 units
+Instruction Mode
+In Person
+P
+Class Components
+<table class="PSTEXT"><tr><td>Lecture Required</td></tr></table>
+Lecture Required
+Academic Career
+Undergraduate
+Dates
+1/11/2027 - 4/26/2027
+Grading
+Graded A-E
+GRD
+Location
+Columbus Campus
+CS-COLMBUS
+Campus
+Columbus
+COL
+Meeting Information
+Days & Times
+Room
+Instructor
+Meeting Dates
+TuTh 9:35AM - 10:55AM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Enrollment Information
+Enrollment Requirements
+Prereq: 2231, and 2421 or ECE 2560, and 2060; and enrollment in CSE, CIS, or ECE majors. Not open to students with credit for 5421.
+Class Availability
+Combined Section Capacity
+40
+Wait List Capacity
+999
+Enrollment Total
+4
+Wait List Total
+0
+Available Seats
+36
+Combined Section
+View Details
+Description
+Status
+Enrl Tot
+Wait Tot
+CSE 3421-0010
+
+LEC (6248)
+Intr Comput Arch
+Open
+4
+0
+CSE 5421-0010
+
+LEC (6249)
+Intr Comput Arch
+Wait List
+0
+0
+CSE 5421-0010
+
+LEC (6250)
+Intr Comput Arch
+Closed
+0
+0
+Description
+Organization of hardware and software in modern computer systems, including instruction set design, processor control, ALU design, pipelining, multicores and accelerators, and memory subsystem design.
+Prereq: 2231, and 2421 or ECE 2560, and 2060; and enrollment in CSE, CIS, or ECE majors. Not open to students with credit for 5421.
+Textbook/Other Materials
+Textbooks to be determined
+t
+Help
+test
+Class Search
+test

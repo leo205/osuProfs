@@ -1,0 +1,44 @@
+{
+  "collectedAt": "2026-10-20T18:17:01Z",
+  "sourcePages": [
+    {
+      "url": "https://cse.osu.edu/directory/faculty?page=0",
+      "names": 24,
+      "sha256": "c330a8d731c6a1ff268354c1b76dba6ef37ee54381ffd85ab4c60407bcf049d8"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/faculty?page=1",
+      "names": 24,
+      "sha256": "30964adff7e62966e650524eded4a186069f7c82228435f97576dbac746d7f63"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/faculty?page=2",
+      "names": 24,
+      "sha256": "17aa27b5c5ab199d5d3fcc2c9fb1b6d118b12a11193850024682cb5110219d19"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/faculty?page=3",
+      "names": 24,
+      "sha256": "631bcb15c4f431c0e69c1fc650dcabd9f56e2ed480d34264ec289e0df02a00fc"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/faculty?page=4",
+      "names": 9,
+      "sha256": "c2ab34ad8b952cd974e850cc60c4bb5bf00ea3362f6f8ece3d60e9e65e164bf5"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/lecturers?page=0",
+      "names": 24,
+      "sha256": "a07a07c94b15bd30f343d206489aa3e56dd2cfec846240f2b497cd75bbcd2162"
+    },
+    {
+      "url": "https://cse.osu.edu/directory/lecturers?page=1",
+      "names": 7,
+      "sha256": "4c60b2ee68b279ba4bb22a8f66e90871979e07df280cc7cbeb97ca3a4590e647"
+    }
+  ],
+  "directoryNames": 105,
+  "identityCandidates": 152,
+  "surnameCandidates": 180,
+  "purpose": "Search inputs and likely identity candidates only; no section assignment is established by a directory entry."
+}

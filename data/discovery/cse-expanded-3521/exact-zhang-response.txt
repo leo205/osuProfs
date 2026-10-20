@@ -1,0 +1,40 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Course Number is exactly '
+3521
+',  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+ZHANG
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+1 class section(s) found
+CSE 3521 - Survey of Artificial Intelligence I: Basic Techniques
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10483
+0100-LEC
+Regular
+MoWeFr 11:30AM - 12:25PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

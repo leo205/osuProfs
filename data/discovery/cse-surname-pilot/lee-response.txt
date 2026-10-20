@@ -1,0 +1,83 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+LEE
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+4 class section(s) found
+CSE 2421 - Systems I: Introduction to Low-Level Programming and Computer Organization
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11936
+0260-LEC
+Regular
+MoWe 1:50PM - 3:55PM
+Hayes Hall 024
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 3421 - Introduction to Computer Architecture
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6248
+0010-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+36012
+0020-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Knowlton Hall 195
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 5421 - Introduction to Computer Architecture
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6249
+0010-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

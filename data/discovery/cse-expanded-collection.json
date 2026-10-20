@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "completedAt": "2026-10-20T18:23:50Z",
+  "scope": {
+    "termCode": "1272",
+    "campus": "col",
+    "subject": "CSE"
+  },
+  "sourceUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY",
+  "candidateFile": "cse-surnames.txt",
+  "candidateCount": 180,
+  "candidateSha256": "aa6e7dd9b75adb514a5546501b4c22de45dd6edb856f87e96bd012baea75fa80",
+  "catalogSha256": "a6fab07e600211cf53a32154402cf403f59cb1ec4c9d3369ccfc65ab06d21118",
+  "batches": [
+    {
+      "candidateCount": 172,
+      "completedAt": "2026-10-20T18:20:31Z",
+      "result": "PASSED"
+    },
+    {
+      "candidateCount": 8,
+      "completedAt": "2026-10-20T18:21:16Z",
+      "result": "PASSED"
+    }
+  ],
+  "checks": [
+    "Exact operator and echoed surname with PeopleSoft compound-name canonicalization",
+    "Correct term, campus and subject",
+    "Empty negative control",
+    "Declared result count equals unique class numbers",
+    "Every returned class belongs to the requested catalog scope",
+    "Unrelated terms and subjects preserved",
+    "Every inferred full name retains LIKELY confidence; published identities unchanged"
+  ],
+  "counts": {
+    "sections": 1007,
+    "publishedInstructorSections": 634,
+    "discoveredSections": 360,
+    "singleFullNameCandidateSections": 302,
+    "multipleFullNameCandidateSections": 58,
+    "unresolvedSections": 13
+  },
+  "cse3521": [
+    {
+      "section": "0010",
+      "classNumber": "6254",
+      "surnames": [
+        "Torku"
+      ],
+      "likelyNames": [
+        "Thomas Torku"
+      ]
+    },
+    {
+      "section": "0030",
+      "classNumber": "6605",
+      "surnames": [
+        "Torku"
+      ],
+      "likelyNames": [
+        "Thomas Torku"
+      ]
+    },
+    {
+      "section": "0100",
+      "classNumber": "10483",
+      "surnames": [
+        "Zhang"
+      ],
+      "likelyNames": [
+        "Simon Zhang"
+      ]
+    },
+    {
+      "section": "0110",
+      "classNumber": "10933",
+      "surnames": [
+        "Barker"
+      ],
+      "likelyNames": [
+        "Joe Barker"
+      ]
+    },
+    {
+      "section": "0130",
+      "classNumber": "11751",
+      "surnames": [
+        "LaTour"
+      ],
+      "likelyNames": [
+        "Rob LaTour"
+      ]
+    },
+    {
+      "section": "0140",
+      "classNumber": "12303",
+      "surnames": [
+        "Zhu"
+      ],
+      "likelyNames": [
+        "Zhihui Zhu"
+      ]
+    },
+    {
+      "section": "0150",
+      "classNumber": "36014",
+      "surnames": [
+        "Barker"
+      ],
+      "likelyNames": [
+        "Joe Barker"
+      ]
+    }
+  ],
+  "limits": "Candidate coverage is bounded and incomplete for people absent from the known sources. An unresolved section does not prove there is no assignment. Current surname association does not confirm a full identity or primary teaching role."
+}

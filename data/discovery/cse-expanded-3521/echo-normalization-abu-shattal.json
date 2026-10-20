@@ -1,0 +1,17 @@
+{
+  "termCode": "1272",
+  "campus": "COL",
+  "subject": "CSE",
+  "catalogNumber": "",
+  "requestedSurname": "Abu Shattal",
+  "echoedSurname": "ABUSHATTAL",
+  "operator": "E",
+  "classNumbers": [
+    "6594"
+  ],
+  "checkedAt": "2026-10-20T18:11:37Z",
+  "criteriaHtml": "<table class=\"PSEDITBOX_DISPONLY\"><tr><td>The following classes match your search criteria Course Subject: <strong>Computer Science & Engineering</strong>,&nbsp;&nbsp;Show Open Classes Only: <strong>No</strong>,&nbsp;&nbsp;Instructor Last Name:  is exactly '<strong>ABUSHATTAL</strong>',&nbsp;&nbsp;Campus:  <strong>Columbus</strong></td></tr></table>",
+  "sourceUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY",
+  "rawResponseSha256": "1a8d63524f29fa6b1df622777847c9e5cd0a2d33bd49f6bfa453bd55c8364025",
+  "interpretation": "PeopleSoft removes internal surname whitespace before echoing its exact-name criterion. Echo validation should account for this normal source transformation without dropping semester, campus, subject, operator, or result-count validation."
+}

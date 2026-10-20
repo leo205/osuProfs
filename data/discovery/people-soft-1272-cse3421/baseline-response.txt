@@ -1,0 +1,52 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Course Number is exactly '
+3421
+',  Show Open Classes Only:
+No
+,  Campus:
+Columbus
+Open
+Closed
+Wait List
+2 class section(s) found
+CSE 3421 - Introduction to Computer Architecture
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6248
+0010-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+36012
+0020-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Knowlton Hall 195
+To be Announced
+01/11/2027 - 04/26/2027
+t
+Help
+test
+Class Search
+test

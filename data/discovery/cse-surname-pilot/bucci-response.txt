@@ -1,0 +1,804 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+BUCCI
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+54 class section(s) found
+CSE 2221 - Software I: Software Components
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6274
+0005-LEC
+Regular
+TuTh 8:00AM - 8:55AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6275
+0006-LAB
+Regular
+WeFr 8:00AM - 8:55AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6212
+0010-LEC
+Regular
+TuTh 9:10AM - 10:05AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6213
+0011-LAB
+Regular
+WeFr 9:10AM - 10:05AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6214
+0020-LEC
+Regular
+TuTh 10:20AM - 11:15AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6215
+0021-LAB
+Regular
+WeFr 10:20AM - 11:15AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6216
+0030-LEC
+Regular
+TuTh 11:30AM - 12:25PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6217
+0031-LAB
+Regular
+WeFr 11:30AM - 12:25PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6220
+0050-LEC
+Regular
+TuTh 1:50PM - 2:45PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6221
+0051-LAB
+Regular
+WeFr 1:50PM - 2:45PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6222
+0060-LEC
+Regular
+TuTh 3:00PM - 3:55PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6223
+0061-LAB
+Regular
+WeFr 3:00PM - 3:55PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6547
+0070-LEC
+Regular
+TuTh 5:20PM - 6:15PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6548
+0071-LAB
+Regular
+WeFr 5:20PM - 6:15PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6581
+0080-LEC
+Regular
+TuTh 6:30PM - 7:25PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6582
+0081-LAB
+Regular
+WeFr 6:30PM - 7:25PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6700
+0100-LEC
+Regular
+TuTh 4:10PM - 5:05PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6701
+0101-LAB
+Regular
+WeFr 4:10PM - 5:05PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11825
+0270-LEC
+Regular
+TuTh 12:40PM - 1:35PM
+Hayes Hall 025
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11827
+0271-LAB
+Regular
+WeFr 12:40PM - 1:35PM
+Baker Systems 470
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 2231 - Software II: Software Development and Design
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6552
+0005-LEC
+Regular
+WeFr 8:00AM - 8:55AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6553
+0006-LAB
+Regular
+TuTh 8:00AM - 8:55AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6224
+0010-LEC
+Regular
+WeFr 9:10AM - 10:05AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6225
+0011-LAB
+Regular
+TuTh 9:10AM - 10:05AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6226
+0020-LEC
+Regular
+WeFr 10:20AM - 11:15AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6227
+0021-LAB
+Regular
+TuTh 10:20AM - 11:15AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6554
+0045-LEC
+Regular
+WeFr 12:40PM - 1:35PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6555
+0046-LAB
+Regular
+TuTh 12:40PM - 1:35PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6230
+0050-LEC
+Regular
+WeFr 1:50PM - 2:45PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6231
+0051-LAB
+Regular
+TuTh 1:50PM - 2:45PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6591
+0070-LEC
+Regular
+WeFr 4:10PM - 5:05PM
+Baker Systems 188
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6592
+0071-LAB
+Regular
+TuTh 4:10PM - 5:05PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6801
+0110-LEC
+Regular
+WeFr 11:30AM - 12:25PM
+Baker Systems 120
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6803
+0111-LAB
+Regular
+TuTh 11:30AM - 12:25PM
+Baker Systems 480
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6802
+0120-LEC
+Regular
+WeFr 12:40PM - 1:35PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6804
+0121-LAB
+Regular
+TuTh 12:40PM - 1:35PM
+Baker Systems 470
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10470
+0140-LEC
+Regular
+WeFr 9:10AM - 10:05AM
+Caldwell Lab 177
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10479
+0141-LAB
+Regular
+TuTh 9:10AM - 10:05AM
+Baker Systems 480
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11829
+0200-LEC
+Regular
+WeFr 3:00PM - 3:55PM
+Caldwell Lab 177
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11830
+0201-LAB
+Regular
+TuTh 3:00PM - 3:55PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 4193 - Individual Studies in Computer Science and Engineering
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6279
+0070-IND
+Regular
+TBA
+TBA
+Paolo Bucci
+01/11/2027 - 04/26/2027
+CSE 4998 - Undergraduate Research in Computer Science and Engineering
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6345
+0070-IND
+Regular
+TBA
+TBA
+Paolo Bucci
+01/11/2027 - 04/26/2027
+CSE 4999 - Computer Science and Engineering Research for Thesis
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6380
+0070-IND
+Regular
+TBA
+TBA
+Paolo Bucci
+01/11/2027 - 04/26/2027
+CSE 5022 - Software I: Software Components
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6562
+0010-LEC
+Regular
+TuTh 3:00PM - 3:55PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6563
+0011-LAB
+Regular
+WeFr 3:00PM - 3:55PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6608
+0020-LEC
+Regular
+TuTh 12:40PM - 1:35PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6609
+0021-LAB
+Regular
+WeFr 12:40PM - 1:35PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7097
+0050-LEC
+Regular
+TuTh 1:50PM - 2:45PM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7098
+0060-LAB
+Regular
+WeFr 1:50PM - 2:45PM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5023 - Software II: Software Development and Design
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6564
+0010-LEC
+Regular
+WeFr 9:10AM - 10:05AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6565
+0011-LAB
+Regular
+TuTh 9:10AM - 10:05AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6610
+0020-LEC
+Regular
+WeFr 8:00AM - 8:55AM
+Dreese Lab 357
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6611
+0021-LAB
+Regular
+TuTh 8:00AM - 8:55AM
+Dreese Lab 280
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 6193 - Individual Studies in Computer Science and Engineering
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6314
+0050-IND
+Regular
+TBA
+TBA
+Paolo Bucci
+01/11/2027 - 04/26/2027
+t
+Help
+test
+Class Search
+test

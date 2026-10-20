@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: osu-profs
+  profiles:
+    default: local
+  jackson:
+    serialization:
+      indent-output: false
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 24
+      min-spare: 2
+    max-connections: 200
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+app:
+  catalog:
+    path: ${CATALOG_PATH:${APP_CATALOG_PATH:../frontend/public/data/catalog.json}}
+  cors:
+    origins: ${APP_CORS_ORIGINS:http://localhost:5173,http://localhost:4173,http://127.0.0.1:5173,http://127.0.0.1:4173}
+  discovery:
+    enabled: false
+    subject: CSE
+    catalog-number: ""
+    surnames: ""
+    candidate-file: ""
+    identity-file: ""
+    max-candidates: 200
+    include-catalog-candidates: true
+  import:
+    enabled: false
+    base-url: https://content.osu.edu
+    term: 1272
+    subjects: CSE,MATH,STAT,PHYSICS,ECE,ENGR
+    campus: col
+    output: ../frontend/public/data/catalog.json
+    delay-ms: 350
+    max-pages: 100
+    timeout-seconds: 30
+    max-drop-fraction: 0.25
+    allow-large-drop: false

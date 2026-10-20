@@ -1,0 +1,129 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+CHAMPION
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+7 class section(s) found
+CSE 2431 - Systems II: Introduction to Operating Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6709
+0080-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10930
+0110-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Cockins Hall 232
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 5236 - Mobile Application Development
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6266
+0010-LEC
+Regular
+MoWeFr 10:20AM - 11:15AM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6267
+0010-LEC
+Regular
+MoWeFr 10:20AM - 11:15AM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6599
+0020-LEC
+Regular
+MoWeFr 11:30AM - 12:25PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6575
+0020-LEC
+Regular
+MoWeFr 11:30AM - 12:25PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5431 - Systems II: Introduction to Operating Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6715
+0060-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

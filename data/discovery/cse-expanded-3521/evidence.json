@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "termCode": "1272",
+    "campus": "COL",
+    "subject": "CSE",
+    "catalogNumber": "3521"
+  },
+  "verifiedSectionCount": 7,
+  "queries": [
+    {
+      "surname": "",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:08:48Z",
+      "classNumbers": [
+        "6254",
+        "6605",
+        "10483",
+        "10933",
+        "11751",
+        "12303",
+        "36014"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-baseline-response.txt",
+      "rawResponseSha256": "119762a48411577fe22a3dd6245c4a42699ea9c45f1493bc3973c1f3e4dbdae3"
+    },
+    {
+      "surname": "Torku",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:02:53Z",
+      "classNumbers": [
+        "6254",
+        "6605"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-torku-response.txt",
+      "rawResponseSha256": "f81d6fe683c1fc426e15e082d663eb9b1cdc612c4ebd80b443ccd51857544c34"
+    },
+    {
+      "surname": "Zhang",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:02:55Z",
+      "classNumbers": [
+        "10483"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-zhang-response.txt",
+      "rawResponseSha256": "b244f07ebb4f3c446ed690c3f3546fba8d50dcded65da393b18fcb97139a2b09"
+    },
+    {
+      "surname": "LaTour",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:04:24Z",
+      "classNumbers": [
+        "11751"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-latour-response.txt",
+      "rawResponseSha256": "e6addee4d3f90ebaebab628de3c19042fe3a1ef8479e4661280430d7c6bf7652"
+    },
+    {
+      "surname": "Barker",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:04:25Z",
+      "classNumbers": [
+        "10933",
+        "36014"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-barker-response.txt",
+      "rawResponseSha256": "c18e9473e963e76bc719ba2fc2ebcdd05d85dc2e43af9f4f7c2317ec6c1affc8"
+    },
+    {
+      "surname": "Shareef",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:04:27Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-shareef-response.txt",
+      "rawResponseSha256": "b5ad1c8b83138e63234e75f10fcab19d7535171ded55aeab6882746a1446dffa"
+    },
+    {
+      "surname": "Perrault",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:03:32Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-perrault-response.txt",
+      "rawResponseSha256": "9d7c517f5e7d61a5eba38de2cc48e064017c6de764da920d944e103db8c0f5a2"
+    },
+    {
+      "surname": "Zhao",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:06:57Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-zhao-response.txt",
+      "rawResponseSha256": "0b2e6e43711cb32874b56d521b03860d44b5630c060c614aba5b0a7d16b7eed9"
+    },
+    {
+      "surname": "Zhu",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:07:00Z",
+      "classNumbers": [
+        "12303"
+      ],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-zhu-response.txt",
+      "rawResponseSha256": "df209c69a81ba4d710d08a18a29aaf73e19aed33c2c5a715b38fca6cd1af0cb1"
+    },
+    {
+      "surname": "Zaccai",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:07:01Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-zaccai-response.txt",
+      "rawResponseSha256": "d2296148a37a13783f7c827a4f2e16b071073c0bef694b2db207cdab7c911316"
+    },
+    {
+      "surname": "Zweben",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:07:03Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-zweben-response.txt",
+      "rawResponseSha256": "13fda4d6d689d3b95b4ff24df9fc92db049bcbe4f92326949534f20c3b1672d2"
+    },
+    {
+      "surname": "OsuNegativeControlZzz",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T18:02:57Z",
+      "classNumbers": [],
+      "scopeVerified": true,
+      "resultCountVerified": true,
+      "responseTextFile": "exact-osunegativecontrolzzz-response.txt",
+      "rawResponseSha256": "8501d0ca4841d9714fb667bdfb368256a1c8a0287117b9f98e3f984721275761"
+    }
+  ],
+  "readyAnnotationsFile": "ready-annotations.json",
+  "identityOverridesFile": "identity-overrides.json",
+  "prefixSweepFile": "prefix-sweep.json",
+  "limitations": [
+    "Exact surname associations are verified current-term. Full given names are reviewed LIKELY candidates, not directly published full-name assignments.",
+    "Historical names seed searches and rank course-family identity candidates only. They never establish the current assignment.",
+    "Known same-surname alternatives are retained in the identity review notes."
+  ]
+}

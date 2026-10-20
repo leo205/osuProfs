@@ -1,0 +1,2378 @@
+{
+  "schemaVersion": 1,
+  "subject": "CSE",
+  "identities": [
+    {
+      "id": "osu-history-86d073a1bdf81124",
+      "name": "Aaron McCanty",
+      "surname": "McCanty",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-0845cea059f123ed",
+      "name": "Adam Champion",
+      "surname": "Champion",
+      "profileUrl": "https://cse.osu.edu/people/champion.17",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Adam%20Champion",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/champion.17",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-c7719f6979f2597b",
+      "name": "Adam Grupa",
+      "surname": "Grupa",
+      "profileUrl": "https://cse.osu.edu/people/grupa.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/grupa.1",
+        "https://cse.osu.edu/directory/lecturers?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-2f64c1625adac9c1",
+      "name": "Adil Ibrahim",
+      "surname": "Ibrahim",
+      "profileUrl": "https://cse.osu.edu/people/ibrahim.436",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Adil%20Ibrahim",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ibrahim.436",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-9b11711c42f1a862",
+      "name": "Ahmed AL-Baghdadi",
+      "surname": "AL-Baghdadi",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-959165f3664e47b3",
+      "name": "Alan Gilbert",
+      "surname": "Gilbert",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-4f24c955c50afc8c",
+      "name": "Ali Alilooee",
+      "surname": "Alilooee",
+      "profileUrl": "https://cse.osu.edu/people/alilooee.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Ali%20Alilooee",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/alilooee.1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-866479ab6de96e98",
+      "name": "Alper Yilmaz",
+      "surname": "Yilmaz",
+      "profileUrl": "https://cse.osu.edu/people/yilmaz.15",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/yilmaz.15",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-61ff6b9275028932",
+      "name": "Andrew Perrault",
+      "surname": "Perrault",
+      "profileUrl": "https://cse.osu.edu/people/perrault.17",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/perrault.17",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-397b6b5788c16512",
+      "name": "Anish Arora",
+      "surname": "Arora",
+      "profileUrl": "https://cse.osu.edu/people/arora.9",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/arora.9",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f8eec4c267306582",
+      "name": "Arnab Nandi",
+      "surname": "Nandi",
+      "profileUrl": "https://cse.osu.edu/people/nandi.9",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/nandi.9",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-968a564981c5dbcb",
+      "name": "Atanas Rountev",
+      "surname": "Rountev",
+      "profileUrl": "https://cse.osu.edu/people/rountev.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/rountev.1",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-3e5240fe944c9ec9",
+      "name": "Aylin Yener",
+      "surname": "Yener",
+      "profileUrl": "https://cse.osu.edu/people/yener.5",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/yener.5",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-032c5f3853b17109",
+      "name": "B Chandrasekaran",
+      "surname": "Chandrasekaran",
+      "profileUrl": "https://cse.osu.edu/people/chandrasekaran.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/chandrasekaran.1",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-9a813772f8d7505b",
+      "name": "Bob Joseph",
+      "surname": "Joseph",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-21e92526b14089b2",
+      "name": "Braeden Thomas Jeske",
+      "surname": "Jeske",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-1cfa7fbae581d53a",
+      "name": "Brijesh Soni",
+      "surname": "Soni",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-0c7875e0c534d669",
+      "name": "Bruce Weide",
+      "surname": "Weide",
+      "profileUrl": "https://cse.osu.edu/people/weide.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/weide.1",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-60c9d4152ee6740a",
+      "name": "Bryan R. Weaver",
+      "surname": "Weaver",
+      "profileUrl": "https://cse.osu.edu/people/weaver.877",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Bryan%20R.%20Weaver",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/weaver.877",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-ba4044492f38627d",
+      "name": "Can Alpay",
+      "surname": "Alpay",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-d7cfdfec4ad30349",
+      "name": "Carter Yagemann",
+      "surname": "Yagemann",
+      "profileUrl": "https://cse.osu.edu/people/yagemann.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/yagemann.1",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-85f8b735dbffbb0c",
+      "name": "Catherine McKinley",
+      "surname": "McKinley",
+      "profileUrl": "https://cse.osu.edu/people/mckinley.217",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/mckinley.217",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-29d1844ffe299fdd",
+      "name": "Cathy Xia",
+      "surname": "Xia",
+      "profileUrl": "https://cse.osu.edu/people/xia.52",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/xia.52",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-dfeaffd70faf3bc9",
+      "name": "Charles Estill",
+      "surname": "Estill",
+      "profileUrl": "https://cse.osu.edu/people/estill.3",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Charles%20Estill",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/estill.3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-b5b3f14414983aaf",
+      "name": "Charlie Giles",
+      "surname": "Giles",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-505e7502c43bf643",
+      "name": "Chris Brew",
+      "surname": "Brew",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-history-b9ea76edd0a67728",
+      "name": "Chris Xiong",
+      "surname": "Xiong",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-a44f7081e825fae4",
+      "name": "Christopher Stewart",
+      "surname": "Stewart",
+      "profileUrl": "https://cse.osu.edu/people/stewart.962",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/stewart.962",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-e8640ef733e525da",
+      "name": "Clair Farris",
+      "surname": "Farris",
+      "profileUrl": "https://cse.osu.edu/people/farris.94",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/farris.94",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-123467c09f4078f4",
+      "name": "Dauntrica Woods",
+      "surname": "Woods",
+      "profileUrl": "https://cse.osu.edu/people/woods.1003",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/woods.1003",
+        "https://cse.osu.edu/directory/lecturers?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-ac96836c35396689",
+      "name": "Dave Ogle",
+      "surname": "Ogle",
+      "profileUrl": "https://cse.osu.edu/people/ogle.87",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ogle.87",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-a2b411b8c9ce9f21",
+      "name": "David Dalton",
+      "surname": "Dalton",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-e3bd2cbe5d881229",
+      "name": "Deliang Wang",
+      "surname": "Wang",
+      "profileUrl": "https://cse.osu.edu/people/wang.77",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/wang.77",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-01d5aebb4527a8bb",
+      "name": "Dennis Hirsch",
+      "surname": "Hirsch",
+      "profileUrl": "https://cse.osu.edu/people/hirsch.151",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/hirsch.151",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-d1617f213144475a",
+      "name": "Dhabaleswar Panda",
+      "surname": "Panda",
+      "profileUrl": "https://cse.osu.edu/people/panda.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/panda.2",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-dce7fe104a3dad17",
+      "name": "Diana Kline",
+      "surname": "Kline",
+      "profileUrl": "https://cse.osu.edu/people/kline.41",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/kline.41",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-bdbe8ddf06393df4",
+      "name": "Diego Zaccai",
+      "surname": "Zaccai",
+      "profileUrl": "https://cse.osu.edu/people/zaccai.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zaccai.1",
+        "https://cse.osu.edu/directory/lecturers?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-850944973d39cc83",
+      "name": "Donald Williamson",
+      "surname": "Williamson",
+      "profileUrl": "https://cse.osu.edu/people/williamson.413",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/williamson.413",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-6a79d276e264b57b",
+      "name": "Doreen Close",
+      "surname": "Close",
+      "profileUrl": "https://cse.osu.edu/people/close.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/close.2",
+        "https://cse.osu.edu/directory/lecturers?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-1f62270681f29358",
+      "name": "Dustin Williams",
+      "surname": "Williams",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-ef0f4247ae14bbdd",
+      "name": "Dylan Briggs",
+      "surname": "Briggs",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-e5fe1899be73ef10",
+      "name": "Eric Fosler-Lussier",
+      "surname": "Fosler-Lussier",
+      "profileUrl": "https://cse.osu.edu/people/fosler-lussier.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/fosler-lussier.1",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-6890bbca7687eb47",
+      "name": "Felix Engelmann",
+      "surname": "Engelmann",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-86be8e1f1a8e7dcd",
+      "name": "Feng Qin",
+      "surname": "Qin",
+      "profileUrl": "https://cse.osu.edu/people/qin.34",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/qin.34",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-6f5021480fea2c94",
+      "name": "George Green",
+      "surname": "Green",
+      "profileUrl": "https://cse.osu.edu/people/green.25",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/green.25",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-88246e08925f1535",
+      "name": "Golrokh Mirzaei",
+      "surname": "Mirzaei",
+      "profileUrl": "https://cse.osu.edu/people/mirzaei.4",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/mirzaei.4",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-e340c38b95708dd2",
+      "name": "Gregory Ryslik",
+      "surname": "Ryslik",
+      "profileUrl": "https://cse.osu.edu/people/ryslik.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ryslik.1",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-e37f9a3032902656",
+      "name": "Han-Wei Shen",
+      "surname": "Shen",
+      "profileUrl": "https://cse.osu.edu/people/shen.94",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/shen.94",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f78c18beabd08d02",
+      "name": "Hanqi Guo",
+      "surname": "Guo",
+      "profileUrl": "https://cse.osu.edu/people/guo.2154",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/guo.2154",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-b7d32a9145411a07",
+      "name": "Hari Subramoni",
+      "surname": "Subramoni",
+      "profileUrl": "https://cse.osu.edu/people/subramoni.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/subramoni.1",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-8e7e2ca31f345ad2",
+      "name": "Huan Sun",
+      "surname": "Sun",
+      "profileUrl": "https://cse.osu.edu/people/sun.397",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/sun.397",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-b846e30cd21efa41",
+      "name": "Huu Kinh Luan Duong",
+      "surname": "Duong",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-0cc558f6dc087a2e",
+      "name": "Irem Eryilmaz",
+      "surname": "Eryilmaz",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-367fe3eb2469fdde",
+      "name": "Jaimie Kelley",
+      "surname": "Kelley",
+      "profileUrl": "https://cse.osu.edu/people/kelley.530",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/kelley.530",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-13f3251c9a0d3fbe",
+      "name": "Janis Jones",
+      "surname": "Jones",
+      "profileUrl": "https://cse.osu.edu/people/jones.5684",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/jones.5684",
+        "https://cse.osu.edu/directory/lecturers?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-680be568776a42ed",
+      "name": "Jason Van Hulse",
+      "surname": "Van Hulse",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-294f0bb3b5f0f1a3",
+      "name": "Jennifer Bentley",
+      "surname": "Bentley",
+      "profileUrl": "https://cse.osu.edu/people/bentley.262",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bentley.262",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-53a10bb6e8a1c1f8",
+      "name": "Jeremy Morris",
+      "surname": "Morris",
+      "profileUrl": "https://cse.osu.edu/people/morris.343",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/morris.343",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-82d040cabb1d48a9",
+      "name": "Jeremy Ryan Grifski",
+      "surname": "Grifski",
+      "profileUrl": "https://cse.osu.edu/people/grifski.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/2743316",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/grifski.1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-66b27c2c776c8aa6",
+      "name": "Jia (Kevin) Liu",
+      "surname": "Liu",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-65820641a38ca729",
+      "name": "Jian Chen",
+      "surname": "Chen",
+      "profileUrl": "https://cse.osu.edu/people/chen.8028",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/chen.8028",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-9f954e3735d4b4c8",
+      "name": "Jim Davis",
+      "surname": "Davis",
+      "profileUrl": "https://cse.osu.edu/people/davis.1719",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/davis.1719",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-1d16e565c21b289f",
+      "name": "Jim Vickroy",
+      "surname": "Vickroy",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-93474027e7972049",
+      "name": "Joe Barker",
+      "surname": "Barker",
+      "profileUrl": "https://cse.osu.edu/people/barker.348",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/1628244",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/barker.348",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-3d0ea52ed7cd8030",
+      "name": "John Paparrizos",
+      "surname": "Paparrizos",
+      "profileUrl": "https://cse.osu.edu/people/paparrizos.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/paparrizos.1",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-781fe795c0397541",
+      "name": "John Wilcox",
+      "surname": "Wilcox",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-99c0a26806e09a47",
+      "name": "Justin Holewinski",
+      "surname": "Holewinski",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-9a7e19f862cdbce3",
+      "name": "Kannan Athreya",
+      "surname": "Athreya",
+      "profileUrl": "https://cse.osu.edu/people/athreya.14",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/athreya.14",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-ef614f7ab48df575",
+      "name": "Kenneth Supowit",
+      "surname": "Supowit",
+      "profileUrl": "https://cse.osu.edu/people/supowit.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/supowit.1",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f220bc006e24833c",
+      "name": "KT Vandergriff",
+      "surname": "Vandergriff",
+      "profileUrl": "https://cse.osu.edu/people/vandergriff.18",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/vandergriff.18",
+        "https://cse.osu.edu/directory/lecturers?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-ca7790af0b5d6ef5",
+      "name": "KT Vandergriff",
+      "surname": "Vandergriff",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-8a434307597d4e09",
+      "name": "Leon Madrid",
+      "surname": "Madrid",
+      "profileUrl": "https://cse.osu.edu/people/madrid.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Leon%20Madrid",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/madrid.1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-9888c45a6cf9c597",
+      "name": "Lin Chiu",
+      "surname": "Chiu",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-history-0fe467e8bed3dcce",
+      "name": "Logan Frank",
+      "surname": "Frank",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-36db78c0c124ee94",
+      "name": "Luan Duong",
+      "surname": "Duong",
+      "profileUrl": "https://cse.osu.edu/people/duong.161",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Luan%20Duong",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/duong.161"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-b4d2c1d15f99747f",
+      "name": "Lucia Larise Larise Stavarache",
+      "surname": "Stavarache",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-65f1b7dd2ff71ed7",
+      "name": "Mahdi Khalili",
+      "surname": "Khalili",
+      "profileUrl": "https://cse.osu.edu/people/khalili.17",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/khalili.17",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-63aff1347fa89312",
+      "name": "Mark Mark Jackson",
+      "surname": "Jackson",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-0c6b5a1ff8883d94",
+      "name": "Martin Moreno",
+      "surname": "Moreno",
+      "profileUrl": "https://cse.osu.edu/people/moreno.244",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/moreno.244",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f12c96859c6781a3",
+      "name": "Matt Boggus",
+      "surname": "Boggus",
+      "profileUrl": "https://cse.osu.edu/people/boggus.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/boggus.2",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-68a571288c8e32ac",
+      "name": "Md Shakhrul Iman Siam",
+      "surname": "Siam",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-45a3ddafaf1f64e5",
+      "name": "Mi Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.13664",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.13664",
+        "https://cse.osu.edu/directory/faculty?page=4"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-43398257b52bc057",
+      "name": "Mi Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-1f536551525b94ed",
+      "name": "Michael Bond",
+      "surname": "Bond",
+      "profileUrl": "https://cse.osu.edu/people/bond.213",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bond.213",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-082034cebe7e2807",
+      "name": "Michael Fritz",
+      "surname": "Fritz",
+      "profileUrl": "https://cse.osu.edu/people/fritz.26",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/fritz.26",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-20b02d2d9a76db08",
+      "name": "Michael VanPutte",
+      "surname": "VanPutte",
+      "profileUrl": "https://cse.osu.edu/people/vanputte.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/vanputte.2",
+        "https://cse.osu.edu/directory/lecturers?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-574011f544aba0a6",
+      "name": "Michelle Mallon",
+      "surname": "Mallon",
+      "profileUrl": "https://cse.osu.edu/people/mallon.3",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/mallon.3",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-98f569453c4fd6ca",
+      "name": "Mohammad Abu Shattal",
+      "surname": "Abu Shattal",
+      "profileUrl": "https://cse.osu.edu/people/abushattal.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/abushattal.1",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-8876d0ca3d309eb2",
+      "name": "Nabhan Salih",
+      "surname": "Salih",
+      "profileUrl": "https://cse.osu.edu/people/salih.43",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Nabhan%20Salih",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/salih.43",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-9ddbdb6ba8b6744f",
+      "name": "Naeem Omar Shareef",
+      "surname": "Shareef",
+      "profileUrl": "https://cse.osu.edu/people/shareef.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/970492",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/shareef.1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-b8c0b8139d4bd102",
+      "name": "Naomi Zweben",
+      "surname": "Zweben",
+      "profileUrl": "https://cse.osu.edu/people/zweben.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zweben.2",
+        "https://cse.osu.edu/directory/lecturers?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-67a83e870f4ae2e2",
+      "name": "Neelam Soundarajan",
+      "surname": "Soundarajan",
+      "profileUrl": "https://cse.osu.edu/people/soundarajan.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/soundarajan.1",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-13e13f2848faa8cc",
+      "name": "Ness Shroff",
+      "surname": "Shroff",
+      "profileUrl": "https://cse.osu.edu/people/shroff.11",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/shroff.11",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-62ce7ff5d0e3c04c",
+      "name": "Nickalaus Painter",
+      "surname": "Painter",
+      "profileUrl": "https://cse.osu.edu/people/painter.167",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/painter.167",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-986952862efb87e4",
+      "name": "Nicoleta Roman",
+      "surname": "Roman",
+      "profileUrl": "https://cse.osu.edu/people/roman.45",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/roman.45",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-63fe0ceb4665fb95",
+      "name": "Padma Sastry",
+      "surname": "Sastry",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-9af30d7e6f4d155d",
+      "name": "Pankaj Mehra",
+      "surname": "Mehra",
+      "profileUrl": "https://cse.osu.edu/people/mehra.77",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/mehra.77",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-442c770a7ef291b9",
+      "name": "Paolo Bucci",
+      "surname": "Bucci",
+      "profileUrl": "https://cse.osu.edu/people/bucci.2",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/196250",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bucci.2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-b9320ecf19a9889b",
+      "name": "Parker Wiksell",
+      "surname": "Wiksell",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-705769e09b84b9e0",
+      "name": "Paul Sivilotti",
+      "surname": "Sivilotti",
+      "profileUrl": "https://cse.osu.edu/people/sivilotti.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/sivilotti.1",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-12332a4093421777",
+      "name": "Phil Christopher Norman",
+      "surname": "Norman",
+      "profileUrl": "https://cse.osu.edu/people/norman.22",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Phil%20Christopher%20Norman",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/norman.22",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-6a14effc703e458b",
+      "name": "Ping Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.10631",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.10631",
+        "https://cse.osu.edu/directory/faculty?page=4",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-31b47b81db4bcade",
+      "name": "Pooya Hatami",
+      "surname": "Hatami",
+      "profileUrl": "https://cse.osu.edu/people/hatami.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/hatami.2",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-9beeb489554da55d",
+      "name": "Praveen Kumar",
+      "surname": "Kumar",
+      "profileUrl": "https://cse.osu.edu/people/kumar.388",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/kumar.388",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f87ca669b9b5b422",
+      "name": "Radu Teodorescu",
+      "surname": "Teodorescu",
+      "profileUrl": "https://cse.osu.edu/people/teodorescu.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/teodorescu.1",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-bd26629b6a3d37ca",
+      "name": "Raef Bassily",
+      "surname": "Bassily",
+      "profileUrl": "https://cse.osu.edu/people/bassily.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bassily.1",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-856cd7ad9002ef00",
+      "name": "Rafe Wenger",
+      "surname": "Wenger",
+      "profileUrl": "https://cse.osu.edu/people/wenger.4",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/wenger.4",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-52a7c2306f737de9",
+      "name": "Raghu Machiraju",
+      "surname": "Machiraju",
+      "profileUrl": "https://cse.osu.edu/people/machiraju.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/machiraju.1",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-b490e06948420b3b",
+      "name": "Rajiv Ramnath",
+      "surname": "Ramnath",
+      "profileUrl": "https://cse.osu.edu/people/ramnath.6",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ramnath.6",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-f1d2385ce041d52b",
+      "name": "Rena Roundtree",
+      "surname": "Roundtree",
+      "profileUrl": "https://cse.osu.edu/people/roundtree.262",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/roundtree.262",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-af7dc44dfc17cd0c",
+      "name": "Rick Parent",
+      "surname": "Parent",
+      "profileUrl": "https://cse.osu.edu/people/parent.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/parent.1",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-d17a10e2413d5f96",
+      "name": "Rob LaTour",
+      "surname": "LaTour",
+      "profileUrl": "https://cse.osu.edu/people/latour.2",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Rob%20LaTour",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/latour.2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-cc262659f0388b8f",
+      "name": "Roger Crawfis",
+      "surname": "Crawfis",
+      "profileUrl": "https://cse.osu.edu/people/crawfis.3",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/crawfis.3",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-a50dfd915df62788",
+      "name": "Roland Kreml",
+      "surname": "Kreml",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-history-a9146aa3c6a874c2",
+      "name": "Roman Ilin",
+      "surname": "Ilin",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-15e89628d1decde0",
+      "name": "Rubao Lee",
+      "surname": "Lee",
+      "profileUrl": "https://cse.osu.edu/people/lee.11875",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/3154645",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/lee.11875",
+        "https://engineering.osu.edu/news/2026/08/meet-colleges-2026-2027-new-faculty-cohort",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-5860fade12f19707",
+      "name": "Sachin Kumar",
+      "surname": "Kumar",
+      "profileUrl": "https://cse.osu.edu/people/kumar.1145",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/kumar.1145",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-6366cf09a13bc9b9",
+      "name": "Sandra Mamrak",
+      "surname": "Mamrak",
+      "profileUrl": "https://cse.osu.edu/people/mamrak.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/mamrak.1",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-3c49eefc3666d2d8",
+      "name": "Scott Allen Sharkey",
+      "surname": "Sharkey",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-11b536c6c131b3f6",
+      "name": "Shaileshh Bojja Venkatakrishnan",
+      "surname": "Bojja Venkatakrishnan",
+      "profileUrl": "https://cse.osu.edu/people/bojjavenkatakrishnan.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bojjavenkatakrishnan.2",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-fd680c2f2f618c32",
+      "name": "Simon Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.680",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Simon%20Zhang",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.680",
+        "https://engineering.osu.edu/news/2026/08/meet-colleges-2026-2027-new-faculty-cohort"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-59c4caed9d442109",
+      "name": "Sivalingam Ramaswami",
+      "surname": "Ramaswami",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-999d634972d856f1",
+      "name": "Spyros Blanas",
+      "surname": "Blanas",
+      "profileUrl": "https://cse.osu.edu/people/blanas.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/blanas.2",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-98cad27a30b49060",
+      "name": "Srinivasan Parthasarathy",
+      "surname": "Parthasarathy",
+      "profileUrl": "https://cse.osu.edu/people/parthasarathy.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/parthasarathy.2",
+        "https://cse.osu.edu/directory/faculty?page=2",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-31a08618246dcab7",
+      "name": "Stanley J Vernier",
+      "surname": "Vernier",
+      "profileUrl": "https://cse.osu.edu/people/vernier.13",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/2974815",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/vernier.13",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-04a534850d8e00d3",
+      "name": "Steve Gomori",
+      "surname": "Gomori",
+      "profileUrl": "https://cse.osu.edu/people/gomori.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/gomori.1",
+        "https://cse.osu.edu/directory/lecturers?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-99ed1103f3d1c8c7",
+      "name": "Steve Lai",
+      "surname": "Lai",
+      "profileUrl": "https://cse.osu.edu/people/lai.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/lai.1",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-40fb1f889febd09a",
+      "name": "Stuart Zweben",
+      "surname": "Zweben",
+      "profileUrl": "https://cse.osu.edu/people/zweben.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zweben.1",
+        "https://cse.osu.edu/directory/faculty?page=4"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-98bac4abbf35a318",
+      "name": "Suren Byna",
+      "surname": "Byna",
+      "profileUrl": "https://cse.osu.edu/people/byna.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/byna.1",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-1824a6cbc37f40c0",
+      "name": "Suribabu Jayanti",
+      "surname": "Jayanti",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-0453a1ef545d343b",
+      "name": "Syedah Zahra Atiq",
+      "surname": "Atiq",
+      "profileUrl": "https://cse.osu.edu/people/atiq.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/atiq.2",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-19115487246bc1ab",
+      "name": "Tanya Berger-Wolf",
+      "surname": "Berger-Wolf",
+      "profileUrl": "https://cse.osu.edu/people/berger-wolf.1",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/berger-wolf.1",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-20a16518f420a675",
+      "name": "Thomas Bihari",
+      "surname": "Bihari",
+      "profileUrl": "https://cse.osu.edu/people/bihari.5",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/bihari.5",
+        "https://cse.osu.edu/directory/faculty?page=0",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-e337e94c1220a93f",
+      "name": "Thomas Torku",
+      "surname": "Torku",
+      "profileUrl": "https://cse.osu.edu/people/torku.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Thomas%20Torku",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/torku.1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-a2f79d950e4bfee6",
+      "name": "Timothy Ellis Carpenter",
+      "surname": "Carpenter",
+      "profileUrl": "https://cse.osu.edu/people/carpenter.454",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/professor/2331857",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/carpenter.454",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T17:51:38Z"
+    },
+    {
+      "id": "osu-history-1f41ce14aee763f8",
+      "name": "Timothy G. Bolwerk",
+      "surname": "Bolwerk",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-2699a01cf8d9a6d2",
+      "name": "Timothy Long",
+      "surname": "Long",
+      "profileUrl": "https://cse.osu.edu/people/long.19",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/long.19",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-64778de22b3e0a32",
+      "name": "Ting Zhu",
+      "surname": "Zhu",
+      "profileUrl": "https://cse.osu.edu/people/zhu.3445",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhu.3445",
+        "https://cse.osu.edu/directory/faculty?page=4",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-07bcf2d9a5b5a0dc",
+      "name": "Wei-Lun Chao",
+      "surname": "Chao",
+      "profileUrl": "https://cse.osu.edu/people/chao.209",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/chao.209",
+        "https://cse.osu.edu/directory/faculty?page=0"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-b3c053d70c0cf001",
+      "name": "William Jones-Kline",
+      "surname": "Jones-Kline",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    },
+    {
+      "id": "osu-c131fa229b5db286",
+      "name": "William Ogden",
+      "surname": "Ogden",
+      "profileUrl": "https://cse.osu.edu/people/ogden.2",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ogden.2",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-deda13aebcdfe40b",
+      "name": "Xia Ning",
+      "surname": "Ning",
+      "profileUrl": "https://cse.osu.edu/people/ning.104",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/ning.104",
+        "https://cse.osu.edu/directory/faculty?page=2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-8232dfa02c048dee",
+      "name": "Xiaodong Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.574",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.574",
+        "https://cse.osu.edu/directory/faculty?page=4",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-784af636dd8f5fad",
+      "name": "Xiaorui Wang",
+      "surname": "Wang",
+      "profileUrl": "https://cse.osu.edu/people/wang.3596",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/wang.3596",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-6985395ac2107866",
+      "name": "Xueru Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.12807",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.12807",
+        "https://cse.osu.edu/directory/faculty?page=4"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-e141ddaeb2796a0c",
+      "name": "Yang Wang",
+      "surname": "Wang",
+      "profileUrl": "https://cse.osu.edu/people/wang.7564",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/wang.7564",
+        "https://cse.osu.edu/directory/faculty?page=3",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-8a218e6741e21d5a",
+      "name": "Yoonkyung Lee",
+      "surname": "Lee",
+      "profileUrl": "https://cse.osu.edu/people/lee.2272",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/lee.2272",
+        "https://cse.osu.edu/directory/faculty?page=1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-b53e843e5ab9723d",
+      "name": "Yu Su",
+      "surname": "Su",
+      "profileUrl": "https://cse.osu.edu/people/su.809",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/su.809",
+        "https://cse.osu.edu/directory/faculty?page=3"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-6d125f5da877fd09",
+      "name": "Zeyu Guo",
+      "surname": "Guo",
+      "profileUrl": "https://cse.osu.edu/people/guo.2148",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/guo.2148",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-79b5a92b6b914096",
+      "name": "Zhihui Zhu",
+      "surname": "Zhu",
+      "profileUrl": "https://cse.osu.edu/people/zhu.3440",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Zhihui%20Zhu",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhu.3440",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-b18d0b1be06f6bf1",
+      "name": "Zhiqiang Lin",
+      "surname": "Lin",
+      "profileUrl": "https://cse.osu.edu/people/lin.3021",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://cse.osu.edu/people/lin.3021",
+        "https://cse.osu.edu/directory/faculty?page=1",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:17:01Z"
+    },
+    {
+      "id": "osu-history-50e8caccac0a8c92",
+      "name": "Zina Pichkar",
+      "surname": "Pichkar",
+      "profileUrl": "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+      "rateMyProfessorsUrl": null,
+      "sourceUrls": [
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:08:57Z"
+    }
+  ],
+  "courseAffinities": {
+    "osu-e337e94c1220a93f": [
+      "2331",
+      "3521",
+      "5331",
+      "5521"
+    ],
+    "osu-fd680c2f2f618c32": [
+      "3521",
+      "5521"
+    ],
+    "osu-d17a10e2413d5f96": [
+      "2123",
+      "3521",
+      "5521"
+    ],
+    "osu-79b5a92b6b914096": [
+      "3521",
+      "5521"
+    ],
+    "osu-history-86d073a1bdf81124": [
+      "5477.01"
+    ],
+    "osu-0845cea059f123ed": [
+      "2431",
+      "5236",
+      "5431"
+    ],
+    "osu-2f64c1625adac9c1": [
+      "2431",
+      "5431"
+    ],
+    "osu-9b11711c42f1a862": [
+      "3232"
+    ],
+    "osu-959165f3664e47b3": [
+      "5911"
+    ],
+    "osu-4f24c955c50afc8c": [
+      "2331",
+      "5331",
+      "6520"
+    ],
+    "osu-61ff6b9275028932": [
+      "5539"
+    ],
+    "osu-397b6b5788c16512": [
+      "5469"
+    ],
+    "osu-f8eec4c267306582": [
+      "5251"
+    ],
+    "osu-968a564981c5dbcb": [
+      "6341"
+    ],
+    "osu-9a813772f8d7505b": [
+      "3901"
+    ],
+    "osu-21e92526b14089b2": [
+      "2221"
+    ],
+    "osu-1cfa7fbae581d53a": [
+      "3461",
+      "5194.01",
+      "5461"
+    ],
+    "osu-60c9d4152ee6740a": [
+      "2501",
+      "5501"
+    ],
+    "osu-ba4044492f38627d": [
+      "2221"
+    ],
+    "osu-d7cfdfec4ad30349": [
+      "5477.02"
+    ],
+    "osu-85f8b735dbffbb0c": [
+      "1111",
+      "2111"
+    ],
+    "osu-dfeaffd70faf3bc9": [
+      "2321",
+      "5032"
+    ],
+    "osu-b5b3f14414983aaf": [
+      "3901"
+    ],
+    "osu-505e7502c43bf643": [
+      "5914"
+    ],
+    "osu-history-b9ea76edd0a67728": [
+      "4252"
+    ],
+    "osu-a44f7081e825fae4": [
+      "3244"
+    ],
+    "osu-e8640ef733e525da": [
+      "2111"
+    ],
+    "osu-123467c09f4078f4": [
+      "5911"
+    ],
+    "osu-ac96836c35396689": [
+      "3461",
+      "5461",
+      "5462"
+    ],
+    "osu-a2b411b8c9ce9f21": [
+      "4471"
+    ],
+    "osu-01d5aebb4527a8bb": [
+      "5539"
+    ],
+    "osu-d1617f213144475a": [
+      "5429"
+    ],
+    "osu-dce7fe104a3dad17": [
+      "2111"
+    ],
+    "osu-bdbe8ddf06393df4": [
+      "3341",
+      "5341"
+    ],
+    "osu-850944973d39cc83": [
+      "5526"
+    ],
+    "osu-1f62270681f29358": [
+      "3901"
+    ],
+    "osu-ef0f4247ae14bbdd": [
+      "2221"
+    ],
+    "osu-history-6890bbca7687eb47": [
+      "5911",
+      "5915"
+    ],
+    "osu-86be8e1f1a8e7dcd": [
+      "6431"
+    ],
+    "osu-6f5021480fea2c94": [
+      "3430",
+      "5052"
+    ],
+    "osu-e340c38b95708dd2": [
+      "2321"
+    ],
+    "osu-b7d32a9145411a07": [
+      "5441"
+    ],
+    "osu-history-b846e30cd21efa41": [
+      "5351",
+      "5431"
+    ],
+    "osu-0cc558f6dc087a2e": [
+      "5471"
+    ],
+    "osu-367fe3eb2469fdde": [
+      "2451",
+      "5042"
+    ],
+    "osu-history-680be568776a42ed": [
+      "2321"
+    ],
+    "osu-294f0bb3b5f0f1a3": [
+      "3232",
+      "5232"
+    ],
+    "osu-53a10bb6e8a1c1f8": [
+      "2124"
+    ],
+    "osu-65820641a38ca729": [
+      "5542",
+      "5544"
+    ],
+    "osu-66b27c2c776c8aa6": [
+      "2221"
+    ],
+    "osu-1d16e565c21b289f": [
+      "3461",
+      "5461"
+    ],
+    "osu-93474027e7972049": [
+      "3521",
+      "5524"
+    ],
+    "osu-781fe795c0397541": [
+      "1222"
+    ],
+    "osu-99c0a26806e09a47": [
+      "3902"
+    ],
+    "osu-history-ca7790af0b5d6ef5": [
+      "2321"
+    ],
+    "osu-8a434307597d4e09": [
+      "2122",
+      "3241",
+      "5241"
+    ],
+    "osu-9888c45a6cf9c597": [
+      "3241",
+      "5241"
+    ],
+    "osu-history-0fe467e8bed3dcce": [
+      "2221"
+    ],
+    "osu-b4d2c1d15f99747f": [
+      "5914"
+    ],
+    "osu-history-63aff1347fa89312": [
+      "2111"
+    ],
+    "osu-0c6b5a1ff8883d94": [
+      "2421"
+    ],
+    "osu-f12c96859c6781a3": [
+      "2221",
+      "3902"
+    ],
+    "osu-history-68a571288c8e32ac": [
+      "4251"
+    ],
+    "osu-history-43398257b52bc057": [
+      "3461",
+      "5461"
+    ],
+    "osu-1f536551525b94ed": [
+      "3341",
+      "5341",
+      "5349"
+    ],
+    "osu-082034cebe7e2807": [
+      "1224",
+      "4256"
+    ],
+    "osu-574011f544aba0a6": [
+      "1223",
+      "2112"
+    ],
+    "osu-98f569453c4fd6ca": [
+      "2421",
+      "5042"
+    ],
+    "osu-8876d0ca3d309eb2": [
+      "2321",
+      "2331",
+      "5331"
+    ],
+    "osu-9ddbdb6ba8b6744f": [
+      "3521",
+      "5541"
+    ],
+    "osu-b8c0b8139d4bd102": [
+      "2221",
+      "5022"
+    ],
+    "osu-67a83e870f4ae2e2": [
+      "3341",
+      "5341"
+    ],
+    "osu-62ce7ff5d0e3c04c": [
+      "3902",
+      "5331"
+    ],
+    "osu-63fe0ceb4665fb95": [
+      "3231",
+      "5231"
+    ],
+    "osu-442c770a7ef291b9": [
+      "2221"
+    ],
+    "osu-b9320ecf19a9889b": [
+      "3241",
+      "5241"
+    ],
+    "osu-705769e09b84b9e0": [
+      "2221"
+    ],
+    "osu-12332a4093421777": [
+      "3231",
+      "3232",
+      "5231",
+      "5232"
+    ],
+    "osu-6a14effc703e458b": [
+      "5243"
+    ],
+    "osu-31b47b81db4bcade": [
+      "3321",
+      "5321",
+      "6321"
+    ],
+    "osu-9beeb489554da55d": [
+      "3231",
+      "5231",
+      "5915"
+    ],
+    "osu-bd26629b6a3d37ca": [
+      "5523"
+    ],
+    "osu-856cd7ad9002ef00": [
+      "5543"
+    ],
+    "osu-f1d2385ce041d52b": [
+      "3231",
+      "5231"
+    ],
+    "osu-cc262659f0388b8f": [
+      "5912"
+    ],
+    "osu-a50dfd915df62788": [
+      "4471"
+    ],
+    "osu-history-a9146aa3c6a874c2": [
+      "3521"
+    ],
+    "osu-15e89628d1decde0": [
+      "2421"
+    ],
+    "osu-5860fade12f19707": [
+      "5525"
+    ],
+    "osu-3c49eefc3666d2d8": [
+      "3901"
+    ],
+    "osu-59c4caed9d442109": [
+      "3231"
+    ],
+    "osu-999d634972d856f1": [
+      "3241",
+      "5241"
+    ],
+    "osu-98cad27a30b49060": [
+      "5245"
+    ],
+    "osu-31a08618246dcab7": [
+      "5914"
+    ],
+    "osu-04a534850d8e00d3": [
+      "2221"
+    ],
+    "osu-1824a6cbc37f40c0": [
+      "5915"
+    ],
+    "osu-0453a1ef545d343b": [
+      "1223"
+    ],
+    "osu-20a16518f420a675": [
+      "5243",
+      "5911"
+    ],
+    "osu-a2f79d950e4bfee6": [
+      "2321",
+      "3341",
+      "5341"
+    ],
+    "osu-history-1f41ce14aee763f8": [
+      "3232"
+    ],
+    "osu-64778de22b3e0a32": [
+      "5463"
+    ],
+    "osu-b3c053d70c0cf001": [
+      "2501",
+      "5501"
+    ],
+    "osu-8232dfa02c048dee": [
+      "3421",
+      "5421"
+    ],
+    "osu-e141ddaeb2796a0c": [
+      "5439"
+    ],
+    "osu-6d125f5da877fd09": [
+      "6331"
+    ],
+    "osu-b18d0b1be06f6bf1": [
+      "5474"
+    ],
+    "osu-history-50e8caccac0a8c92": [
+      "3241",
+      "5241"
+    ]
+  }
+}

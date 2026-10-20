@@ -1,0 +1,112 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+IBRAHIM
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+6 class section(s) found
+CSE 2431 - Systems II: Introduction to Operating Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6236
+0010-LEC
+Regular
+WeFr 2:20PM - 3:40PM
+Campbell Hall 200
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6237
+0050-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11837
+0120-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Dreese Lab 264
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11908
+0150-LEC
+Regular
+WeFr 11:10AM - 12:30PM
+Denney Hall 253
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 5431 - Systems II: Introduction to Operating Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6240
+0010-LEC
+Regular
+WeFr 2:20PM - 3:40PM
+Campbell Hall 200
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6241
+0050-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

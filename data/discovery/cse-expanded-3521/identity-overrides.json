@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "subject": "CSE",
+  "identities": [
+    {
+      "id": "osu-e337e94c1220a93f",
+      "name": "Thomas Torku",
+      "surname": "Torku",
+      "profileUrl": "https://cse.osu.edu/people/torku.1",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Thomas%20Torku",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/torku.1"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-fd680c2f2f618c32",
+      "name": "Simon Zhang",
+      "surname": "Zhang",
+      "profileUrl": "https://cse.osu.edu/people/zhang.680",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Simon%20Zhang",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhang.680",
+        "https://engineering.osu.edu/news/2026/08/meet-colleges-2026-2027-new-faculty-cohort"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-d17a10e2413d5f96",
+      "name": "Rob LaTour",
+      "surname": "LaTour",
+      "profileUrl": "https://cse.osu.edu/people/latour.2",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Rob%20LaTour",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/latour.2"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    },
+    {
+      "id": "osu-79b5a92b6b914096",
+      "name": "Zhihui Zhu",
+      "surname": "Zhu",
+      "profileUrl": "https://cse.osu.edu/people/zhu.3440",
+      "rateMyProfessorsUrl": "https://www.ratemyprofessors.com/search/professors/724?q=Zhihui%20Zhu",
+      "sourceUrls": [
+        "https://cse.osu.edu/people/zhu.3440",
+        "https://registrar.osu.edu/media/ucbl51qb/spring-2026-finals-assignment-list.pdf",
+        "https://zhihuizhu.github.io/Teaching.html"
+      ],
+      "confidence": "LIKELY",
+      "checkedAt": "2026-10-20T18:10:44Z"
+    }
+  ],
+  "courseAffinities": {
+    "osu-e337e94c1220a93f": [
+      "3521",
+      "5521"
+    ],
+    "osu-fd680c2f2f618c32": [
+      "3521",
+      "5521"
+    ],
+    "osu-d17a10e2413d5f96": [
+      "3521",
+      "5521"
+    ],
+    "osu-79b5a92b6b914096": [
+      "3521",
+      "5521"
+    ]
+  },
+  "notes": [
+    "Affinities are identity-ranking context from the same course family; they are not confirmation of future assignments.",
+    "Thomas Torku is the official profile display name; the base feed repeats his first name as Thomas Thomas Torku. Stable ID is unchanged.",
+    "Zhang is ambiguous university-wide; Simon Zhang is the reviewed course-specific candidate from actual CSE3521 teaching history and official profile.",
+    "Ting Zhu is another current CSE faculty member with the surname Zhu; he is not disproven by surname searches. Zhihui Zhu has higher course affinity because the official Registrar Spring2026 PDF links him to CSE3521, corroborated by his official-profile-linked teaching page."
+  ]
+}

@@ -1,0 +1,17 @@
+.git
+.aws
+.codex
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+**/node_modules
+frontend/dist
+backend/target
+**/.m2
+**/.DS_Store
+**/coverage
+data/bootstrap

@@ -1,0 +1,20 @@
+Class Search
+Groupbox
+Search for Classes
+Enter Search Criteria
+Name
+The search returns no results that match the criteria specified.
+Search for Classes
+Class Search Criteria
+The Ohio State University
+
+Verified returned form selections:
+{
+  "CLASS_SRCH_WRK2_STRM$35$": "1272",
+  "SSR_CLSRCH_WRK_CAMPUS$0": "COL",
+  "SSR_CLSRCH_WRK_SUBJECT_SRCH$1": "CSE",
+  "SSR_CLSRCH_WRK_CATALOG_NBR$2": "",
+  "SSR_CLSRCH_WRK_LAST_NAME$8": "OsuNegativeControlZzz",
+  "SSR_CLSRCH_WRK_SSR_EXACT_MATCH2$8": "E",
+  "SSR_CLSRCH_WRK_SSR_OPEN_ONLY$chk$4": "N"
+}

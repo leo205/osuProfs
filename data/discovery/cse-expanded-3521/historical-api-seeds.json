@@ -1,0 +1,75 @@
+{
+  "source": "Public OSU class-search API",
+  "results": [
+    {
+      "termCode": "1264",
+      "queriedAt": "2026-10-20T18:04:04Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1264&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": [
+        {
+          "name": "Rob LaTour",
+          "email": "latour.2@osu.edu"
+        }
+      ]
+    },
+    {
+      "termCode": "1262",
+      "queriedAt": "2026-10-20T18:04:05Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1262&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1258",
+      "queriedAt": "2026-10-20T18:04:05Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1258&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1254",
+      "queriedAt": "2026-10-20T18:04:06Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1254&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1252",
+      "queriedAt": "2026-10-20T18:04:06Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1252&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1248",
+      "queriedAt": "2026-10-20T18:04:07Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1248&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1244",
+      "queriedAt": "2026-10-20T18:04:07Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1244&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    },
+    {
+      "termCode": "1242",
+      "queriedAt": "2026-10-20T18:04:08Z",
+      "sourceUrls": [
+        "https://content.osu.edu/v2/classes/search?q=3521&term=1242&campus=col&subject=cse&p=1"
+      ],
+      "publishedInstructors": []
+    }
+  ],
+  "interpretation": "Only Summer2026 returned matching records among these queries. Empty historical searches are an API availability limitation, not proof that the course was not offered."
+}

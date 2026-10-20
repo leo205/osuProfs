@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "ISO-8601 UTC",
+  "source": {
+    "name": "Ohio State Class Search",
+    "url": "https://classes.osu.edu/",
+    "endpoint": "https://content.osu.edu/v2/classes/search"
+  },
+  "terms": [
+    {
+      "code": "1272",
+      "label": "Spring 2027"
+    }
+  ],
+  "subjects": [
+    {
+      "code": "CSE",
+      "label": "Computer Science and Engineering"
+    }
+  ],
+  "campuses": [
+    {
+      "code": "col",
+      "label": "Columbus"
+    }
+  ],
+  "coverage": [
+    {
+      "termCode": "1272",
+      "campus": "col",
+      "subjects": ["CSE"],
+      "courseCount": 0,
+      "sectionCount": 0,
+      "namedInstructorSections": 0,
+      "complete": true,
+      "warnings": []
+    }
+  ],
+  "courses": [
+    {
+      "id": "1272-col-CSE-2421",
+      "termCode": "1272",
+      "campus": "col",
+      "subject": "CSE",
+      "catalogNumber": "2421",
+      "title": "Systems I",
+      "description": "Official description",
+      "credits": "4",
+      "career": "Undergraduate",
+      "prerequisites": null,
+      "attributes": [],
+      "sections": [
+        {
+          "id": "1272-6274",
+          "classNumber": "6274",
+          "section": "0005",
+          "component": "Lecture",
+          "instructionMode": "In Person",
+          "instructors": [
+            {
+              "id": "stable-upstream-or-normalized-identifier",
+              "name": "Published name",
+              "role": null
+            }
+          ],
+          "instructorDiscovery": null,
+          "meetings": [
+            {
+              "days": ["MO", "WE"],
+              "startTime": "09:10",
+              "endTime": "10:05",
+              "building": "Dreese Laboratories",
+              "room": "0264",
+              "startDate": "2027-01-11",
+              "endDate": "2027-04-26"
+            }
+          ],
+          "enrollment": {
+            "status": "UNKNOWN",
+            "enrolled": null,
+            "capacity": null,
+            "waitlist": null,
+            "available": null,
+            "checkedAt": null
+          },
+          "sourceUrl": "https://classes.osu.edu/",
+          "lastUpdated": "ISO-8601 UTC"
+        },
+        {
+          "id": "1272-example-surname-match",
+          "classNumber": "example-class-number",
+          "section": "example-section",
+          "component": "Lecture",
+          "instructionMode": "In Person",
+          "instructors": [],
+          "instructorDiscovery": {
+            "status": "SURNAME_MATCH",
+            "surnames": ["ExampleSurname"],
+            "sourceUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY",
+            "checkedAt": "ISO-8601 UTC",
+            "method": "PEOPLESOFT_EXACT_LAST_NAME",
+            "fullNameMatches": [
+              {
+                "id": "example-identity-id",
+                "name": "Example GivenName ExampleSurname",
+                "surname": "ExampleSurname",
+                "profileUrl": "https://cse.osu.edu/people/example.1",
+                "rateMyProfessorsUrl": null,
+                "sourceUrls": ["https://cse.osu.edu/people/example.1"],
+                "confidence": "LIKELY",
+                "checkedAt": "ISO-8601 UTC"
+              }
+            ]
+          },
+          "meetings": [],
+          "enrollment": {
+            "status": "UNKNOWN",
+            "enrolled": null,
+            "capacity": null,
+            "waitlist": null,
+            "available": null,
+            "checkedAt": null
+          },
+          "sourceUrl": "https://classes.osu.edu/",
+          "lastUpdated": "ISO-8601 UTC"
+        }
+      ]
+    }
+  ]
+}

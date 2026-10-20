@@ -1,0 +1,101 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+NORMAN
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+5 class section(s) found
+CSE 3231 - Software Engineering Techniques
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7084
+0040-LEC
+Regular
+MoWe 2:20PM - 3:40PM
+Bolz Hall 124
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 3232 - Software Requirements Analysis
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6691
+0020-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Baker Systems 148
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11941
+0070-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Dreese Lab 264
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5231 - Software Engineering Techniques
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7086
+0040-LEC
+Regular
+MoWe 2:20PM - 3:40PM
+Bolz Hall 124
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5232 - Software Requirements Analysis
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6693
+0020-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Baker Systems 148
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

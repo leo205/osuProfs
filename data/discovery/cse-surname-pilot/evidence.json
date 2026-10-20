@@ -1,0 +1,1846 @@
+{
+  "schemaVersion": 1,
+  "sourceUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY",
+  "method": "PEOPLESOFT_EXACT_LAST_NAME",
+  "scope": {
+    "termCode": "1272",
+    "termLabel": "Spring 2027",
+    "campus": "COL",
+    "subject": "CSE"
+  },
+  "negativeControl": {
+    "surname": "OsuNegativeControlZzz",
+    "operator": "E",
+    "classNumbers": [],
+    "checkedAt": "2026-10-20T17:29:54Z",
+    "responseTextFile": "negative-control-response.txt",
+    "criteriaVerifiedInReturnedForm": true,
+    "rawResponseSha256": "8b4a1686b09a2dab57f82ad57d2dc2c9726fd886e919c80b0981629749ad5096"
+  },
+  "candidateSource": "Surnames seeded from actual published CSE lecture instructors in the checked-in Autumn2026 snapshot. Those older assignments are query inputs only; current-term matches supply all discovery evidence.",
+  "queries": [
+    {
+      "surname": "Weaver",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:12Z",
+      "classNumbers": [
+        "6857",
+        "6966",
+        "6865",
+        "6967",
+        "10788",
+        "10789"
+      ],
+      "responseTextFile": "weaver-response.txt",
+      "rawResponseSha256": "c7b197e25daed1fd323af19b9d3dfb6d106c8b202ac928c3ce869e7adbc6b18b"
+    },
+    {
+      "surname": "Madrid",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:15Z",
+      "classNumbers": [
+        "6211",
+        "6595",
+        "6753",
+        "6858",
+        "6600",
+        "6755"
+      ],
+      "responseTextFile": "madrid-response.txt",
+      "rawResponseSha256": "94913da3f5d9385be62bcccd63c6300ed548e949f0e9ce3582d2c03e82e5bd49"
+    },
+    {
+      "surname": "Estill",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:17Z",
+      "classNumbers": [
+        "6232",
+        "6235",
+        "6699",
+        "6792"
+      ],
+      "responseTextFile": "estill-response.txt",
+      "rawResponseSha256": "e791bf99c0699131f0bb2c56b2d24e60f10c2b816d3d483a2f5a696e3aa32c4a"
+    },
+    {
+      "surname": "Carpenter",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:19Z",
+      "classNumbers": [
+        "6234",
+        "6556",
+        "6242",
+        "6810",
+        "6842",
+        "6860",
+        "6243",
+        "6829",
+        "6843",
+        "11768"
+      ],
+      "responseTextFile": "carpenter-response.txt",
+      "rawResponseSha256": "5069a7f89fb2dd105f52a6fd31713e3c74ed3f8ea63e83790c1299bb8d6f973b"
+    },
+    {
+      "surname": "Salih",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:21Z",
+      "classNumbers": [
+        "10471",
+        "11834",
+        "11950"
+      ],
+      "responseTextFile": "salih-response.txt",
+      "rawResponseSha256": "024afb15ba6a32d9a8f5647aae9a15f105cedcc5ee5d27fd3264e12b82783e78"
+    },
+    {
+      "surname": "Duong",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:24Z",
+      "classNumbers": [
+        "6233",
+        "6807",
+        "11838",
+        "6846"
+      ],
+      "responseTextFile": "duong-response.txt",
+      "rawResponseSha256": "081209d36b54060b4553f130b69657b2256fc37b257ff232fbd46ba1a49aa461"
+    },
+    {
+      "surname": "Alilooee",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:26Z",
+      "classNumbers": [
+        "6805",
+        "11835",
+        "11836",
+        "7089",
+        "11953",
+        "11954",
+        "12155"
+      ],
+      "responseTextFile": "alilooee-response.txt",
+      "rawResponseSha256": "3c975f4fb4c000215bee150cce0cf3659d6c01dcab9888794d9706e4d8b4d42b"
+    },
+    {
+      "surname": "Champion",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:28Z",
+      "classNumbers": [
+        "6709",
+        "10930",
+        "6266",
+        "6267",
+        "6599",
+        "6575",
+        "6715"
+      ],
+      "responseTextFile": "champion-response.txt",
+      "rawResponseSha256": "1f6f2085156782de8ba28ec98ab59d271085dafa54af48d6861ae0e5d3958591"
+    },
+    {
+      "surname": "Bucci",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:31Z",
+      "classNumbers": [
+        "6274",
+        "6275",
+        "6212",
+        "6213",
+        "6214",
+        "6215",
+        "6216",
+        "6217",
+        "6220",
+        "6221",
+        "6222",
+        "6223",
+        "6547",
+        "6548",
+        "6581",
+        "6582",
+        "6700",
+        "6701",
+        "11825",
+        "11827",
+        "6552",
+        "6553",
+        "6224",
+        "6225",
+        "6226",
+        "6227",
+        "6554",
+        "6555",
+        "6230",
+        "6231",
+        "6591",
+        "6592",
+        "6801",
+        "6803",
+        "6802",
+        "6804",
+        "10470",
+        "10479",
+        "11829",
+        "11830",
+        "6279",
+        "6345",
+        "6380",
+        "6562",
+        "6563",
+        "6608",
+        "6609",
+        "7097",
+        "7098",
+        "6564",
+        "6565",
+        "6610",
+        "6611",
+        "6314"
+      ],
+      "responseTextFile": "bucci-response.txt",
+      "rawResponseSha256": "cf45328289f5ae997f179ad2c881c9fdf9a39286c1e64ff9683034fef159d4ca"
+    },
+    {
+      "surname": "Grifski",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:33Z",
+      "classNumbers": [
+        "6554",
+        "6555",
+        "6230",
+        "6231",
+        "6801",
+        "6803"
+      ],
+      "responseTextFile": "grifski-response.txt",
+      "rawResponseSha256": "662ab64ebd8dcef52d2fa56d95a0308162b0ce08edc5d3a94af2a0e5a5dc81ba"
+    },
+    {
+      "surname": "Ibrahim",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:36Z",
+      "classNumbers": [
+        "6236",
+        "6237",
+        "11837",
+        "11908",
+        "6240",
+        "6241"
+      ],
+      "responseTextFile": "ibrahim-response.txt",
+      "rawResponseSha256": "5281af2eb79a9d0437e416b363be3fb9a71a3a4201e82323c68f1c1e73c6d79f"
+    },
+    {
+      "surname": "Norman",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:38Z",
+      "classNumbers": [
+        "7084",
+        "6691",
+        "11941",
+        "7086",
+        "6693"
+      ],
+      "responseTextFile": "norman-response.txt",
+      "rawResponseSha256": "e675b10ac7565d5122e8be1efc8bc2cbc8ab1881a3622103553f6dafb50933f7"
+    },
+    {
+      "surname": "Barker",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:40Z",
+      "classNumbers": [
+        "10933",
+        "36014",
+        "10799",
+        "10798",
+        "35995",
+        "35996"
+      ],
+      "responseTextFile": "barker-response.txt",
+      "rawResponseSha256": "b7f7e783dc975ba99ce54f6f4574dcf3ad4b8d35bd7dfbcec8f7eadc93ed6687"
+    },
+    {
+      "surname": "Shareef",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:44Z",
+      "classNumbers": [
+        "6255",
+        "10800",
+        "6296",
+        "6362",
+        "6397",
+        "6257",
+        "6258",
+        "36022",
+        "11939",
+        "11938"
+      ],
+      "responseTextFile": "shareef-response.txt",
+      "rawResponseSha256": "022effa34633fb5e69beab3dd9d4e409864a0f1a6c458eb8860557322a38cd08"
+    },
+    {
+      "surname": "Vernier",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:31:46Z",
+      "classNumbers": [
+        "6719",
+        "6718",
+        "10638",
+        "7078",
+        "10484",
+        "10639"
+      ],
+      "responseTextFile": "vernier-response.txt",
+      "rawResponseSha256": "ca63210d878658decbb57361e9da528ec564f423fda279d0154458ff05530fe9"
+    },
+    {
+      "surname": "Lee",
+      "operator": "E",
+      "termCode": "1272",
+      "campus": "COL",
+      "subject": "CSE",
+      "catalogNumber": "",
+      "openOnly": false,
+      "checkedAt": "2026-10-20T17:29:52Z",
+      "classNumbers": [
+        "11936",
+        "6248",
+        "36012",
+        "6249"
+      ],
+      "responseTextFile": "lee-response.txt",
+      "rawResponseSha256": "2707e6641a57c94226a1be828b1610e4b7a8c5517a2aa8e31770e6ee4cbbe888"
+    }
+  ],
+  "enrichedSections": [
+    {
+      "termCode": "1272",
+      "classNumber": "10470",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10471",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Salih"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10479",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10484",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10638",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10639",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10788",
+      "subject": "CSE",
+      "catalogNumber": "5501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10789",
+      "subject": "CSE",
+      "catalogNumber": "5501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10798",
+      "subject": "CSE",
+      "catalogNumber": "5524",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10799",
+      "subject": "CSE",
+      "catalogNumber": "5524",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10800",
+      "subject": "CSE",
+      "catalogNumber": "3541",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10930",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "10933",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11768",
+      "subject": "CSE",
+      "catalogNumber": "5341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11825",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11827",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11829",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11830",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11834",
+      "subject": "CSE",
+      "catalogNumber": "2331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Salih"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11835",
+      "subject": "CSE",
+      "catalogNumber": "2331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11836",
+      "subject": "CSE",
+      "catalogNumber": "2331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11837",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11838",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Duong"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11908",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11936",
+      "subject": "CSE",
+      "catalogNumber": "2421",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Lee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11938",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11939",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11941",
+      "subject": "CSE",
+      "catalogNumber": "3232",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Norman"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11950",
+      "subject": "CSE",
+      "catalogNumber": "5331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Salih"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11953",
+      "subject": "CSE",
+      "catalogNumber": "5331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "11954",
+      "subject": "CSE",
+      "catalogNumber": "5331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "12155",
+      "subject": "CSE",
+      "catalogNumber": "6520",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "35995",
+      "subject": "CSE",
+      "catalogNumber": "5524",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "35996",
+      "subject": "CSE",
+      "catalogNumber": "5524",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "36012",
+      "subject": "CSE",
+      "catalogNumber": "3421",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Lee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "36014",
+      "subject": "CSE",
+      "catalogNumber": "3521",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Barker"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "36022",
+      "subject": "CSE",
+      "catalogNumber": "5541",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6211",
+      "subject": "CSE",
+      "catalogNumber": "2122",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6212",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6213",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6214",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6215",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6216",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6217",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6220",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6221",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6222",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6223",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6224",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6225",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6226",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6227",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6230",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6231",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6232",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Estill"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6233",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Duong"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6234",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6235",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Estill"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6236",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6237",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6240",
+      "subject": "CSE",
+      "catalogNumber": "5431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6241",
+      "subject": "CSE",
+      "catalogNumber": "5431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Ibrahim"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6242",
+      "subject": "CSE",
+      "catalogNumber": "3321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6243",
+      "subject": "CSE",
+      "catalogNumber": "5321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6248",
+      "subject": "CSE",
+      "catalogNumber": "3421",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Lee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6249",
+      "subject": "CSE",
+      "catalogNumber": "5421",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Lee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6255",
+      "subject": "CSE",
+      "catalogNumber": "3541",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6257",
+      "subject": "CSE",
+      "catalogNumber": "5541",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6258",
+      "subject": "CSE",
+      "catalogNumber": "5541",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Shareef"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6266",
+      "subject": "CSE",
+      "catalogNumber": "5236",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6267",
+      "subject": "CSE",
+      "catalogNumber": "5236",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6274",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6275",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6547",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6548",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6552",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6553",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6554",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6555",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6556",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6562",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6563",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6564",
+      "subject": "CSE",
+      "catalogNumber": "5023",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6565",
+      "subject": "CSE",
+      "catalogNumber": "5023",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6575",
+      "subject": "CSE",
+      "catalogNumber": "5236",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6581",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6582",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6591",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6592",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6595",
+      "subject": "CSE",
+      "catalogNumber": "3241",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6599",
+      "subject": "CSE",
+      "catalogNumber": "5236",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6600",
+      "subject": "CSE",
+      "catalogNumber": "5241",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6608",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6609",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6610",
+      "subject": "CSE",
+      "catalogNumber": "5023",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6611",
+      "subject": "CSE",
+      "catalogNumber": "5023",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6691",
+      "subject": "CSE",
+      "catalogNumber": "3232",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Norman"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6693",
+      "subject": "CSE",
+      "catalogNumber": "5232",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Norman"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6699",
+      "subject": "CSE",
+      "catalogNumber": "2321",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Estill"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6700",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6701",
+      "subject": "CSE",
+      "catalogNumber": "2221",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6709",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6715",
+      "subject": "CSE",
+      "catalogNumber": "5431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Champion"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6718",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6719",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6753",
+      "subject": "CSE",
+      "catalogNumber": "3241",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6755",
+      "subject": "CSE",
+      "catalogNumber": "5241",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6792",
+      "subject": "CSE",
+      "catalogNumber": "5032",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Estill"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6801",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6802",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6803",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "AMBIGUOUS",
+      "surnames": [
+        "Bucci",
+        "Grifski"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6804",
+      "subject": "CSE",
+      "catalogNumber": "2231",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6805",
+      "subject": "CSE",
+      "catalogNumber": "2331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6807",
+      "subject": "CSE",
+      "catalogNumber": "2431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Duong"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6810",
+      "subject": "CSE",
+      "catalogNumber": "3341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6829",
+      "subject": "CSE",
+      "catalogNumber": "5341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6842",
+      "subject": "CSE",
+      "catalogNumber": "3341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6843",
+      "subject": "CSE",
+      "catalogNumber": "5341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6846",
+      "subject": "CSE",
+      "catalogNumber": "5431",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Duong"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6857",
+      "subject": "CSE",
+      "catalogNumber": "2501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6858",
+      "subject": "CSE",
+      "catalogNumber": "3241",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Madrid"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6860",
+      "subject": "CSE",
+      "catalogNumber": "3341",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Carpenter"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6865",
+      "subject": "CSE",
+      "catalogNumber": "2501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6966",
+      "subject": "CSE",
+      "catalogNumber": "2501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "6967",
+      "subject": "CSE",
+      "catalogNumber": "2501",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Weaver"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7078",
+      "subject": "CSE",
+      "catalogNumber": "5914",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Vernier"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7084",
+      "subject": "CSE",
+      "catalogNumber": "3231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Norman"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7086",
+      "subject": "CSE",
+      "catalogNumber": "5231",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Norman"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7089",
+      "subject": "CSE",
+      "catalogNumber": "5331",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Alilooee"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7097",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Lecture",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    },
+    {
+      "termCode": "1272",
+      "classNumber": "7098",
+      "subject": "CSE",
+      "catalogNumber": "5022",
+      "component": "Laboratory",
+      "status": "SURNAME_MATCH",
+      "surnames": [
+        "Bucci"
+      ]
+    }
+  ],
+  "limitations": [
+    "Matches verify an associated instructor surname, not a full identity or primary instructor role.",
+    "Multiple matching surnames are retained as AMBIGUOUS.",
+    "Public result rows still say To be Announced.",
+    "Assignments can change. Candidate list is bounded and incomplete; a missing match does not mean no assignment exists."
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "data": {
+    "totalItems": 2,
+    "currentItemCount": 2,
+    "page": 1,
+    "totalPages": 1,
+    "nextPageLink": null,
+    "courses": [
+      {
+        "course": {
+          "term": "Spring 2027",
+          "effectiveDate": "2012-06-01",
+          "effectiveStatus": "A",
+          "title": "Individual Studies in Computer Science and Engineering",
+          "shortDescription": "Indv Studies CSE",
+          "description": "Designed to give the student an opportunity to pursue special studies not otherwise offered.\r\nPrereq: Permission of instructor. Repeatable to a maximum of 10 cr hrs or 10 completions. This course is graded S/U.",
+          "equivalentId": "",
+          "allowMultiEnroll": "N",
+          "maxUnits": 10,
+          "minUnits": 1,
+          "repeatUnitsLimit": 10,
+          "grading": "Satisfactory/Unsatisfactory",
+          "component": "Independent Study",
+          "primaryComponent": "IND",
+          "offeringNumber": "1",
+          "academicGroup": "Engineering",
+          "subject": "CSE",
+          "catalogNumber": "4193",
+          "campus": "Columbus",
+          "academicOrg": "D1435",
+          "academicCareer": "Undergraduate",
+          "cipCode": "14.0901",
+          "courseAttributes": [
+            {
+              "name": "CCP",
+              "value": "NON-CCP",
+              "description": "Not eligible for College Credit Plus program"
+            }
+          ],
+          "campusCode": "COL",
+          "catalogLevel": "4xxx",
+          "subjectDesc": "Computer Science & Engineering",
+          "courseId": "150553"
+        },
+        "sections": [
+          {
+            "classNumber": "6874",
+            "section": "0015",
+            "component": "Independent Study",
+            "instructionMode": "In Person",
+            "meetings": [
+              {
+                "meetingNumber": 1,
+                "facilityId": null,
+                "facilityType": null,
+                "facilityDescription": null,
+                "facilityDescriptionShort": null,
+                "facilityGroup": null,
+                "facilityCapacity": 0,
+                "buildingCode": null,
+                "room": null,
+                "buildingDescription": null,
+                "buildingDescriptionShort": null,
+                "startTime": null,
+                "endTime": null,
+                "startDate": "2027-01-11",
+                "endDate": "2027-04-26",
+                "monday": false,
+                "tuesday": false,
+                "wednesday": false,
+                "thursday": false,
+                "friday": false,
+                "saturday": false,
+                "sunday": false,
+                "standingMeetingPattern": null,
+                "instructors": [
+                  {
+                    "displayName": "Julia Armstrong",
+                    "role": "PI",
+                    "email": "armstrong.798@osu.edu"
+                  }
+                ]
+              }
+            ],
+            "courseOfferingNumber": 1,
+            "courseId": "150553",
+            "academicGroup": "ENG",
+            "subject": "Computer Science & Engineering",
+            "catalogNumber": "4193",
+            "career": "UGRD",
+            "description": "Indv Studies CSE",
+            "enrollmentStatus": "Open",
+            "status": "A",
+            "type": "E",
+            "associatedClass": "15",
+            "autoEnrollWaitlist": true,
+            "autoEnrollSection1": null,
+            "autoEnrollSection2": null,
+            "consent": false,
+            "waitlistCapacity": 999,
+            "minimumEnrollment": 0,
+            "enrollmentTotal": 1,
+            "waitlistTotal": 0,
+            "academicOrg": "D1435",
+            "location": "CS-COLMBUS",
+            "equivalentCourseId": null,
+            "startDate": "2027-01-11",
+            "endDate": "2027-04-26",
+            "cancelDate": null,
+            "primaryInstructorSection": "0015",
+            "combinedSection": null,
+            "holidaySchedule": "OSUSIS",
+            "sessionCode": "1",
+            "sessionDescription": "Regular Academic Term",
+            "term": "Spring 2027",
+            "campus": "Columbus",
+            "attributes": [
+              {
+                "name": "CCP",
+                "value": "NON-CCP",
+                "description": "Not eligible for College Credit Plus program"
+              }
+            ],
+            "secCampus": "COL",
+            "secAcademicGroup": "ENG",
+            "secCatalogNumber": "4193",
+            "meetingDays": "",
+            "_parent": "150553-1-1272",
+            "subjectDesc": "Computer Science & Engineering",
+            "courseTitle": "Individual Studies in Computer Science and Engineering",
+            "courseDescription": "Designed to give the student an opportunity to pursue special studies not otherwise offered.\r\nPrereq: Permission of instructor. Repeatable to a maximum of 10 cr hrs or 10 completions. This course is graded S/U.",
+            "catalogLevel": "4xxx",
+            "termCode": "1272"
+          }
+        ]
+      },
+      {
+        "course": {
+          "term": "Spring 2027",
+          "effectiveDate": "2026-01-11",
+          "effectiveStatus": "A",
+          "title": "Software II: Software Development and Design",
+          "shortDescription": "SW 2: Dev & Dsgn",
+          "description": "Data representation using hashing, search trees, and linked data structures; algorithms for sorting; using trees for language processing; component interface design; best practices in Java.\nPrereq: 2221 or 5022. Not open to students with credit for 2231 or 2231.01.",
+          "equivalentId": "",
+          "allowMultiEnroll": "N",
+          "maxUnits": 3,
+          "minUnits": 3,
+          "repeatUnitsLimit": 3,
+          "grading": "Graded",
+          "component": "Lecture",
+          "primaryComponent": "LEC",
+          "offeringNumber": "1",
+          "academicGroup": "Engineering",
+          "subject": "CSE",
+          "catalogNumber": "5023",
+          "campus": "Columbus",
+          "academicOrg": "D1435",
+          "academicCareer": "Graduate",
+          "cipCode": "14.0901",
+          "courseAttributes": [
+            {
+              "name": "",
+              "value": "",
+              "description": ""
+            }
+          ],
+          "campusCode": "COL",
+          "catalogLevel": "5xxx",
+          "subjectDesc": "Computer Science & Engineering",
+          "courseId": "161613"
+        },
+        "sections": [
+          {
+            "classNumber": "6610",
+            "section": "0020",
+            "component": "Lecture",
+            "instructionMode": "In Person",
+            "meetings": [
+              {
+                "meetingNumber": 1,
+                "facilityId": "DL0357",
+                "facilityType": "1B",
+                "facilityDescription": "Dreese Laboratories",
+                "facilityDescriptionShort": "Dreese Lab",
+                "facilityGroup": false,
+                "facilityCapacity": 46,
+                "buildingCode": "279",
+                "room": "357",
+                "buildingDescription": "Dreese Lab 357",
+                "buildingDescriptionShort": "DL 357",
+                "startTime": "8:00 am",
+                "endTime": "8:55 am",
+                "startDate": "2027-01-11",
+                "endDate": "2027-04-26",
+                "monday": false,
+                "tuesday": false,
+                "wednesday": true,
+                "thursday": false,
+                "friday": true,
+                "saturday": false,
+                "sunday": false,
+                "standingMeetingPattern": null,
+                "instructors": [
+                  {
+                    "displayName": null,
+                    "role": null,
+                    "email": null
+                  }
+                ]
+              }
+            ],
+            "courseOfferingNumber": 1,
+            "courseId": "161613",
+            "academicGroup": "ENG",
+            "subject": "Computer Science & Engineering",
+            "catalogNumber": "5023",
+            "career": "GRAD",
+            "description": "SW 2: Dev & Dsgn",
+            "enrollmentStatus": "Closed",
+            "status": "A",
+            "type": "E",
+            "associatedClass": "10",
+            "autoEnrollWaitlist": true,
+            "autoEnrollSection1": "0011",
+            "autoEnrollSection2": null,
+            "consent": false,
+            "waitlistCapacity": 999,
+            "minimumEnrollment": 0,
+            "enrollmentTotal": 0,
+            "waitlistTotal": 0,
+            "academicOrg": "D1435",
+            "location": "CS-COLMBUS",
+            "equivalentCourseId": null,
+            "startDate": "2027-01-11",
+            "endDate": "2027-04-26",
+            "cancelDate": null,
+            "primaryInstructorSection": "0010",
+            "combinedSection": "Closed",
+            "holidaySchedule": "OSUSIS",
+            "sessionCode": "1",
+            "sessionDescription": "Regular Academic Term",
+            "term": "Spring 2027",
+            "campus": "Columbus",
+            "attributes": [],
+            "secCampus": "COL",
+            "secAcademicGroup": "ENG",
+            "secCatalogNumber": "5023",
+            "meetingDays": "",
+            "_parent": "161613-1-1272",
+            "subjectDesc": "Computer Science & Engineering",
+            "courseTitle": "Software II: Software Development and Design",
+            "courseDescription": "Data representation using hashing, search trees, and linked data structures; algorithms for sorting; using trees for language processing; component interface design; best practices in Java.\nPrereq: 2221 or 5022. Not open to students with credit for 2231 or 2231.01.",
+            "catalogLevel": "5xxx",
+            "termCode": "1272"
+          }
+        ]
+      }
+    ]
+  }
+}

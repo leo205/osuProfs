@@ -1,0 +1,175 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+CARPENTER
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+10 class section(s) found
+CSE 2321 - Foundations I: Discrete Structures
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6234
+0065-LEC
+Regular
+MoWeFr 1:50PM - 2:45PM
+Journalism Bldg 106
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6556
+0070-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Baker Systems 180
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 3321 - Automata and Formal Languages
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6242
+0010-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Online
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 3341 - Principles of Programming Languages
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6810
+0040-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6842
+0050-LEC
+Regular
+MoWeFr 4:10PM - 5:05PM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6860
+0070-LEC
+Regular
+MoWeFr 12:40PM - 1:35PM
+Journalism Bldg 239
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5321 - Automata and Formal Languages
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6243
+0010-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Online
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5341 - Principles of Programming Languages
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6829
+0040-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6843
+0050-LEC
+Regular
+MoWeFr 4:10PM - 5:05PM
+Dreese Lab 369
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11768
+0080-LEC
+Regular
+MoWeFr 12:40PM - 1:35PM
+Journalism Bldg 239
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

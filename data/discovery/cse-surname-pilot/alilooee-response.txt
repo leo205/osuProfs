@@ -1,0 +1,129 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+ALILOOEE
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+7 class section(s) found
+CSE 2331 - Foundations II: Data Structures and Algorithms
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6805
+0080-LEC
+Regular
+TuTh 3:55PM - 5:15PM
+Baker Systems 198
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11835
+0170-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11836
+0180-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5331 - Foundations II: Data Structures and Algorithms
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7089
+0080-LEC
+Regular
+TuTh 3:55PM - 5:15PM
+Baker Systems 198
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11953
+0150-LEC
+Regular
+TuTh 9:35AM - 10:55AM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11954
+0160-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Dreese Lab 266
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 6520 - Foundations of Applied Artificial Intelligence for Non-Majors
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+12155
+0010-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Journalism Bldg 371
+To be Announced
+01/11/2027 - 04/26/2027
+t
+Help
+test
+Class Search
+test

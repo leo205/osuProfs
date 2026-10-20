@@ -1,0 +1,128 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Course Number is exactly '
+3521
+',  Show Open Classes Only:
+No
+,  Campus:
+Columbus
+Open
+Closed
+Wait List
+7 class section(s) found
+CSE 3521 - Survey of Artificial Intelligence I: Basic Techniques
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6254
+0010-LEC
+Regular
+MoWe 5:30PM - 6:50PM
+Scott Lab E125
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6605
+0030-LEC
+Regular
+TuTh 5:30PM - 6:50PM
+Baker Systems 180
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10483
+0100-LEC
+Regular
+MoWeFr 11:30AM - 12:25PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10933
+0110-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Baker Systems 198
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11751
+0130-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Journalism Bldg 251
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+12303
+0140-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Journalism Bldg 270
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+36014
+0150-LEC
+Regular
+MoWeFr 1:50PM - 2:45PM
+Baker Systems 198
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

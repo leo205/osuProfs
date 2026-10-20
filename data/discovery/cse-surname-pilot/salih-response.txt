@@ -1,0 +1,69 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+SALIH
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+3 class section(s) found
+CSE 2321 - Foundations I: Discrete Structures
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10471
+0170-LEC
+Regular
+MoWeFr 10:20AM - 11:15AM
+Knowlton Hall 190
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 2331 - Foundations II: Data Structures and Algorithms
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11834
+0150-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5331 - Foundations II: Data Structures and Algorithms
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+11950
+0140-LEC
+Regular
+MoWeFr 3:00PM - 3:55PM
+Caldwell Lab 220
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

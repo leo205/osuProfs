@@ -1,0 +1,113 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+VERNIER
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+6 class section(s) found
+CSE 5914 - Capstone Design: Knowledge-Based Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6719
+0010-LEC
+Regular
+TuTh 4:00PM - 5:20PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6718
+0010-LEC
+Regular
+TuTh 4:00PM - 5:20PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10638
+0030-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Caldwell Lab 137
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+7078
+0030-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Caldwell Lab 137
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10484
+0040-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Caldwell Lab 133
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10639
+0040-LEC
+Regular
+TuTh 12:45PM - 2:05PM
+Caldwell Lab 133
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

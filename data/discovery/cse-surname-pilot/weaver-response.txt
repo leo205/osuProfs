@@ -1,0 +1,112 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+WEAVER
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+6 class section(s) found
+CSE 2501 - Social, Ethical, and Professional Issues in Computing
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6857
+0120-LEC
+Regular
+Tu 11:10AM - 12:30PM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6966
+0125-LEC
+Regular
+Th 11:10AM - 12:30PM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6865
+0130-LEC
+Regular
+Tu 9:35AM - 10:55AM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6967
+0135-LEC
+Regular
+Th 9:35AM - 10:55AM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+CSE 5501 - Social, Ethical, and Professional Issues in Computing
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10788
+0100-LEC
+Regular
+Tu 9:35AM - 10:55AM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+10789
+0110-LEC
+Regular
+Th 9:35AM - 10:55AM
+Dreese Lab 317
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

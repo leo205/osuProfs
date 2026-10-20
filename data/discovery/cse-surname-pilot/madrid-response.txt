@@ -1,0 +1,113 @@
+Class Search
+Groupbox
+Search for Classes
+Search Results
+The Ohio State University | Spring 2027
+The following classes match your search criteria Course Subject:
+Computer Science & Engineering
+,  Show Open Classes Only:
+No
+,  Instructor Last Name:  is exactly '
+MADRID
+',  Campus:
+Columbus
+Open
+Closed
+Wait List
+6 class section(s) found
+CSE 2122 - Data Structures Using C++
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6211
+0010-LEC
+Regular
+TuTh 2:20PM - 3:40PM
+Baker Systems 198
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 3241 - Introduction to Database Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6595
+0050-LEC
+Regular
+WeFr 12:45PM - 2:05PM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6753
+0090-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6858
+0120-LEC
+Regular
+WeFr 9:35AM - 10:55AM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+CSE 5241 - Introduction to Database Systems
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6600
+0050-LEC
+Regular
+WeFr 12:45PM - 2:05PM
+Baker Systems 140
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+Class
+Section
+Days & Times
+Room
+Instructor
+Meeting Dates
+Status
+6755
+0080-LEC
+Regular
+TuTh 11:10AM - 12:30PM
+Baker Systems 136
+To be Announced
+01/11/2027 - 04/26/2027
+Notes: This is a combined section class
+t
+Help
+test
+Class Search
+test

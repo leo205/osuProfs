@@ -1,0 +1,114 @@
+name: Refresh catalog and optionally publish
+
+on:
+  schedule:
+    # 10:23 UTC; daily collection is opt-in via ENABLE_SCHEDULED_IMPORTS.
+    - cron: "23 10 * * *"
+  workflow_dispatch:
+    inputs:
+      term:
+        description: OSU term code
+        required: true
+        default: "1272"
+      subjects:
+        description: Comma-separated OSU subject codes
+        required: true
+        default: CSE,MATH,STAT,PHYSICS,ECE,ENGR
+      campus:
+        description: OSU campus code
+        required: true
+        default: col
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-refresh-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_SCHEDULED_IMPORTS == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      IMPORT_TERM: ${{ inputs.term || '1272' }}
+      IMPORT_SUBJECTS: ${{ inputs.subjects || 'CSE,MATH,STAT,PHYSICS,ECE,ENGR' }}
+      IMPORT_CAMPUS: ${{ inputs.campus || 'col' }}
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify Java importer
+        run: mvn -B -ntp -f backend/pom.xml verify
+      - name: Verify roster collector
+        run: python3 -m unittest discover -s data/bootstrap -p test_update_cse_roster.py
+      - name: Refresh official CSE roster and surname seeds
+        run: python3 data/bootstrap/update_cse_roster.py
+      - name: Refresh catalog and revalidate instructor surnames atomically
+        run: >-
+          java -jar backend/target/osu-profs-0.1.0.jar
+          --spring.main.web-application-type=none
+          --app.import.enabled=true
+          --app.import.output=frontend/public/data/catalog.json
+          --app.import.term="$IMPORT_TERM"
+          --app.import.subjects="$IMPORT_SUBJECTS"
+          --app.import.campus="$IMPORT_CAMPUS"
+          --app.discovery.enabled=true
+          --app.discovery.subject=CSE
+          --app.discovery.candidate-file=data/discovery/cse-surnames.txt
+          --app.discovery.identity-file=data/discovery/cse-instructor-identities.json
+          --app.discovery.include-catalog-candidates=true
+          --app.discovery.max-candidates=200
+      - name: Verify and build refreshed site
+        working-directory: frontend
+        run: |
+          npm ci
+          npm test
+          npm run build
+      - name: Preserve successful snapshot and site for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: refreshed-catalog-and-site
+          path: |
+            frontend/public/data/catalog.json
+            frontend/dist
+            data/discovery/cse-instructor-identities.json
+            data/discovery/cse-surnames.txt
+          retention-days: 7
+      - name: Check optional publishing configuration
+        id: publishing
+        env:
+          ENABLE_DEPLOY: ${{ vars.ENABLE_CLOUDFLARE_DEPLOY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+        run: |
+          if [ "$ENABLE_DEPLOY" = "true" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ] && [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_PROJECT_NAME" ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+            echo 'Build passed. Configured Cloudflare publication will run next.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+            echo 'Build passed. Publication is disabled; download the workflow artifact to review it.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Publish the verified site to Cloudflare Pages
+        if: steps.publishing.outputs.enabled == 'true'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PROJECT_NAME: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          DEPLOY_BRANCH: ${{ github.ref_name }}
+        run: >-
+          npx --yes wrangler@4 pages deploy frontend/dist
+          --project-name="$CLOUDFLARE_PROJECT_NAME"
+          --branch="$DEPLOY_BRANCH"
+          --commit-dirty=true
