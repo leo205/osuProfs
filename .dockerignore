@@ -15,3 +15,4 @@ backend/target
 **/.DS_Store
 **/coverage
 data/bootstrap
+artifacts

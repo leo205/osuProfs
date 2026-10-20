@@ -37,8 +37,11 @@ class PeopleSoftInstructorDiscoveryAdapterTest {
     }
     private Query query() { return new Query("1272", "col", "CSE", "3421", List.of("Lee")); }
     private PeopleSoftInstructorDiscoveryAdapter serve(String negative, String positive) throws Exception {
-        List<String> responses = List.of(fixture("search-form"), fixture("expanded-form"), negative,
-                fixture("search-form"), fixture("expanded-form"), positive);
+        return serve(fixture("search-form"), negative, positive);
+    }
+    private PeopleSoftInstructorDiscoveryAdapter serve(String initial, String negative, String positive) throws Exception {
+        List<String> responses = List.of(initial, fixture("expanded-form"), negative,
+                initial, fixture("expanded-form"), positive);
         AtomicInteger index = new AtomicInteger();
         server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
         server.createContext("/search", exchange -> {
@@ -77,6 +80,13 @@ class PeopleSoftInstructorDiscoveryAdapterTest {
         assertTrue(search.get("testCookie").contains("public-session=fixed"));
         assertFalse(search.get("testCookie").contains("$Version"), "PeopleSoft requires browser-style session cookies");
         assertFalse(search.get("testCookie").contains("\"fixed\""));
+    }
+    @Test void acceptsSubjectsAvailableOnlyAfterChangingTheInitialDefaultTerm() throws Exception {
+        var initial = Jsoup.parse(fixture("search-form"));
+        initial.getElementsByAttributeValue("name", "SSR_CLSRCH_WRK_SUBJECT_SRCH$1").first()
+            .select("option[value=CSE]").remove();
+        var adapter = serve(initial.outerHtml(), fixture("no-results"), fixture("lee-results"));
+        assertEquals(2, adapter.discover(query()).size(), "Subject choices must come from the expanded requested-term form");
     }
     @Test void rejectsResultsWhenFilterWasIgnored() throws Exception {
         var adapter = serve(fixture("no-results"), fixture("lee-results").replace("'<strong>LEE</strong>'", "'<strong>SMITH</strong>'"));

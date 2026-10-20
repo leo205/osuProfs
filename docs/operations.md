@@ -2,44 +2,65 @@
 
 ## Before a public launch
 
-- Place the repository, hosting project, and any domain under shared ownership. Record recovery access and assign at least two maintainers.
-- Verify that displayed terms, subjects, and campus match `catalog.json` coverage; don't describe the pilot as all-OSU coverage.
-- Compare several class numbers, instructor names, and meetings with official OSU results. Include a full-name section, a surname match, an ambiguous match, a TBA section, a lecture/lab course, and an arranged/online offering. Verify surname-search scope and collection time without assuming a primary instructor or full identity.
-- Check search by exact course number and instructor name. Open section details and official-source links.
-- Test saving/removing sections, term changes, refresh persistence, meeting conflicts, and `.ics` calendar export. Confirm overnight, partial-date, and missing-time cases are either handled or shown as limitations.
-- Check keyboard navigation, visible focus, form labels, empty/error states, and a narrow mobile viewport.
-- If using the API, confirm `/api/health`, CORS, timestamps, and static fallback when the API is unavailable.
-- Confirm production HTTPS, a visible source timestamp, an independent-project notice, and a way for maintainers to receive corrections through the repository.
+- Record repository/hosting recovery access and assign at least two maintainers.
+- Compare the manifest’s upcoming semester, campuses and subjects with catalog coverage and the collection receipt. Distinguish complete public class collection from instructor-discovery coverage.
+- Spot-check official class numbers, full instructor names and roles, meetings, sessions and linked components across campuses. Include published names, likely matches, multiple candidates and unresolved instructors.
+- Check search by course number/name, instructor, campus and subject. Open section details and request live seat availability; confirm its timestamp is separate from the snapshot timestamp.
+- Test saving/removing sections, semester changes, refresh persistence, meeting conflicts and calendar export. Check arranged/online offerings and missing or partial meeting dates.
+- Check keyboard navigation, visible focus, form labels, pagination, empty/error states and a narrow mobile viewport.
+- If using the API, check `/api/health`, allowed frontend origins and static fallback when API coverage or evidence is older/incomplete.
+- Confirm production HTTPS, visible source timestamps and the independent-project notice. Track corrections through the repository.
 
 ## Refresh monitoring
 
-Start with one import per day. Watch the Actions tab and enable GitHub workflow failure notifications for maintainers. Schedules can stop or be delayed; compare the site's timestamp with the last successful workflow instead of assuming cron ran.
+Start with one base collection each day and the default 20-minute instructor-search budget. Enable scheduled runs with `ENABLE_SCHEDULED_IMPORTS=true`, then monitor Actions failures and source timestamps. GitHub’s cron schedule is not a freshness guarantee.
 
-For an import failure, leave the published snapshot in place. Check source availability, pagination/schema changes, coverage warnings, and count drops. Run a manual refresh with publication disabled while investigating. Review the resulting artifact before enabling a source-parser change. An old timestamp should remain visible when refreshes fail.
+The workflow restores `artifacts/university/` from the latest matching cache. The public snapshot contains only the upcoming term; `history.json` stays in the local/build cache. Cache keys include branch, upcoming term, history term and campus selector; each successful run saves a new immutable cache after Python, Java and frontend checks pass. The cache contains:
 
-The scheduled import reruns CSE surname discovery using all available current/included historical catalog candidates plus reviewed seeds, then joins official-record full names with curated registry overrides. A discovery or registry failure is an import failure: it must not publish a fresh catalog with evidence silently erased. Record sources, preserve stable IDs, respect candidate/result limits, and compare exact-search results with a no-results negative control. Monitor runtime as candidate history grows. Reverify curated profile links and individual rating URLs separately; school-scoped search links do not verify an RMP identity. Preserve old check times on untested evidence. Inspect a previously matched section that stops matching and a newly matched section. Confirm likely labels persist across views, and unresolved rows do not imply an unassigned section or completed exhaustive search.
+| File                                        | Purpose                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `catalog.json`                              | Latest working catalog, including preserved surname/full-name evidence                  |
+| `history.json`                              | Build-only historical records for instructor candidates; never published as app classes |
+| `discovery-state.json`                      | Completed surname queries, source check times and section-scope fingerprints            |
+| `collection.json`                           | Validated campus totals, latest discovery progress and batch failures                   |
+| `latest-import.log`, `latest-discovery.log` | Most recent Java collection/search diagnostics                                          |
 
-Run `data/bootstrap/update_cse_roster.py` before a manual import, as the scheduled workflow does. Review official roster changes and retain curated identity/link overrides. The refreshed roster/seed files are included in the workflow artifact; update the checked-in baseline through a reviewed change rather than silently losing new names on the next run.
+A missing or evicted cache rebuilds from the checked-in catalog and recollects history. It can repeat queries but must not remove previously published evidence merely because progress state is absent. Build-only historical records refresh when missing, on scheduled Sunday runs, or when a manual run selects `refresh_history`.
 
-The collector also loads reviewed historical Registrar course associations from checked-in JSON; no PDF parser is needed during a refresh. Recheck the original official schedule before changing that evidence, retain source URLs, and do not expand printed initials into guessed given names. Run `python3 -m unittest discover -s data/bootstrap -p test_update_cse_roster.py` when changing collector behavior or historical identity matching; CI and scheduled refresh run it before collection.
+The surname queue checks previously unsearched names first, then changed scopes, then expired queries oldest first. Repeated checks of busy subjects therefore cannot indefinitely delay untouched scopes. New work prioritizes unresolved sections with scheduled meetings. Each Java batch has at most 40 surnames. Successful queries are reused for seven days unless the scope’s class identifiers change. The budget is checked between batches; it is not an exact job-duration limit. A large queue can span many daily runs. Inspect `pendingBatches` and `pendingSurnameQueries`, and review the failure list instead of treating an unfinished search as exhaustive coverage.
 
-The scheduled workflow does not commit generated JSON. Its successful output is retained as a seven-day Actions artifact, and optional Cloudflare deployment publishes that output. Periodically download and review a successful catalog and update the checked-in baseline through a normal pull request. The importer's drop check compares against that checked-in baseline in each workflow run, not an automatically downloaded previous deployment. Keep the baseline current during registration.
+## Failure handling
 
-## Recovery
+A source/pagination/count-validation failure during base collection stops the run and deployment. Keep the previous public snapshot, inspect schema changes, source availability and count drops, and investigate with deployment disabled.
 
-For a bad static deployment, use the provider's deployment rollback and disable `ENABLE_CLOUDFLARE_DEPLOY` while investigating. Rebuild from a known-good Git revision or a retained artifact. Keep a known-good catalog in version control and periodic offline exports; workflow artifact retention is not a permanent backup.
+A failed surname batch retains previous evidence and remains pending. The orchestrator records the failure and can still publish a validated base catalog plus successful discovery batches. It never interprets a failed request as “no instructor assigned.” Recheck exact search criteria, no-results negative controls and class-number joins before changing the discovery adapter.
 
-The optional Render API contains the checked-in snapshot from its last container build, so redeploy it after updating that baseline. The free Render filesystem is ephemeral. If using PostgreSQL, export it regularly to a private location and test a restore into a separate database. Public course snapshots do not need a student-data backup system.
+If frontend verification or any later required check fails, the workflow does not save the new cache or deploy. The prior successful cache and site remain available. When investigating locally, retain the working directory and logs. Do not manually mark unsuccessful surname queries complete.
+
+Published instructor names, surname matches and full-name candidates have different evidence meanings. Confirm **Likely match** labels remain present across course rows, profiles, comparisons, saved plans and calendar exports. Instructor identity reviews and surname checks retain their own timestamps. A fresh base import must not make older evidence look freshly verified.
+
+## Roster and history maintenance
+
+The workflow refreshes CSE’s official directory using `update_cse_roster.py --catalog artifacts/university/catalog.json`. Reviewed identity and direct RateMyProfessors links are retained. Other subjects derive candidates from upcoming and build-only historical instructor records; adding an official directory for a department can expand its candidate set.
+
+Reverify curated profile links and individual RateMyProfessors identities separately. A school-scoped search link does not verify an RMP profile. Historical Registrar associations are checked-in evidence; runtime refreshes need no PDF parser. Preserve source URLs and printed names, and never expand initials into guessed given names.
+
+Run all Python collector/publisher/resume tests after changing those paths:
+
+```sh
+python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
+```
+
+## Retention and recovery
+
+Successful workflows retain a seven-day artifact containing the catalog index/files, production site, collection/discovery receipts and CSE roster/registry. The workflow does not commit generated catalogs. Periodically review a successful artifact and update the checked-in baseline through a normal pull request. Keep offline copies as well; Actions caches and artifacts are not permanent backups.
+
+Rollback a bad static deployment through the hosting provider and disable `ENABLE_CLOUDFLARE_DEPLOY` while investigating. Rebuild from a known-good Git revision or retained artifact. Include the catalog index and every referenced file together; publishing only an index can leave clients unable to load their catalog.
+
+The optional Render API serves the checked-in catalog from its container build. Rebuild it after updating that baseline. Its filesystem is ephemeral. If using PostgreSQL, keep regular exports and test a restore into a separate database.
 
 ## Sustainable ownership
 
-Document each active term/campus/subject scope and the source parser assumptions. Review provider limits and dependency updates monthly, and test the next term before registration begins. Keep production tokens in hosting/GitHub secret settings with minimal permissions and rotate them after a maintainer leaves. Record the next maintainer and handoff date before graduation; domain and billing access should never depend on one student's personal account.
+Update the workflow’s default upcoming and build-history term codes before registration changes semesters. Review current coverage, pending discovery work, free-service limits and dependency updates regularly. Keep production tokens in repository/hosting secrets, rotate them when maintainers leave, and document the next maintainer before graduation.
 
-## Verification of this initial build
-
-- Frontend checks cover catalog/URL semantics, snapshot integrity, API freshness/fallback, saved-plan persistence, comparison dialogs, instructor navigation, surname discovery presentation/filtering, meeting conflicts, and calendar export. Run the current suite for its exact count.
-- Java checks cover framework-free core compilation, API/CORS behavior, pagination, incomplete-import rejection, scope preservation, instructor enrichment, and atomic publication. Run Maven verification for current results.
-- The TypeScript check and production frontend build passed. A production-preview request returned the exact bundled 623-course / 4,793-section snapshot.
-- A live Java refresh of all six Spring subjects matched the pilot counts and preserved Autumn records. An isolated PostgreSQL 17 verification covered migration, archive write, and API readback.
-- Visual browser QA was not completed because Chrome access was not approved. Desktop and narrow-screen layout still need a manual visual check before public launch.
-- No external hosting deployment has been configured or performed.
+Automated checks cover source pagination, all-subject normalization, scope preservation, resumable searches, atomic file publication, manifest validation, instructor evidence, frontend search/planning and live-seat response handling. They cannot establish that an unpublished future assignment is correct or replace manual visual/source checks. No external hosting deployment is configured by these local changes.

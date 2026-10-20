@@ -24,25 +24,27 @@ management:
       show-details: never
 app:
   catalog:
-    path: ${CATALOG_PATH:${APP_CATALOG_PATH:../frontend/public/data/catalog.json}}
+    path: ${CATALOG_PATH:${APP_CATALOG_PATH:../frontend/public/data/catalog-index.json}}
   cors:
     origins: ${APP_CORS_ORIGINS:http://localhost:5173,http://localhost:4173,http://127.0.0.1:5173,http://127.0.0.1:4173}
   discovery:
     enabled: false
-    subject: CSE
+    subject: ALL
     catalog-number: ""
     surnames: ""
     candidate-file: ""
+    candidate-subject: CSE
     identity-file: ""
+    history-file: ""
     max-candidates: 200
     include-catalog-candidates: true
   import:
     enabled: false
     base-url: https://content.osu.edu
     term: 1272
-    subjects: CSE,MATH,STAT,PHYSICS,ECE,ENGR
+    subjects: ALL
     campus: col
-    output: ../frontend/public/data/catalog.json
+    output: ../artifacts/catalog.json
     delay-ms: 350
     max-pages: 100
     timeout-seconds: 30

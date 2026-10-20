@@ -47,6 +47,6 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - name: Verify roster collector
-        run: python3 -m unittest discover -s data/bootstrap -p test_update_cse_roster.py
+      - name: Verify collection, publication, and resume logic
+        run: python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
       - run: mvn -B -ntp -f backend/pom.xml verify

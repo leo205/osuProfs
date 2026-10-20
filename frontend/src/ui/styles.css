@@ -3257,3 +3257,28 @@ body {
     font-size: 9px;
   }
 }
+
+.section-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 5px 12px;
+  margin: 10px 0 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.section-facts dt {
+  color: var(--muted);
+}
+.section-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.availability-check {
+  margin: 12px 0;
+}
+.availability-check [role="status"] {
+  margin-top: 12px;
+}
+.availability-error {
+  color: var(--red);
+}

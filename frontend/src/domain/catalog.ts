@@ -54,7 +54,7 @@ export function hasSurnameMatch(section: Section): boolean {
 export function isInstructorIdentified(section: Section): boolean {
   return (
     section.instructors.length > 0 ||
-    (hasSurnameMatch(section) && fullNameMatches(section).length <= 1)
+    (hasSurnameMatch(section) && fullNameMatches(section).length === 1)
   );
 }
 
@@ -112,19 +112,21 @@ export function collectedAt(
   campus = "",
   subject = "",
 ): string {
-  const timestamps = catalog.courses
-    .filter(
-      (c) =>
-        c.termCode === termCode &&
-        (!campus || c.campus === campus) &&
-        (!subject || c.subject === subject),
+  let oldest = Infinity;
+  for (const course of catalog.courses) {
+    if (
+      course.termCode !== termCode ||
+      (campus && course.campus !== campus) ||
+      (subject && course.subject !== subject)
     )
-    .flatMap((c) => c.sections.map((s) => Date.parse(s.lastUpdated)))
-    .filter(Number.isFinite);
-  return timestamps.length
-    ? new Date(
-        timestamps.reduce((oldest, value) => Math.min(oldest, value), Infinity),
-      ).toISOString()
+      continue;
+    for (const section of course.sections) {
+      const timestamp = Date.parse(section.lastUpdated);
+      if (Number.isFinite(timestamp)) oldest = Math.min(oldest, timestamp);
+    }
+  }
+  return Number.isFinite(oldest)
+    ? new Date(oldest).toISOString()
     : catalog.generatedAt;
 }
 
@@ -191,6 +193,7 @@ export function filterCourses(
       if (filters.subject && course.subject !== filters.subject) return false;
       if (number && !normalize(course.catalogNumber).startsWith(number))
         return false;
+      if (!tokens.length) return true;
       const haystack = normalize(
         `${courseCode(course)} ${course.subject}${course.catalogNumber} ${course.title} ${course.description} ${course.sections.flatMap(sectionInstructorNames).join(" ")}`,
       );
@@ -245,6 +248,7 @@ export function instructorIndex(
   catalog: Catalog,
   termCode: string,
   query = "",
+  campus = "",
 ): {
   instructor: InstructorProfile;
   courses: Course[];
@@ -262,7 +266,9 @@ export function instructorIndex(
       likelyIds: Set<string>;
     }
   >();
-  for (const course of catalog.courses.filter((c) => c.termCode === termCode)) {
+  for (const course of catalog.courses.filter(
+    (c) => c.termCode === termCode && (!campus || c.campus === campus),
+  )) {
     for (const section of course.sections)
       for (const instructor of [
         ...section.instructors,

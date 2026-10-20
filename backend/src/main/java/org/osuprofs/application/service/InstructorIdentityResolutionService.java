@@ -12,22 +12,30 @@ public final class InstructorIdentityResolutionService {
     private static final String PUBLIC_RECORDS = "https://content.osu.edu/v2/classes/search";
     private final InstructorIdentityRegistry registry;
     private final String defaultSubject;
-    public InstructorIdentityResolutionService(InstructorIdentityRegistry registry) { this(registry, "CSE"); }
+    public InstructorIdentityResolutionService(InstructorIdentityRegistry registry) { this(registry, "ALL"); }
     public InstructorIdentityResolutionService(InstructorIdentityRegistry registry, String defaultSubject) {
         this.registry = registry; this.defaultSubject = defaultSubject;
     }
 
-    public Catalog resolve(Catalog catalog) throws Exception {
+    public Catalog resolve(Catalog catalog) throws Exception { return resolve(catalog, null); }
+    public Catalog resolve(Catalog catalog, Catalog history) throws Exception {
         var reviewed = registry.load();
         if (!reviewed.subject().isBlank() && reviewed.identities().isEmpty())
             throw new IllegalStateException("Configured instructor identity registry has no reviewed identities");
-        String subject = reviewed.subject().isBlank() ? defaultSubject : reviewed.subject();
-        Map<String, Candidate> candidates = catalogCandidates(catalog, subject);
+        Catalog result = catalog;
+        for (String subject : catalog.courses().stream().map(Catalog.Course::subject).distinct().sorted().toList()) {
+            if (defaultSubject.equalsIgnoreCase("ALL") || defaultSubject.equalsIgnoreCase(subject))
+                result = resolveSubject(result, history, subject, reviewed);
+        }
+        return result;
+    }
+    private Catalog resolveSubject(Catalog catalog, Catalog history, String subject, InstructorIdentityRegistry.Registry reviewed) {
+        Map<String, Candidate> candidates = catalogCandidates(catalog, history, subject);
         // Cached reviewed metadata remains portable when an import omits the optional registry.
         catalog.courses().stream().filter(c -> c.subject().equalsIgnoreCase(subject)).flatMap(c -> c.sections().stream())
             .map(Catalog.Section::instructorDiscovery).filter(Objects::nonNull).map(Catalog.InstructorDiscovery::fullNameMatches)
             .filter(Objects::nonNull).flatMap(List::stream).forEach(identity -> overlay(candidates, identity));
-        for (var identity : reviewed.identities()) {
+        for (var identity : reviewed.subject().equalsIgnoreCase(subject) ? reviewed.identities() : List.<Catalog.InstructorIdentityMatch>of()) {
             Candidate candidate = overlay(candidates, identity);
             for (String number : reviewed.courseAffinities().getOrDefault(identity.id(), List.of()))
                 candidate.observed.computeIfAbsent(number, ignored -> new LinkedHashSet<>()).addAll(identity.sourceUrls());
@@ -50,7 +58,7 @@ public final class InstructorIdentityResolutionService {
                 var resolved = new Catalog.InstructorDiscovery(discovery.status(), discovery.surnames(), discovery.sourceUrl(),
                     discovery.checkedAt(), discovery.method(), List.copyOf(selected.values()));
                 return new Catalog.Section(section.id(), section.classNumber(), section.section(), section.component(), section.instructionMode(),
-                    section.instructors(), section.meetings(), section.enrollment(), section.sourceUrl(), section.lastUpdated(), resolved);
+                    section.instructors(), section.meetings(), section.enrollment(), section.sourceUrl(), section.lastUpdated(), resolved, section.details());
             }).toList();
             return new Catalog.Course(course.id(), course.termCode(), course.campus(), course.subject(), course.catalogNumber(), course.title(),
                 course.description(), course.credits(), course.career(), course.prerequisites(), course.attributes(), sections);
@@ -58,9 +66,11 @@ public final class InstructorIdentityResolutionService {
         return new Catalog(catalog.schemaVersion(), catalog.generatedAt(), catalog.source(), catalog.terms(), catalog.subjects(), catalog.campuses(), catalog.coverage(), courses);
     }
 
-    private Map<String, Candidate> catalogCandidates(Catalog catalog, String subject) {
+    private Map<String, Candidate> catalogCandidates(Catalog catalog, Catalog history, String subject) {
         Map<String, Candidate> result = new LinkedHashMap<>();
-        var newestFirst = catalog.courses().stream().filter(c -> c.subject().equalsIgnoreCase(subject))
+        var allCourses = new ArrayList<>(catalog.courses());
+        if (history != null) allCourses.addAll(history.courses());
+        var newestFirst = allCourses.stream().filter(c -> c.subject().equalsIgnoreCase(subject))
             .sorted(Comparator.comparing(Catalog.Course::termCode).reversed().thenComparing(Catalog.Course::id)).toList();
         for (var course : newestFirst) for (var section : course.sections()) for (var instructor : section.instructors()) {
             if (instructor.name() == null || instructor.name().isBlank()) continue;

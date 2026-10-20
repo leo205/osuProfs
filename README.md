@@ -1,14 +1,12 @@
 # Buckeye Course Guide
 
-A student-built OSU course and instructor explorer using React, TypeScript, and a Java 21 / Spring Boot backend. It is an independent project, with public-source snapshots rather than a connection to a student's enrollment account.
+An independent OSU course and instructor explorer built with React, TypeScript, Java 21 and Spring Boot. It shows public course records for the upcoming semester, across every campus and offered subject returned by OSU’s public class search.
 
-The cheapest deployment serves the website and a validated catalog as static files. Java collects and normalizes OSU data; GitHub Actions can refresh it daily. Browsing does not require an always-running API or database. The Spring Boot API and PostgreSQL adapter are available when needed.
+The free-first deployment serves the website and validated catalog files from static hosting. Java handles collection and normalization; scheduled GitHub Actions jobs refresh classes and resume instructor searches. Browsing needs no always-running API or database. Spring Boot REST and PostgreSQL adapters remain available when needed.
 
 ## Run locally
 
-Install Node.js 22.21+ and npm. Java 21 and Maven 3.9+ are needed for the backend and importer, but not for the static frontend.
-
-Refreshing the official instructor roster also uses Python 3 and curl, with no additional Python packages.
+Install Node.js 22.21+ and npm. Java 21 and Maven 3.9+ are needed for the backend/importer. Collection orchestration also uses Python 3 and curl, without additional Python packages.
 
 ```sh
 cd frontend
@@ -16,7 +14,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite, normally <http://localhost:5173>. The included `frontend/public/data/catalog.json` contains real public OSU records and collection timestamps. Search and planning work without accounts, secrets, or paid services.
+Open Vite’s local URL, normally <http://localhost:5173>. The website reads `frontend/public/data/catalog-index.json` and its catalog files. Records include their actual source collection times. Search, RateMyProfessors links and local schedule planning work without an account or paid service.
 
 For the optional API, use another terminal:
 
@@ -31,71 +29,82 @@ The API starts at <http://localhost:8080/api/health>. To use it from React, add 
 VITE_API_BASE_URL=http://localhost:8080
 ```
 
-React falls back to the bundled catalog if the optional API cannot be reached. `.env.example` documents backend settings; Spring Boot does not automatically load a root `.env` file.
+React retains the bundled catalog if the API is unavailable, older or missing richer instructor/section information. The bundled catalog defines the visible upcoming term; archived API semesters stay hidden. If the published catalog cannot load, the app asks you to retry before using API data. `.env.example` documents backend settings; Spring Boot does not automatically load a root `.env` file.
 
-## What this version covers
+## Course and instructor coverage
 
-- Course and instructor search with semester, campus, and subject filtering.
-- Section details, published instructor names, likely full-name matches from public instructor-search evidence, meeting times, and source links.
-- Instructor profiles and RateMyProfessors links, with published assignments separated from likely identity matches.
-- A local saved-section planner with meeting conflict detection and calendar export.
-- Source, freshness, and coverage information beside the catalog.
-- A static-first website, an HTTP API, a repeatable importer, automated checks, and optional deployment configuration.
+- Search by semester, campus, subject, course number, instructor and course text.
+- See course descriptions, credits, prerequisites, all available attributes and every imported section.
+- Read published instructor names and roles, meeting dates/times/locations, delivery mode, session details, linked sections and enrollment consent when supplied.
+- Open section details and choose **Check current seats** to request current availability directly from OSU. Snapshot status and the live seat check keep separate timestamps.
+- Follow instructor profiles and RateMyProfessors links; save a schedule locally, inspect conflicts and export a calendar.
+- Inspect collection coverage and official source links.
 
-The initial pilot covers Spring 2027 in Columbus for CSE, MATH, STAT, PHYSICS, ECE, and ENGR, with Autumn 2026 CSE for comparison. Read the current catalog's `coverage` entries for exact scope and completeness. An empty search outside this scope does not mean OSU offers no such course.
+The public catalog contains only upcoming Spring 2027 (`1272`) across all campuses. Autumn 2026 (`1268`) is collected into a local/build-only history file to help identify instructors; its classes are not published or selectable in the app. The manifest and each catalog file’s `coverage` records describe what is actually included; the collection receipt records campus totals checked against OSU. A complete class collection does not mean every instructor identity has been published or resolved.
 
-The CSE discovery pipeline searches OSU's public PeopleSoft class search by exact surname and joins current-term class numbers to the catalog. Candidates come from all available current and included historical CSE instructor records, plus reviewed seeds. Official teaching records provide full-name candidates, with the reviewed registry supplying identity and rating-link overrides. CSE 3421 classes 6248 and 36012 show **Rubao Lee — Likely match**, with official records and a RateMyProfessors link.
+Instructor discovery uses current and historical published names for each subject, plus CSE’s official directory and reviewed identity overrides. It searches current-term class assignments by exact surname in OSU’s public PeopleSoft search. Work runs in paced, resumable batches instead of stopping at a small manual list.
 
-The surname search itself does not expose a full identity or a confirmed primary instructor; an associated instructor or coordinator may cause a match. Full names derived from official records and teaching history are explicitly **likely**, and multiple candidates stay visible without a single winner. Published names remain unchanged. An **Instructor not resolved** row means the current imports/search coverage have not identified the instructor; it does not prove the section is unassigned. Discovery covers CSE and the candidates available to this pipeline, not every university instructor. Rating pages open externally; ratings and reviews are not imported. See [data coverage and evidence](docs/data-and-coverage.md).
+A surname query does not prove a full identity or primary teaching role. Full names inferred from official records and teaching history remain **Likely match**; multiple supported candidates remain visible. **Instructor not resolved** means current evidence has not identified the instructor. Published assignments remain separate. RateMyProfessors pages open externally; ratings and reviews are not imported. See [data coverage and evidence](docs/data-and-coverage.md).
 
-## Refresh the catalog
+## Refresh all offered classes
 
-Run from the repository root:
+Run from the repository root. On the first run, flatten the checked-in manifest into a local working catalog:
 
 ```sh
-python3 data/bootstrap/update_cse_roster.py
+python3 data/bootstrap/publish_catalog.py \
+  --input frontend/public/data/catalog-index.json \
+  --flatten artifacts/university/catalog.json
+python3 data/bootstrap/update_cse_roster.py \
+  --catalog artifacts/university/catalog.json
 mvn -B -ntp -f backend/pom.xml verify
-java -jar backend/target/osu-profs-0.1.0.jar \
-  --spring.main.web-application-type=none \
-  --app.import.enabled=true \
-  --app.import.output=frontend/public/data/catalog.json \
-  --app.import.term=1272 \
-  --app.import.subjects=CSE,MATH,STAT,PHYSICS,ECE,ENGR \
-  --app.import.campus=col \
-  --app.discovery.enabled=true \
-  --app.discovery.subject=CSE \
-  --app.discovery.candidate-file=data/discovery/cse-surnames.txt \
-  --app.discovery.identity-file=data/discovery/cse-instructor-identities.json \
-  --app.discovery.include-catalog-candidates=true \
-  --app.discovery.max-candidates=200
+python3 data/bootstrap/refresh_university.py \
+  --term 1272 \
+  --history-term 1268 \
+  --campuses ALL \
+  --discover \
+  --discovery-minutes 20
 ```
 
-The roster refresh updates official CSE directory names and surname seeds while preserving curated identity/link overrides. It also loads checked-in historical Registrar course associations; runtime collection needs no PDF parser. The importer then follows course pagination, checks surnames from the full available CSE history/roster, joins official-record full-name candidates, and validates the combined result before replacing the output. A roster, catalog, discovery, or registry failure prevents deployment. Other terms and subjects remain in the snapshot. Evidence and identity-source reviews keep separate `checkedAt` values; an API refresh does not make older evidence current. Review coverage and the frontend after changing import scope or candidate limits.
+On later runs, retain `artifacts/university/` and skip the initial flatten command so previous successful discovery progress survives. The orchestrator collects all offered subjects/campuses, verifies section counts, caches build-only instructor history and processes batches of at most 40 surnames. The time budget is checked between batches, so a final batch can extend beyond it. Pending work resumes on the next run. Build-only history refreshes when missing or with `--refresh-history`; the scheduled workflow also refreshes it on Sundays.
+
+To continue only pending searches against an already validated local snapshot:
+
+```sh
+python3 data/bootstrap/refresh_university.py \
+  --term 1272 --history-term 1268 --campuses ALL \
+  --skip-base --discover --discovery-minutes 20
+```
+
+A discovery budget of `0` processes the entire pending queue and can take a long time. Keep the bounded default for scheduled free-tier runs. Base collection failures stop publication. Failed surname batches keep prior data, remain pending and appear in `artifacts/university/collection.json`; they do not become false “no instructor” results. See [collection tools](data/bootstrap/README.md) and [operations](docs/operations.md).
 
 ## Verify and build
 
 ```sh
+python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
+mvn -B -ntp -f backend/pom.xml verify
 cd frontend
 npm test
 npm run build
 npm run preview
 ```
 
-Run `mvn -B -ntp -f backend/pom.xml verify` from the repository root for Java tests and packaging, and `python3 -m unittest discover -s data/bootstrap -p test_update_cse_roster.py` for the roster collector. `.github/workflows/ci.yml` runs these checks and the frontend checks on pushes and pull requests. [Manual checks](docs/operations.md) cover interactions and source comparisons that automated tests cannot establish.
+CI runs these checks on pushes and pull requests. The refresh workflow builds and publishes only checked output. [Manual checks](docs/operations.md) cover source comparisons, accessibility and visual behavior.
 
 ## Structure and deployment
 
 ```text
-frontend/              React UI and public catalog
-backend/               Java domain, ports, adapters, Spring Boot entry point
-data/                  Data contract and source bootstrap support
-.github/workflows/     Build verification and optional scheduled refresh/deploy
-docs/                  Architecture, data scope, deployment, operations
-render.yaml            Optional free API service blueprint
+frontend/              React UI, catalog index and static catalog files
+backend/               Java domain, ports, adapters and Spring Boot entry point
+data/bootstrap/        Collection orchestration, roster and publication tools
+data/discovery/        Reviewed identity evidence and CSE roster inputs
+artifacts/university/  Local/cache working catalog, history and discovery progress
+.github/workflows/     Verification and optional scheduled refresh/deployment
+docs/                  Architecture, source coverage, deployment and operations
+render.yaml            Optional API service blueprint
 ```
 
-The backend follows hexagonal architecture: its domain and use cases are separated from OSU HTTP, JSON storage, REST, and PostgreSQL adapters. See [architecture](docs/architecture.md).
+The backend follows [hexagonal architecture](docs/architecture.md): domain models and use cases are independent of OSU HTTP, JSON files, REST and PostgreSQL. The Python orchestrator drives the Java CLI and packages the resulting catalog for static hosting.
 
-Start with Cloudflare Pages on a free `pages.dev` address and GitHub's free standard public-repository runners. Render and Neon are optional. **The $0/month target depends on service eligibility, quotas, and staying on free plans.** No hosting account, domain, paid plan, deployment, or external publication is created by running this project locally. See [deployment and costs](docs/deployment.md) for exact setup and limits.
+Use Cloudflare Pages with a free `pages.dev` address and GitHub’s standard public-repository runners for the $0/month target. The optional API, database and custom domain are separate choices. Service eligibility, quotas and storage limits still apply; [deployment and costs](docs/deployment.md) describes the setup. Running locally does not create hosting resources or publish the site.
 
-Saved sections live in this browser's local storage. They are not synced or backed up to a user account. Do not commit credentials or private student information. Before public launch, put the repository and hosting under shared ownership and assign at least two maintainers; see [operations](docs/operations.md).
+Saved schedules stay in this browser’s local storage. Keep credentials and private student data out of the repository, and record project recovery access and a maintainer handoff plan.

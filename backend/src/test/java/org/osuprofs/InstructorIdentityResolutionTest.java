@@ -46,7 +46,8 @@ class InstructorIdentityResolutionTest {
         var result = resolver("CSE", candidate).resolve(discovered("  GARCIA  ", null));
         assertEquals(1, result.courses().getFirst().sections().get(1).instructorDiscovery().fullNameMatches().size());
         var otherSubject = resolver("MATH", candidate).resolve(discovered("García", null));
-        assertNull(otherSubject.courses().getFirst().sections().get(1).instructorDiscovery().fullNameMatches());
+        assertTrue(otherSubject.courses().getFirst().sections().get(1).instructorDiscovery().fullNameMatches().isEmpty(),
+            "A reviewed identity in a different subject must not become a candidate");
         assertTrue(resolver("CSE", identity("other", "Reviewed McLee", "McLee")).resolve(discovered("Lee", null))
             .courses().getFirst().sections().get(1).instructorDiscovery().fullNameMatches().isEmpty());
     }

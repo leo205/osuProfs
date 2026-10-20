@@ -14,7 +14,13 @@ public record Catalog(int schemaVersion, String generatedAt, Source source, List
                          List<String> attributes, List<Section> sections) {}
     public record Section(String id, String classNumber, String section, String component, String instructionMode,
                           List<Instructor> instructors, List<Meeting> meetings, Enrollment enrollment,
-                          String sourceUrl, String lastUpdated, InstructorDiscovery instructorDiscovery) {
+                          String sourceUrl, String lastUpdated, InstructorDiscovery instructorDiscovery, SectionDetails details) {
+        public Section(String id, String classNumber, String section, String component, String instructionMode,
+                       List<Instructor> instructors, List<Meeting> meetings, Enrollment enrollment,
+                       String sourceUrl, String lastUpdated, InstructorDiscovery instructorDiscovery) {
+            this(id, classNumber, section, component, instructionMode, instructors, meetings, enrollment,
+                sourceUrl, lastUpdated, instructorDiscovery, null);
+        }
         public Section(String id, String classNumber, String section, String component, String instructionMode,
                        List<Instructor> instructors, List<Meeting> meetings, Enrollment enrollment,
                        String sourceUrl, String lastUpdated) {
@@ -22,6 +28,10 @@ public record Catalog(int schemaVersion, String generatedAt, Source source, List
                 sourceUrl, lastUpdated, null);
         }
     }
+    public record SectionDetails(String sessionCode, String sessionDescription, String startDate, String endDate,
+                                 String associatedClass, List<String> autoEnrollSections, String consent,
+                                 String primaryInstructorSection, String location, List<String> attributes,
+                                 String availabilityUrl) {}
     public record InstructorDiscovery(String status, List<String> surnames, String sourceUrl,
                                       String checkedAt, String method, List<InstructorIdentityMatch> fullNameMatches) {
         public InstructorDiscovery(String status, List<String> surnames, String sourceUrl, String checkedAt, String method) {

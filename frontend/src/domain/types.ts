@@ -35,6 +35,19 @@ export interface Meeting {
   startDate: string | null;
   endDate: string | null;
 }
+export interface SectionDetails {
+  sessionCode: string | null;
+  sessionDescription: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  associatedClass: string | null;
+  consent: string | null;
+  primaryInstructorSection: string | null;
+  location: string | null;
+  availabilityUrl: string | null;
+  autoEnrollSections: string[];
+  attributes: string[];
+}
 export interface Section {
   id: string;
   classNumber: string;
@@ -43,6 +56,7 @@ export interface Section {
   instructionMode: string;
   instructors: Instructor[];
   instructorDiscovery?: InstructorDiscovery | null;
+  details?: SectionDetails | null;
   meetings: Meeting[];
   enrollment: {
     status: "OPEN" | "CLOSED" | "WAITLIST" | "UNKNOWN" | "CANCELLED";

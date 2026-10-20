@@ -1,17 +1,95 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { readFileSync } from "node:fs";
-import { loadCatalog, validateCatalog } from "./catalog";
+import { existsSync, readFileSync } from "node:fs";
+import { loadCatalog, validateCatalog, validateCatalogIndex } from "./catalog";
 import { collectedAt } from "../domain/catalog";
-import type { Catalog } from "../domain/types";
+import type { Catalog, CodeLabel } from "../domain/types";
 
-const fullCatalog = JSON.parse(
-  readFileSync(
-    new URL("../../public/data/catalog.json", import.meta.url),
-    "utf8",
-  ),
-) as Catalog;
+function publishedCatalog(): Catalog {
+  const indexUrl = new URL(
+    "../../public/data/catalog-index.json",
+    import.meta.url,
+  );
+  if (!existsSync(indexUrl))
+    return JSON.parse(
+      readFileSync(
+        new URL("../../public/data/catalog.json", import.meta.url),
+        "utf8",
+      ),
+    ) as Catalog;
+  const index = validateCatalogIndex(
+    JSON.parse(readFileSync(indexUrl, "utf8")),
+  );
+  const shards = index.catalogs.map(
+    (shard) =>
+      JSON.parse(
+        readFileSync(
+          new URL(`../../public${shard.url}`, import.meta.url),
+          "utf8",
+        ),
+      ) as Catalog,
+  );
+  const labels = (kind: "terms" | "subjects" | "campuses"): CodeLabel[] => [
+    ...new Map(
+      shards.flatMap((shard) =>
+        shard[kind].map((item) => [item.code, item] as const),
+      ),
+    ).values(),
+  ];
+  return {
+    ...shards[0],
+    generatedAt: index.generatedAt,
+    terms: labels("terms"),
+    subjects: labels("subjects"),
+    campuses: labels("campuses"),
+    coverage: shards.flatMap((shard) => shard.coverage),
+    courses: shards.flatMap((shard) => shard.courses),
+  };
+}
+const fullCatalog = publishedCatalog();
+// Exercise transport/fallback behavior with a bounded real-data subset. The
+// complete schoolwide files still receive integrity and manifest checks below.
+function behaviorFixture(): Catalog {
+  const courses = fullCatalog.courses.filter(
+    (course) =>
+      course.campus === "col" &&
+      ((course.subject === "CSE" &&
+        ["2421", "3421", "3521"].includes(course.catalogNumber)) ||
+        (course.subject === "MATH" && course.catalogNumber === "1151")),
+  );
+  const grouped = new Map<string, typeof courses>();
+  for (const course of courses) {
+    const key = `${course.termCode}/${course.campus}`;
+    grouped.set(key, [...(grouped.get(key) ?? []), course]);
+  }
+  return {
+    ...fullCatalog,
+    courses,
+    coverage: [...grouped.values()].map((group) => ({
+      termCode: group[0].termCode,
+      campus: group[0].campus,
+      subjects: [...new Set(group.map((course) => course.subject))],
+      courseCount: group.length,
+      sectionCount: group.reduce(
+        (count, course) => count + course.sections.length,
+        0,
+      ),
+      namedInstructorSections: group
+        .flatMap((course) => course.sections)
+        .filter((section) => section.instructors.length).length,
+      complete: true,
+      warnings: [],
+    })),
+  };
+}
+const behaviorCatalog = behaviorFixture();
 function response(catalog: unknown) {
-  return { ok: true, json: async () => catalog };
+  return { ok: true, status: 200, json: async () => catalog };
+}
+const missingIndex = { ok: false, status: 404 };
+function legacyFetch(handler: (url: string) => unknown) {
+  return vi.fn(async (url: string) =>
+    url === "/data/catalog-index.json" ? missingIndex : handler(url),
+  );
 }
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -19,10 +97,32 @@ afterEach(() => {
 });
 
 describe("published catalog integrity", () => {
+  it("loads the actual published manifest and every referenced file as one upcoming-semester catalog", async () => {
+    vi.stubEnv("VITE_API_BASE_URL", "");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        const file = new URL(`../../public${url}`, import.meta.url);
+        if (!existsSync(file)) return { ok: false, status: 404 };
+        return response(JSON.parse(readFileSync(file, "utf8")));
+      }),
+    );
+    const result = await loadCatalog();
+    expect(result.catalog.courses).toHaveLength(fullCatalog.courses.length);
+    expect(result.catalog.coverage).toHaveLength(fullCatalog.coverage.length);
+    expect(result.catalog.terms).toHaveLength(1);
+    expect(
+      result.catalog.courses.every(
+        (course) => course.termCode === result.catalog.terms[0].code,
+      ),
+    ).toBe(true);
+  });
+
   it("retains current instructor-search evidence for every reported CSE 3521 section", () => {
     const course = fullCatalog.courses.find(
       (c) =>
         c.termCode === "1272" &&
+        c.campus === "col" &&
         c.subject === "CSE" &&
         c.catalogNumber === "3521",
     );
@@ -94,14 +194,15 @@ describe("published catalog integrity", () => {
   });
   it("does not relabel an untouched semester as fresh after a partial import", () => {
     const catalog = { ...fullCatalog, generatedAt: "2027-01-01T00:00:00Z" };
-    expect(Date.parse(collectedAt(catalog, "1268"))).toBeLessThan(
-      Date.parse(catalog.generatedAt),
-    );
+    expect(
+      Date.parse(collectedAt(catalog, fullCatalog.terms[0].code)),
+    ).toBeLessThan(Date.parse(catalog.generatedAt));
   });
   it("contains verified Lee evidence for both requested CSE 3421 sections", () => {
     const course = fullCatalog.courses.find(
       (c) =>
         c.termCode === "1272" &&
+        c.campus === "col" &&
         c.subject === "CSE" &&
         c.catalogNumber === "3421",
     );
@@ -124,7 +225,7 @@ describe("published catalog integrity", () => {
     }
   });
   it("rejects malformed or unsafe discovery evidence", () => {
-    const copy = structuredClone(fullCatalog);
+    const copy = structuredClone(behaviorCatalog);
     const section = copy.courses
       .flatMap((c) => c.sections)
       .find((s) => s.instructorDiscovery)!;
@@ -135,7 +236,7 @@ describe("published catalog integrity", () => {
     expect(() => validateCatalog(copy)).toThrow();
   });
   it("rejects unsafe full-name profile or rating links instead of displaying untrusted identity claims", () => {
-    const copy = structuredClone(fullCatalog);
+    const copy = structuredClone(behaviorCatalog);
     const identity = copy.courses
       .flatMap((c) => c.sections)
       .flatMap((s) => s.instructorDiscovery?.fullNameMatches ?? [])[0];
@@ -149,9 +250,48 @@ describe("published catalog integrity", () => {
 });
 
 describe("static-first catalog access", () => {
+  it("keeps published instructors when an equally fresh API omits their names", async () => {
+    vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
+    const snapshot = shardFixture("CSE");
+    snapshot.courses[0].sections[0].instructors = [
+      { id: "person", name: "Published Person", role: "Instructor" },
+    ];
+    const api = structuredClone(snapshot);
+    api.courses[0].sections[0].instructors = [];
+    vi.stubGlobal(
+      "fetch",
+      legacyFetch((url) => response(url.startsWith("https:") ? api : snapshot)),
+    );
+    expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
+  });
+  it("retains section dates, linked components and availability links when an API omits section details", async () => {
+    vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
+    const snapshot = shardFixture("CSE");
+    snapshot.courses[0].sections[0].details = {
+      sessionCode: "1",
+      sessionDescription: "Regular session",
+      startDate: "2027-01-11",
+      endDate: "2027-04-26",
+      associatedClass: "1",
+      autoEnrollSections: [],
+      consent: null,
+      primaryInstructorSection: "0010",
+      location: "Columbus",
+      attributes: [],
+      availabilityUrl:
+        "https://content.osu.edu/v2/classes/availability?termCode=1272&sessionCode=1&courseOfferingNumber=1&courseId=123&classSection=0010",
+    };
+    const api = structuredClone(snapshot);
+    delete api.courses[0].sections[0].details;
+    vi.stubGlobal(
+      "fetch",
+      legacyFetch((url) => response(url.startsWith("https:") ? api : snapshot)),
+    );
+    expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
+  });
   it("retains full-name evidence when the API has equally fresh surnames but omits identity candidates", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
-    const api = structuredClone(fullCatalog);
+    const api = structuredClone(behaviorCatalog);
     api.courses.forEach((c) =>
       c.sections.forEach((s) => {
         if (s.instructorDiscovery) delete s.instructorDiscovery.fullNameMatches;
@@ -159,8 +299,8 @@ describe("static-first catalog access", () => {
     );
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) =>
-        response(url.startsWith("https:") ? api : fullCatalog),
+      legacyFetch(async (url: string) =>
+        response(url.startsWith("https:") ? api : behaviorCatalog),
       ),
     );
     expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
@@ -168,7 +308,7 @@ describe("static-first catalog access", () => {
 
   it("rejects older identity metadata even when the source surname checks are equally recent", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
-    const api = structuredClone(fullCatalog);
+    const api = structuredClone(behaviorCatalog);
     api.courses
       .flatMap((c) => c.sections)
       .flatMap((s) => s.instructorDiscovery?.fullNameMatches ?? [])
@@ -177,62 +317,92 @@ describe("static-first catalog access", () => {
       });
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) =>
-        response(url.startsWith("https:") ? api : fullCatalog),
+      legacyFetch(async (url: string) =>
+        response(url.startsWith("https:") ? api : behaviorCatalog),
       ),
     );
     expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
   });
   it("does not contact an optional API unless explicitly configured", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "");
-    const fetch = vi.fn().mockResolvedValue(response(fullCatalog));
+    const fetch = legacyFetch(() => response(behaviorCatalog));
     vi.stubGlobal("fetch", fetch);
     expect((await loadCatalog()).via).toBe("snapshot");
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch.mock.calls[0][0]).toBe("/data/catalog.json");
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual([
+      "/data/catalog-index.json",
+      "/data/catalog.json",
+    ]);
   });
   it("retains the broader snapshot when a newer API only contains one subject", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
     const partial: Catalog = {
-      ...fullCatalog,
+      ...behaviorCatalog,
       generatedAt: "2027-01-01T00:00:00Z",
-      courses: fullCatalog.courses.filter(
+      courses: behaviorCatalog.courses.filter(
         (c) => c.subject === "CSE" && c.termCode === "1272",
       ),
-      coverage: [{ ...fullCatalog.coverage[0], subjects: ["CSE"] }],
+      coverage: [{ ...behaviorCatalog.coverage[0], subjects: ["CSE"] }],
     };
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) =>
-        response(url.startsWith("https:") ? partial : fullCatalog),
+      legacyFetch(async (url: string) =>
+        response(url.startsWith("https:") ? partial : behaviorCatalog),
       ),
     );
     const result = await loadCatalog();
-    expect(result.catalog.courses.length).toBe(fullCatalog.courses.length);
+    expect(result.catalog.courses.length).toBe(behaviorCatalog.courses.length);
     expect(result.fallbackReason).toBe("older-or-partial");
   });
   it("uses a complete, equally fresh API response when configured", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test/");
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(response(fullCatalog)));
+    vi.stubGlobal(
+      "fetch",
+      legacyFetch(() => response(behaviorCatalog)),
+    );
     expect((await loadCatalog()).via).toBe("api");
+  });
+  it("keeps archived API semesters out of the published upcoming-semester catalog", async () => {
+    vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
+    const snapshot = shardFixture("CSE");
+    const api = structuredClone(snapshot);
+    const past = structuredClone(api.courses[0]);
+    past.id = "1268-col-CSE-1000";
+    past.termCode = "1268";
+    api.courses.push(past);
+    api.terms.push({ code: "1268", label: "Autumn 2026" });
+    api.coverage.push({ ...api.coverage[0], termCode: "1268" });
+    vi.stubGlobal(
+      "fetch",
+      legacyFetch((url) => response(url.startsWith("https:") ? api : snapshot)),
+    );
+    const loaded = await loadCatalog();
+    expect(loaded.via).toBe("api");
+    expect(loaded.catalog.terms.map((term) => term.code)).toEqual(["1272"]);
+    expect(
+      loaded.catalog.courses.every((course) => course.termCode === "1272"),
+    ).toBe(true);
+    expect(
+      loaded.catalog.coverage.every((scope) => scope.termCode === "1272"),
+    ).toBe(true);
   });
   it("keeps surname discoveries when an API has equally fresh classes but lacks evidence", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
-    const api = structuredClone(fullCatalog);
+    const api = structuredClone(behaviorCatalog);
     api.courses.forEach((c) =>
       c.sections.forEach((s) => delete s.instructorDiscovery),
     );
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) =>
-        response(url.startsWith("https:") ? api : fullCatalog),
+      legacyFetch(async (url: string) =>
+        response(url.startsWith("https:") ? api : behaviorCatalog),
       ),
     );
     expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
   });
   it("rejects an equally fresh API that drops a section with surname evidence", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
-    const api = structuredClone(fullCatalog);
+    const api = structuredClone(behaviorCatalog);
     const course = api.courses.find((c) =>
       c.sections.some((s) => s.instructorDiscovery),
     )!;
@@ -240,8 +410,8 @@ describe("static-first catalog access", () => {
     course.sections = course.sections.filter((s) => s !== removed);
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) =>
-        response(url.startsWith("https:") ? api : fullCatalog),
+      legacyFetch(async (url: string) =>
+        response(url.startsWith("https:") ? api : behaviorCatalog),
       ),
     );
     expect((await loadCatalog()).fallbackReason).toBe("older-or-partial");
@@ -250,22 +420,197 @@ describe("static-first catalog access", () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) => {
+      legacyFetch(async (url: string) => {
         if (url.startsWith("https:")) throw new Error("offline");
-        return response(fullCatalog);
+        return response(behaviorCatalog);
       }),
     );
     expect((await loadCatalog()).fallbackReason).toBe("unavailable");
   });
-  it("can use the API if the bundled static file cannot load", async () => {
+  it("requires the published semester boundary even when an API is available", async () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
     vi.stubGlobal(
       "fetch",
-      vi.fn(async (url: string) => {
+      legacyFetch(async (url: string) => {
         if (url.startsWith("/")) throw new Error("missing");
-        return response(fullCatalog);
+        return response(behaviorCatalog);
       }),
     );
-    expect((await loadCatalog()).via).toBe("api");
+    await expect(loadCatalog()).rejects.toThrow(/Reload the page or try again/);
+  });
+});
+
+function shardFixture(subject: string, campus = "col"): Catalog {
+  const course = structuredClone(fullCatalog.courses[0]);
+  course.id = `1272-${campus}-${subject}-1000`;
+  course.subject = subject;
+  course.termCode = "1272";
+  course.campus = campus;
+  course.sections = course.sections.slice(0, 1);
+  return {
+    ...fullCatalog,
+    terms: [{ code: "1272", label: "Spring 2027" }],
+    subjects: [{ code: subject, label: subject }],
+    campuses: [{ code: campus, label: campus === "col" ? "Columbus" : "Lima" }],
+    courses: [course],
+    coverage: [
+      {
+        termCode: "1272",
+        campus,
+        subjects: [subject],
+        courseCount: 1,
+        sectionCount: course.sections.length,
+        namedInstructorSections: course.sections.filter(
+          (section) => section.instructors.length,
+        ).length,
+        complete: true,
+        warnings: [],
+      },
+    ],
+  };
+}
+function shardIndex(catalogs: Catalog[]) {
+  return {
+    schemaVersion: 1,
+    generatedAt: fullCatalog.generatedAt,
+    catalogs: catalogs.map((catalog, i) => ({
+      url: `/data/shards/part-${i}.json`,
+      termCode: "1272",
+      campus: catalog.courses[0].campus,
+      subjects: catalog.subjects.map((subject) => subject.code),
+      courseCount: catalog.courses.length,
+      sectionCount: catalog.courses.reduce(
+        (total, course) => total + course.sections.length,
+        0,
+      ),
+    })),
+  };
+}
+
+describe("schoolwide catalog shards", () => {
+  it("loads every subject and campus, merges shared metadata, and preserves instructor evidence", async () => {
+    const shards = [
+      shardFixture("CSE"),
+      shardFixture("MATH"),
+      shardFixture("CSE", "lim"),
+    ];
+    const index = shardIndex(shards);
+    const fetch = vi.fn(async (url: string) =>
+      response(
+        url === "/data/catalog-index.json"
+          ? index
+          : shards[index.catalogs.findIndex((shard) => shard.url === url)],
+      ),
+    );
+    vi.stubGlobal("fetch", fetch);
+    const loaded = await loadCatalog();
+    expect(loaded.catalog.courses).toHaveLength(3);
+    expect(loaded.catalog.subjects.map((subject) => subject.code)).toEqual([
+      "CSE",
+      "MATH",
+    ]);
+    expect(loaded.catalog.campuses.map((campus) => campus.code)).toEqual([
+      "col",
+      "lim",
+    ]);
+    expect(loaded.catalog.terms).toHaveLength(1);
+    expect(loaded.catalog.courses[0].sections).toEqual(
+      shards[0].courses[0].sections,
+    );
+    expect(fetch.mock.calls.map(([url]) => url)).not.toContain(
+      "/data/catalog.json",
+    );
+  });
+
+  it("fetches at most four shards concurrently", async () => {
+    const shards = Array.from({ length: 9 }, (_, i) =>
+      shardFixture(`SUBJ${i}`),
+    );
+    const index = shardIndex(shards);
+    let active = 0;
+    let peak = 0;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        if (url === "/data/catalog-index.json") return response(index);
+        active++;
+        peak = Math.max(peak, active);
+        await new Promise((resolve) => setTimeout(resolve, 1));
+        active--;
+        return response(
+          shards[index.catalogs.findIndex((shard) => shard.url === url)],
+        );
+      }),
+    );
+    expect((await loadCatalog()).catalog.courses).toHaveLength(9);
+    expect(peak).toBe(4);
+  });
+
+  it.each([
+    "https://other.example/data/catalog.json",
+    "//other.example/data/catalog.json",
+    "/data/../secret.json",
+    "/data/%2e%2e/secret.json",
+    "/data/part.json?token=abc",
+    "/data//part.json",
+  ])("rejects an unsafe manifest URL: %s", (url) => {
+    const index = shardIndex([shardFixture("CSE")]);
+    index.catalogs[0].url = url;
+    expect(() => validateCatalogIndex(index)).toThrow();
+  });
+
+  it("rejects overlapping subject coverage and duplicate files", () => {
+    const index = shardIndex([shardFixture("CSE"), shardFixture("MATH")]);
+    index.catalogs[1].subjects = ["CSE"];
+    expect(() => validateCatalogIndex(index)).toThrow(/repeats/);
+    index.catalogs[1].subjects = ["MATH"];
+    index.catalogs[1].url = index.catalogs[0].url;
+    expect(() => validateCatalogIndex(index)).toThrow(/repeats/);
+  });
+
+  it.each(["wrong-count", "wrong-campus", "wrong-subject", "duplicate-id"])(
+    "rejects incomplete or inconsistent shard records: %s",
+    async (failure) => {
+      const shards = [shardFixture("CSE"), shardFixture("MATH")];
+      const index = shardIndex(shards);
+      if (failure === "wrong-count") index.catalogs[1].sectionCount++;
+      if (failure === "wrong-campus") shards[1].courses[0].campus = "lim";
+      if (failure === "wrong-subject") shards[1].courses[0].subject = "CHEM";
+      if (failure === "duplicate-id")
+        shards[1].courses[0].id = shards[0].courses[0].id;
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(async (url: string) =>
+          response(
+            url === "/data/catalog-index.json"
+              ? index
+              : shards[index.catalogs.findIndex((shard) => shard.url === url)],
+          ),
+        ),
+      );
+      await expect(loadCatalog()).rejects.toThrow();
+    },
+  );
+
+  it("fails the whole snapshot when one shard fails instead of presenting partial coverage", async () => {
+    const shards = [shardFixture("CSE"), shardFixture("MATH")];
+    const index = shardIndex(shards);
+    const fetch = vi.fn(async (url: string) =>
+      url === index.catalogs[1].url
+        ? { ok: false, status: 503 }
+        : response(url === "/data/catalog-index.json" ? index : shards[0]),
+    );
+    vi.stubGlobal("fetch", fetch);
+    await expect(loadCatalog()).rejects.toThrow(/503/);
+    expect(fetch.mock.calls.map(([url]) => url)).not.toContain(
+      "/data/catalog.json",
+    );
+  });
+
+  it("only uses the legacy file when the index is absent, not on malformed data or a service failure", async () => {
+    const fetch = vi.fn(async () => ({ ok: false, status: 503 }));
+    vi.stubGlobal("fetch", fetch);
+    await expect(loadCatalog()).rejects.toThrow(/503/);
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 });

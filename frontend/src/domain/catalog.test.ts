@@ -169,7 +169,7 @@ describe("surname discovery evidence", () => {
     });
   });
 
-  it("finds a unique surname through both search fields and keeps it in identified-only results", () => {
+  it("finds a unique surname through both search fields without counting it as a full identity", () => {
     const found = section("6248", { instructorDiscovery: discovery() });
     const data = catalog([
       course("3421", { sections: [found, section("36012")] }),
@@ -180,7 +180,13 @@ describe("surname discovery evidence", () => {
       filterCourses(data, filters({ instructor: "lee" }), {
         ...emptySectionFilters,
         namedOnly: true,
-      })[0].sections.map((s) => s.classNumber),
+      }),
+    ).toEqual([]);
+    expect(isInstructorIdentified(found)).toBe(false);
+    expect(
+      filterCourses(data, filters({ instructor: "lee" }))[0].sections.map(
+        (s) => s.classNumber,
+      ),
     ).toEqual(["6248"]);
     expect(
       filterCourses(data, filters({ query: "LEE cse3421" })).map(

@@ -84,7 +84,7 @@ class CatalogBackedIdentityResolutionTest {
         assertTrue(matches(result).getFirst().sourceUrls().contains(reviewed.sourceUrls().getFirst()));
         assertEquals("LIKELY", matches(result).getFirst().confidence());
     }
-    @Test void catalogCandidateSeedsCoverCurrentAndPriorNamesAndFailClearlyBeforeOvercapLookups() throws Exception {
+    @Test void catalogCandidateSeedsCoverCurrentAndPriorNamesAndProcessEveryBoundedBatch() throws Exception {
         var fresh = catalog(course("1272", "3521", List.of(person("current", "Current Zhang")), "Zhang"));
         var previous = catalog(course("1268", "5521", List.of(person("old1", "Jonathan Torku"), person("old2", "Alan Perrault")), null));
         AtomicReference<List<String>> queried = new AtomicReference<>();
@@ -92,9 +92,10 @@ class CatalogBackedIdentityResolutionTest {
             new InstructorEnrichmentService.Options("CSE", "", List.of("Bojja Venkatakrishnan"), 200));
         service.enrich(fresh, previous);
         assertTrue(queried.get().containsAll(List.of("Zhang", "Torku", "Perrault", "Bojja Venkatakrishnan")));
-        AtomicReference<Boolean> called = new AtomicReference<>(false);
-        var capped = new InstructorEnrichmentService(query -> { called.set(true); return List.of(); },
+        List<List<String>> batches = new ArrayList<>();
+        var capped = new InstructorEnrichmentService(query -> { batches.add(query.surnames()); return List.of(); },
             new InstructorEnrichmentService.Options("CSE", "", List.of("Lee", "Zhang", "Torku"), 2, false));
-        assertThrows(IllegalStateException.class, () -> capped.enrich(fresh, previous)); assertFalse(called.get());
+        capped.enrich(fresh, previous);
+        assertEquals(List.of(List.of("Lee", "Torku"), List.of("Zhang")), batches);
     }
 }

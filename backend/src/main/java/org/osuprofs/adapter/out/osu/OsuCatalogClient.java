@@ -2,6 +2,7 @@ package org.osuprofs.adapter.out.osu;
 
 import org.osuprofs.application.port.out.CatalogSource;
 import org.osuprofs.domain.model.Catalog;
+import org.jsoup.Jsoup;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.json.JsonMapper;
 import java.net.URI;
@@ -23,15 +24,113 @@ public final class OsuCatalogClient implements CatalogSource {
     private final Duration timeout;
     private final int maxPages;
     private final long delayMs;
+    private final String subjectDirectoryUrl;
 
     public OsuCatalogClient(JsonMapper mapper, String baseUrl, int timeoutSeconds, int maxPages, long delayMs) {
+        this(mapper, baseUrl, timeoutSeconds, maxPages, delayMs, PeopleSoftInstructorDiscoveryAdapter.PUBLIC_SEARCH.toString());
+    }
+    public OsuCatalogClient(JsonMapper mapper, String baseUrl, int timeoutSeconds, int maxPages, long delayMs, String subjectDirectoryUrl) {
         if (maxPages < 1 || timeoutSeconds < 1 || delayMs < 0) throw new IllegalArgumentException("Invalid importer limits");
         this.mapper = mapper; this.baseUrl = baseUrl.replaceAll("/$", ""); this.timeout = Duration.ofSeconds(timeoutSeconds);
         this.maxPages = maxPages; this.delayMs = delayMs;
+        this.subjectDirectoryUrl = subjectDirectoryUrl;
         this.http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build();
     }
 
+    @Override public List<String> subjects(String term, String campus) throws Exception {
+        // Regional campuses fit below the feed's 10,000-result ceiling. Reading every page
+        // identifies offered subjects without hundreds of empty department requests.
+        if (!campus.equalsIgnoreCase("col")) {
+            JsonNode first = request(term, campus, "", 1).path("data");
+            if (first.path("totalItems").isInt() && first.path("totalItems").asInt() > 0
+                    && first.path("totalItems").asInt() < 10_000 && first.path("totalPages").isInt()
+                    && first.path("totalPages").asInt() <= maxPages && first.path("courses").isArray()) {
+                int pages = first.path("totalPages").asInt(), total = first.path("totalItems").asInt();
+                Set<String> offered = new TreeSet<>(), sections = new HashSet<>();
+                for (int page = 1; page <= pages; page++) {
+                    if (page > 1) Thread.sleep(delayMs);
+                    JsonNode data = page == 1 ? first : request(term, campus, "", page).path("data");
+                    if (!data.path("courses").isArray() || data.path("totalItems").asInt(-1) != total
+                            || data.path("totalPages").asInt(-1) != pages || data.path("page").asInt(-1) != page)
+                        throw new IllegalStateException("Official subject discovery pagination changed");
+                    for (JsonNode item : data.path("courses")) {
+                        offered.add(required(item.path("course"), "subject").toUpperCase(Locale.ROOT));
+                        for (JsonNode section : item.path("sections")) sections.add(required(section, "classNumber"));
+                    }
+                }
+                if (sections.size() != total) throw new IllegalStateException("Official subject discovery missed class sections");
+                return List.copyOf(offered);
+            }
+        }
+        try (HttpClient directory = HttpClient.newBuilder().cookieHandler(PeopleSoftInstructorDiscoveryAdapter.anonymousCookies())
+                .followRedirects(HttpClient.Redirect.NORMAL).connectTimeout(Duration.ofSeconds(15)).build()) {
+            var response = directory.send(HttpRequest.newBuilder(URI.create(subjectDirectoryUrl + "?PAGE=SSR_CLSRCH_ENTRY"))
+                .timeout(timeout).header("User-Agent", "Mozilla/5.0 (compatible; OSUProfs public course planner)")
+                .GET().build(), HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200 || response.body().length() > 2_000_000)
+                throw new IllegalStateException("Official subject directory is unavailable");
+            var initial = Jsoup.parse(response.body());
+            var form = PeopleSoftInstructorDiscoveryAdapter.fields(initial);
+            form.put("ICAction", "DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$149$$2");
+            form.put("CLASS_SRCH_WRK2_STRM$35$", term);
+            form.put("SSR_CLSRCH_WRK_CAMPUS$0", campus.toUpperCase(Locale.ROOT));
+            String body = form.entrySet().stream().map(entry -> encode(entry.getKey()) + "=" + encode(entry.getValue()))
+                .collect(java.util.stream.Collectors.joining("&"));
+            Thread.sleep(delayMs);
+            var expanded = directory.send(HttpRequest.newBuilder(URI.create(subjectDirectoryUrl)).timeout(timeout)
+                .header("User-Agent", "Mozilla/5.0 (compatible; OSUProfs public course planner)")
+                .header("Content-Type", "application/x-www-form-urlencoded").header("Referer", subjectDirectoryUrl)
+                .POST(HttpRequest.BodyPublishers.ofString(body)).build(), HttpResponse.BodyHandlers.ofString());
+            if (expanded.statusCode() != 200 || expanded.body().length() > 2_000_000)
+                throw new IllegalStateException("Official subject directory could not select the requested term");
+            var document = Jsoup.parse(expanded.body());
+            var selected = PeopleSoftInstructorDiscoveryAdapter.fields(document);
+            if (!term.equals(selected.get("CLASS_SRCH_WRK2_STRM$35$"))
+                    || !campus.equalsIgnoreCase(selected.get("SSR_CLSRCH_WRK_CAMPUS$0")))
+                throw new IllegalStateException("Official subject directory did not confirm the requested term and campus");
+            var select = document.getElementsByAttributeValue("name", "SSR_CLSRCH_WRK_SUBJECT_SRCH$1").first();
+            if (select == null) throw new IllegalStateException("Official subject directory has no subject options");
+            Set<String> subjects = new TreeSet<>();
+            for (var option : select.select("option")) {
+                String code = option.attr("value").strip();
+                if (code.isEmpty()) continue;
+                if (!code.matches("[A-Z0-9& _-]{1,20}") || code.equals("ALL"))
+                    throw new IllegalStateException("Official directory returned an invalid subject code");
+                subjects.add(code);
+            }
+            if (subjects.isEmpty()) throw new IllegalStateException("Official subject directory contains no subjects");
+            return List.copyOf(subjects);
+        }
+    }
+
     @Override public Catalog fetch(String term, String campus, List<String> subjects) throws Exception {
+        String generatedAt = Instant.now().toString();
+        List<Catalog.Course> courses = new ArrayList<>();
+        List<Catalog.Option> subjectOptions = new ArrayList<>();
+        Catalog representative = null;
+        for (String subject : subjects) {
+            Catalog collected = null;
+            for (int attempt = 0; attempt < 3; attempt++) {
+                try { collected = fetchOnce(term, campus, List.of(subject)); break; }
+                catch (RetryablePaginationException failure) {
+                    if (attempt == 2) throw failure;
+                    System.getLogger(OsuCatalogClient.class.getName()).log(System.Logger.Level.WARNING,
+                        "Retrying inconsistent {0} / {1} / {2} pagination from page one: {3}", term, campus, subject, failure.getMessage());
+                    Thread.sleep(Math.max(delayMs, 1000L * (attempt + 1)));
+                }
+            }
+            if (representative == null || representative.courses().isEmpty() && !collected.courses().isEmpty()) representative = collected;
+            courses.addAll(collected.courses()); subjectOptions.addAll(collected.subjects());
+            Thread.sleep(delayMs);
+        }
+        if (representative == null) throw new IllegalArgumentException("At least one subject is required");
+        int sections = courses.stream().mapToInt(c -> c.sections().size()).sum();
+        int named = courses.stream().flatMap(c -> c.sections().stream()).mapToInt(s -> s.instructors().isEmpty() ? 0 : 1).sum();
+        return new Catalog(1, generatedAt, representative.source(), representative.terms(), subjectOptions, representative.campuses(),
+            List.of(new Catalog.Coverage(term, campus, subjects, courses.size(), sections, named, true, representative.coverage().getFirst().warnings())), courses);
+    }
+
+    private Catalog fetchOnce(String term, String campus, List<String> subjects) throws Exception {
         String timestamp = Instant.now().toString();
         Map<String, MutableCourse> courses = new LinkedHashMap<>();
         Map<String, Catalog.Option> subjectOptions = new TreeMap<>();
@@ -46,13 +145,13 @@ public final class OsuCatalogClient implements CatalogSource {
                     throw new IllegalStateException("OSU response lacks valid courses or pagination for " + subject);
                 int actualPages = data.path("totalPages").asInt();
                 int actualItems = data.path("totalItems").asInt();
-                if (actualPages < 0 || actualItems < 0 || actualPages > maxPages)
+                if (actualPages < 0 || actualItems < 0 || actualItems >= 10_000 || actualPages > maxPages)
                     throw new IllegalStateException("OSU pagination exceeds configured limits for " + subject);
                 if (page == 1) { pages = Math.max(1, actualPages); expectedItems = actualItems; }
                 else if (actualItems != expectedItems || Math.max(1, actualPages) != pages)
-                    throw new IllegalStateException("OSU pagination changed during import for " + subject + "; retry later");
+                    throw new RetryablePaginationException("OSU pagination changed during import for " + subject);
                 if (data.path("page").isNumber() && data.path("page").asInt() != page)
-                    throw new IllegalStateException("OSU returned the wrong page for " + subject);
+                    throw new RetryablePaginationException("OSU returned the wrong page for " + subject);
                 for (JsonNode item : data.path("courses")) {
                     JsonNode raw = item.path("course");
                     if (!subject.equalsIgnoreCase(text(raw, "subject")))
@@ -88,13 +187,13 @@ public final class OsuCatalogClient implements CatalogSource {
                 }
             }
             if (seenSections.size() != expectedItems)
-                throw new IllegalStateException("Incomplete " + subject + " import: expected " + expectedItems + " sections, got " + seenSections.size());
+                throw new RetryablePaginationException("Incomplete " + subject + " import: expected " + expectedItems + " sections, got " + seenSections.size());
             subjectOptions.putIfAbsent(subject, new Catalog.Option(subject, subject));
         }
         List<Catalog.Course> result = courses.values().stream().map(MutableCourse::freeze).toList();
         int sectionCount = result.stream().mapToInt(c -> c.sections().size()).sum();
         int named = result.stream().flatMap(c -> c.sections().stream()).mapToInt(s -> s.instructors().isEmpty() ? 0 : 1).sum();
-        List<String> warnings = List.of("Coverage is limited to the listed subjects and campus. TBA instructors remain unpublished.",
+        List<String> warnings = List.of("Coverage is limited to the listed subjects and campus. Empty instructor arrays mean names are not exposed by this feed; separate search evidence may be available.",
             "Enrollment is a periodic snapshot; verify availability in OSU's official registration system.");
         return new Catalog(1, timestamp, new Catalog.Source("Ohio State Class Search", PUBLIC_URL, baseUrl + SEARCH_PATH),
             List.of(new Catalog.Option(term, first(termLabel, term))), List.copyOf(subjectOptions.values()),
@@ -104,7 +203,7 @@ public final class OsuCatalogClient implements CatalogSource {
 
     private JsonNode request(String term, String campus, String subject, int page) throws Exception {
         String url = baseUrl + SEARCH_PATH + "?q=&term=" + encode(term) + "&campus=" + encode(campus) +
-            "&subject=" + encode(subject.toLowerCase(Locale.ROOT)) + "&p=" + page + "&pagenum=200";
+            (subject.isBlank() ? "" : "&subject=" + encode(subject.toLowerCase(Locale.ROOT))) + "&sort=catalogNumber&p=" + page + "&pagenum=200";
         for (int attempt = 0; attempt < 3; attempt++) {
             HttpResponse<String> response;
             try {
@@ -153,7 +252,26 @@ public final class OsuCatalogClient implements CatalogSource {
         return new Catalog.Section(term + "-" + classNumber, classNumber, first(text(raw, "section"), ""),
             first(text(raw, "component"), "Not published"), first(text(raw, "instructionMode"), "Not published"),
             List.copyOf(instructors.values()), meetings, new Catalog.Enrollment(status, enrolled, null, waitlist, null,
-                status.equals("UNKNOWN") && enrolled == null && waitlist == null ? null : timestamp), PUBLIC_URL, timestamp);
+                status.equals("UNKNOWN") && enrolled == null && waitlist == null ? null : timestamp), PUBLIC_URL, timestamp, null, details(raw, term));
+    }
+    private Catalog.SectionDetails details(JsonNode raw, String term) {
+        List<String> autoEnroll = new ArrayList<>(), attributes = new ArrayList<>();
+        for (String key : List.of("autoEnrollSection1", "autoEnrollSection2")) {
+            String value = text(raw, key);
+            if (value != null && !autoEnroll.contains(value)) autoEnroll.add(value);
+        }
+        for (JsonNode attribute : raw.path("attributes")) {
+            String description = first(text(attribute, "description"), text(attribute, "value"), text(attribute, "name"));
+            if (description != null && !attributes.contains(description)) attributes.add(description);
+        }
+        String session = text(raw, "sessionCode"), offering = text(raw, "courseOfferingNumber"), courseId = text(raw, "courseId"),
+            section = text(raw, "section"), availability = null;
+        if (session != null && offering != null && courseId != null && section != null)
+            availability = baseUrl + "/v2/classes/availability?termCode=" + encode(term) + "&sessionCode=" + encode(session)
+                + "&courseOfferingNumber=" + encode(offering) + "&courseId=" + encode(courseId) + "&classSection=" + encode(section);
+        return new Catalog.SectionDetails(session, text(raw, "sessionDescription"), text(raw, "startDate"), text(raw, "endDate"),
+            text(raw, "associatedClass"), autoEnroll, text(raw, "consent"), text(raw, "primaryInstructorSection"),
+            text(raw, "location"), attributes, availability);
     }
     private String time(String raw) {
         if (raw == null) return null;
@@ -194,5 +312,8 @@ public final class OsuCatalogClient implements CatalogSource {
         }
         Catalog.Course freeze() { return new Catalog.Course(id, term, campus, subject, number, title, description, credits,
             career, null, attributes, List.copyOf(sections.values())); }
+    }
+    private static final class RetryablePaginationException extends IllegalStateException {
+        RetryablePaginationException(String message) { super(message); }
     }
 }

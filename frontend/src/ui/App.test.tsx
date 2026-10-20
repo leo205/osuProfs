@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  act,
   cleanup,
   render,
   screen,
@@ -227,7 +228,11 @@ beforeEach(() => {
   localStorage.clear();
   vi.stubEnv("VITE_API_BASE_URL", "");
   fetchMock.mockReset().mockImplementation(async () => snapshotResponse());
-  vi.stubGlobal("fetch", fetchMock);
+  vi.stubGlobal("fetch", (url: string, options: unknown) =>
+    url === "/data/catalog-index.json"
+      ? Promise.resolve({ ok: false, status: 404 })
+      : fetchMock(url, options),
+  );
 });
 
 afterEach(() => {
@@ -364,7 +369,7 @@ describe("course planning user flows", () => {
       2,
     );
     expect(
-      screen.getByText("2 of 2 sections with an identified instructor"),
+      screen.getByText("0 of 2 sections with an identified instructor"),
     ).toBeTruthy();
     expect(screen.queryByText("Instructor not resolved")).toBeNull();
     expect(screen.queryByText(/Assignments\s+remain TBA/)).toBeNull();
@@ -381,13 +386,13 @@ describe("course planning user flows", () => {
         .getAttribute("href"),
     ).toBe(peopleSoftSource);
     await user.click(screen.getByRole("link", { name: "Data & sources" }));
-    expect(screen.getByText("66.7%")).toBeTruthy();
+    expect(screen.getByText("33.3%")).toBeTruthy();
     expect(
-      screen.getByText("2 published names · 2 surname matches"),
+      screen.getByText("2 published · 0 likely full-name matches"),
     ).toBeTruthy();
   });
 
-  it("finds discovered surnames through instructor search and includes them in identified-only results", async () => {
+  it("finds discovered surnames through instructor search and keeps surname-only results outside full identity filtering", async () => {
     fetchMock.mockImplementation(async () =>
       snapshotResponse(discoveredPilot()),
     );
@@ -403,7 +408,10 @@ describe("course planning user flows", () => {
     await user.click(
       screen.getByRole("checkbox", { name: "Identified instructors only" }),
     );
-    expect(screen.getAllByText("Lee")).toHaveLength(2);
+    expect(
+      screen.getByRole("heading", { name: "No sections match this search." }),
+    ).toBeTruthy();
+    expect(screen.queryAllByText("Lee")).toHaveLength(0);
   });
 
   it("displays ambiguous surname candidates without claiming a full identity or counting them as identified", async () => {
@@ -707,5 +715,198 @@ describe("course planning user flows", () => {
         name: "Add CSE 2421 section 0001 to schedule",
       }),
     ).toBeTruthy();
+  });
+});
+
+describe("schoolwide browsing and section information", () => {
+  it("recovers an archived-semester URL and browser history to the published upcoming term", async () => {
+    const data = structuredClone(pilot);
+    data.terms = data.terms.filter((term) => term.code === "1272");
+    data.courses = data.courses.filter((course) => course.termCode === "1272");
+    data.coverage = data.coverage.filter((scope) => scope.termCode === "1272");
+    fetchMock.mockImplementation(async () => snapshotResponse(data));
+    window.history.replaceState(
+      null,
+      "",
+      "?view=search&term=1268&campus=col&subject=CSE&number=2421",
+    );
+    await openInitialSearch();
+    expect(
+      screen.getByRole("combobox", { name: "PLANNING FOR" }),
+    ).toHaveProperty("value", "1272");
+    expect(screen.queryByRole("option", { name: "Autumn 2026" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "See past term" })).toBeNull();
+    expect(new URLSearchParams(window.location.search).get("term")).toBe(
+      "1272",
+    );
+    await act(async () => {
+      window.history.pushState(
+        null,
+        "",
+        "?view=instructors&term=1268&campus=col",
+      );
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    expect(
+      screen.getByRole("combobox", { name: "PLANNING FOR" }),
+    ).toHaveProperty("value", "1272");
+    expect(screen.queryByRole("option", { name: "Autumn 2026" })).toBeNull();
+    expect(new URLSearchParams(window.location.search).get("term")).toBe(
+      "1272",
+    );
+  });
+
+  it("shows all course attributes and section details, then checks live seats only on request", async () => {
+    const data = structuredClone(pilot);
+    const course = data.courses[0];
+    course.attributes = ["Writing", "Honors", "Service learning"];
+    const target = course.sections[0];
+    target.instructors = [
+      { id: "teacher", name: "Alex Rivera", role: "Primary instructor" },
+      { id: "assistant", name: "Jordan Chen", role: "Teaching assistant" },
+    ];
+    const availabilityUrl =
+      "https://content.osu.edu/v2/classes/availability?termCode=1272&sessionCode=7W1&courseOfferingNumber=1&courseId=1234&classSection=0001";
+    target.details = {
+      sessionCode: "7W1",
+      sessionDescription: "First 7 weeks",
+      startDate: "2027-01-11",
+      endDate: "2027-03-05",
+      associatedClass: "101",
+      consent: "Department consent",
+      primaryInstructorSection: "0001",
+      location: "Columbus",
+      availabilityUrl,
+      autoEnrollSections: ["0002"],
+      attributes: ["Honors section"],
+    };
+    fetchMock.mockImplementation(async (url: string) =>
+      url === availabilityUrl
+        ? {
+            ok: true,
+            json: async () => ({
+              status: "success",
+              data: {
+                availability: {
+                  enrollmentStatus: "Open",
+                  enrollmentCapacity: 25,
+                  enrollmentTotal: 12,
+                  availableSeats: 13,
+                  waitlistCapacity: 999,
+                  waitlistTotal: 0,
+                },
+              },
+            }),
+          }
+        : snapshotResponse(data),
+    );
+    const { user } = await openInitialSearch();
+    expect(screen.getByText("Service learning")).toBeTruthy();
+    expect(fetchMock.mock.calls.map(([url]) => url)).not.toContain(
+      availabilityUrl,
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Show details for section 0001" }),
+    );
+    expect(screen.getByText("First 7 weeks")).toBeTruthy();
+    expect(screen.getByText("Department consent")).toBeTruthy();
+    expect(screen.getByText("Jordan Chen · Teaching assistant")).toBeTruthy();
+    expect(fetchMock.mock.calls.map(([url]) => url)).not.toContain(
+      availabilityUrl,
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Check current seats" }),
+    );
+    await screen.findByText("12 / 25");
+    expect(screen.getByText("13")).toBeTruthy();
+    expect(screen.getByText("0 / 999")).toBeTruthy();
+    expect(
+      screen.getByText(/Checked .*Verify in BuckeyeLink before enrolling/),
+    ).toBeTruthy();
+    expect(data.courses[0].sections[0].enrollment.capacity).toBeNull();
+    fetchMock.mockImplementation(async () => {
+      throw new Error("Seat service unavailable");
+    });
+    await user.click(
+      screen.getByRole("button", { name: "Check current seats" }),
+    );
+    expect(await screen.findByRole("alert")).toHaveProperty(
+      "textContent",
+      "Seat service unavailable",
+    );
+    expect(screen.getByText("12 / 25")).toBeTruthy();
+  });
+
+  it("offers every campus, shows campus names, and preserves an all-campus shared search", async () => {
+    const data = structuredClone(pilot);
+    const lima = structuredClone(data.courses[0]);
+    lima.id = "1272-lim-CSE-2421";
+    lima.campus = "lim";
+    lima.title = "Systems I at Lima";
+    lima.sections = [
+      section("90001", "0900", [
+        { id: "lima-person", name: "Taylor Lima", role: "Instructor" },
+      ]),
+    ];
+    data.courses.push(lima);
+    data.campuses.push({ code: "lim", label: "Lima" });
+    data.coverage.push({
+      ...data.coverage[0],
+      campus: "lim",
+      courseCount: 1,
+      sectionCount: 1,
+      namedInstructorSections: 1,
+    });
+    fetchMock.mockImplementation(async () => snapshotResponse(data));
+    window.history.replaceState(
+      null,
+      "",
+      "?view=search&term=1272&campus=&subject=CSE&number=2421",
+    );
+    const { user } = await openInitialSearch();
+    expect(screen.getByRole("combobox", { name: "Campus" })).toHaveProperty(
+      "value",
+      "",
+    );
+    expect(
+      screen.getByRole("heading", { name: "Systems I at Lima" }),
+    ).toBeTruthy();
+    expect(screen.getAllByText("Lima").length).toBeGreaterThan(0);
+    await user.click(screen.getByRole("link", { name: "Instructors" }));
+    expect(screen.getByRole("button", { name: /Taylor Lima/ })).toBeTruthy();
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Instructor campus" }),
+      "col",
+    );
+    expect(screen.queryByRole("button", { name: /Taylor Lima/ })).toBeNull();
+    expect(screen.getByRole("button", { name: /María García/ })).toBeTruthy();
+  });
+
+  it("keeps the instructor directory bounded to 24 profiles per page and resets pagination for a search", async () => {
+    const data = structuredClone(pilot);
+    const section = data.courses[0].sections[0];
+    section.instructors = Array.from({ length: 30 }, (_, i) => ({
+      id: `person-${i}`,
+      name: `Professor ${String(i).padStart(2, "0")}`,
+      role: null,
+    }));
+    fetchMock.mockImplementation(async () => snapshotResponse(data));
+    const { user } = await openInitialSearch();
+    await user.click(screen.getByRole("link", { name: "Instructors" }));
+    expect(document.querySelectorAll(".instructor-card")).toHaveLength(24);
+    expect(screen.queryByRole("button", { name: /Professor 29/ })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Next instructors" }));
+    expect(document.querySelectorAll(".instructor-card")).toHaveLength(7);
+    expect(screen.queryByRole("button", { name: /Professor 00/ })).toBeNull();
+    expect(screen.getByRole("button", { name: /Professor 29/ })).toBeTruthy();
+    await user.type(
+      screen.getByRole("textbox", { name: "Filter instructors by name" }),
+      "Professor 00",
+    );
+    expect(document.querySelectorAll(".instructor-card")).toHaveLength(1);
+    expect(screen.getByRole("button", { name: /Professor 00/ })).toBeTruthy();
+    expect(
+      screen.queryByRole("navigation", { name: "Instructor pages" }),
+    ).toBeNull();
   });
 });

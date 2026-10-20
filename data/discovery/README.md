@@ -1,8 +1,30 @@
 # Public instructor-surname discovery
 
-The purpose of this pilot is to identify current, upcoming-semester instructor
+The purpose of this collection is to identify current, upcoming-semester instructor
 associations that OSU's public class-search JSON feed displays as TBA. It uses
 the public PeopleSoft **Instructor Last Name** search, without signing in.
+
+## University collection
+
+The Java enrichment service supports every imported subject and campus. It derives
+same-subject surname candidates from published current and historical records;
+the reviewed CSE directory registry remains a CSE-specific supplement.
+`data/bootstrap/refresh_university.py` coordinates the upcoming catalog, private teaching-history inputs and
+resumable batches of 40 surnames. It records successful queries, source failures,
+and pending work in `artifacts/university/`. A daily time budget bounds work;
+`--discovery-minutes 0` processes every pending batch. Completed checks expire
+after seven days by default, and newly added/removed section IDs invalidate the
+scope's earlier completion state.
+
+The public catalog contains Spring 2027 only. Autumn records stay in the ignored
+working directory as candidate-search history and are excluded from the app.
+See [the university collection receipt](university-collection.json) for verified
+Spring counts and unfinished searches.
+
+Every current surname association must still pass the form checks below.
+Historical names supply search inputs and qualified identity context; they never
+establish future assignments by themselves. The original CSE experiments below
+remain as method evidence, not a statement of the current university-wide counts.
 
 ## Verified result
 

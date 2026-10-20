@@ -1,5 +1,9 @@
 import { useState } from "react";
 import {
+  fetchAvailability,
+  type SeatAvailability,
+} from "../adapters/availability";
+import {
   courseCode,
   DAY_LABELS,
   formatDate,
@@ -74,9 +78,80 @@ export function MeetingSummary({
   );
 }
 
+function AvailabilityCheck({ url }: { url: string }) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [availability, setAvailability] = useState<SeatAvailability | null>(
+    null,
+  );
+  async function check() {
+    setLoading(true);
+    setError("");
+    try {
+      setAvailability(await fetchAvailability(url));
+    } catch (failure) {
+      setError(
+        failure instanceof Error
+          ? failure.message
+          : "Seat availability could not be checked. Try again shortly.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+  return (
+    <div className="availability-check">
+      <button
+        className="button button-secondary small"
+        disabled={loading}
+        onClick={() => void check()}
+      >
+        <Icon name="refresh" size={14} />
+        {loading ? "Checking seats…" : "Check current seats"}
+      </button>
+      {error && (
+        <p role="alert" className="availability-error">
+          {error}
+        </p>
+      )}
+      {availability && (
+        <div role="status">
+          <strong>{availability.enrollmentStatus}</strong>
+          <dl className="section-facts">
+            <dt>Available seats</dt>
+            <dd>{availability.availableSeats ?? "Not provided"}</dd>
+            <dt>Enrolled / capacity</dt>
+            <dd>
+              {availability.enrollmentTotal ?? "?"} /{" "}
+              {availability.enrollmentCapacity ?? "?"}
+            </dd>
+            <dt>Waitlisted / capacity</dt>
+            <dd>
+              {availability.waitlistTotal ?? "?"} /{" "}
+              {availability.waitlistCapacity ?? "?"}
+            </dd>
+          </dl>
+          <span className="cell-note">
+            Checked{" "}
+            {formatDate(availability.checkedAt, {
+              month: "short",
+              day: "numeric",
+              hour: "numeric",
+              minute: "2-digit",
+              timeZoneName: "short",
+            })}{" "}
+            · Verify in BuckeyeLink before enrolling.
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 interface Props {
   course: Course;
   termLabel: string;
+  campusLabel?: string;
   saved: Set<string>;
   compared: Set<string>;
   onSave: (course: Course, section: Section) => void;
@@ -90,6 +165,7 @@ interface Props {
 export default function CourseCard({
   course,
   termLabel,
+  campusLabel,
   saved,
   compared,
   onSave,
@@ -137,7 +213,7 @@ export default function CourseCard({
         <div className="course-code-row">
           <span className="course-code">{courseCode(course)}</span>
           <span className="tag">{course.career || "Course"}</span>
-          {course.attributes.slice(0, 2).map((a) => (
+          {course.attributes.map((a) => (
             <span className="tag" key={a}>
               {a}
             </span>
@@ -158,7 +234,8 @@ export default function CourseCard({
           </span>
           <span>
             <Icon name="pin" size={15} />
-            {course.campus === "col" ? "Columbus" : course.campus}
+            {campusLabel ??
+              (course.campus === "col" ? "Columbus" : course.campus)}
           </span>
         </div>
         {pieces[0] && <p className="course-description">{pieces[0]}</p>}
@@ -379,6 +456,84 @@ export default function CourseCard({
                         <div className="section-details">
                           <div>
                             <h3>Meeting details</h3>
+                            {section.details && (
+                              <dl className="section-facts">
+                                {(section.details.sessionDescription ||
+                                  section.details.sessionCode) && (
+                                  <>
+                                    <dt>Session</dt>
+                                    <dd>
+                                      {section.details.sessionDescription ??
+                                        section.details.sessionCode}
+                                    </dd>
+                                  </>
+                                )}
+                                {(section.details.startDate ||
+                                  section.details.endDate) && (
+                                  <>
+                                    <dt>Section dates</dt>
+                                    <dd>
+                                      {formatDate(section.details.startDate)} –{" "}
+                                      {formatDate(section.details.endDate)}
+                                    </dd>
+                                  </>
+                                )}
+                                {section.details.location && (
+                                  <>
+                                    <dt>Location</dt>
+                                    <dd>{section.details.location}</dd>
+                                  </>
+                                )}
+                                {section.details.associatedClass && (
+                                  <>
+                                    <dt>Associated class</dt>
+                                    <dd>{section.details.associatedClass}</dd>
+                                  </>
+                                )}
+                                {section.details.consent && (
+                                  <>
+                                    <dt>Enrollment consent</dt>
+                                    <dd>
+                                      {(
+                                        {
+                                          D: "Department consent",
+                                          I: "Instructor consent",
+                                          false: "No consent required",
+                                        } as Record<string, string>
+                                      )[section.details.consent] ??
+                                        section.details.consent}
+                                    </dd>
+                                  </>
+                                )}
+                                {section.details.primaryInstructorSection && (
+                                  <>
+                                    <dt>Primary instruction section</dt>
+                                    <dd>
+                                      {section.details.primaryInstructorSection}
+                                    </dd>
+                                  </>
+                                )}
+                                {!!section.details.autoEnrollSections
+                                  .length && (
+                                  <>
+                                    <dt>Automatic enrollment sections</dt>
+                                    <dd>
+                                      {section.details.autoEnrollSections.join(
+                                        ", ",
+                                      )}
+                                    </dd>
+                                  </>
+                                )}
+                                {!!section.details.attributes.length && (
+                                  <>
+                                    <dt>Section attributes</dt>
+                                    <dd>
+                                      {section.details.attributes.join(" · ")}
+                                    </dd>
+                                  </>
+                                )}
+                              </dl>
+                            )}
                             {section.meetings.length ? (
                               section.meetings.map((m, i) => (
                                 <div className="meeting-detail" key={i}>
@@ -423,6 +578,12 @@ export default function CourseCard({
                                         ? "Multiple surname searches matched this section. Full instructor identity remains unresolved."
                                         : "No name found in current search coverage; this does not prove the section is unassigned. The base course feed does not publish an instructor name."}
                             </p>
+                            {section.instructors.map((instructor) => (
+                              <p key={instructor.id}>
+                                {instructor.name}
+                                {instructor.role ? ` · ${instructor.role}` : ""}
+                              </p>
+                            ))}
                             {!section.instructors.length &&
                               fullNameMatches(section).map((identity) => (
                                 <p key={identity.id}>
@@ -480,8 +641,21 @@ export default function CourseCard({
                                 minute: "2-digit",
                                 timeZoneName: "short",
                               })}
-                              . Seat capacity is not provided.
+                              .
+                              {section.enrollment.capacity === null
+                                ? " Seat capacity is not provided."
+                                : ` Seat capacity: ${section.enrollment.capacity}.`}
+                              {section.enrollment.available !== null &&
+                                ` Available seats: ${section.enrollment.available}.`}
+                              {section.enrollment.waitlist !== null &&
+                                ` Waitlist: ${section.enrollment.waitlist}.`}
                             </p>
+                            {section.details?.availabilityUrl && (
+                              <AvailabilityCheck
+                                key={section.details.availabilityUrl}
+                                url={section.details.availabilityUrl}
+                              />
+                            )}
                             <a
                               className="inline-link"
                               href={section.sourceUrl}

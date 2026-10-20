@@ -30,30 +30,32 @@ public class CatalogConfiguration {
         return new OsuCatalogClient(mapper, baseUrl, timeout, pages, delay);
     }
     @Bean ImportCatalog importCatalog(CatalogSource source, SnapshotStore store, ObjectProvider<CatalogArchive> archive,
-                                     ObjectProvider<InstructorEnrichmentService> enrichment, InstructorIdentityResolutionService identityResolution) {
-        return new CatalogImportService(source, store, archive.getIfAvailable(), enrichment.getIfAvailable(), identityResolution);
+                                     ObjectProvider<InstructorEnrichmentService> enrichment, InstructorIdentityResolutionService identityResolution,
+                                     @Value("${app.discovery.history-file:}") String historyFile) {
+        return new CatalogImportService(source, store, archive.getIfAvailable(), enrichment.getIfAvailable(), identityResolution, historyFile);
     }
     @Bean InstructorIdentityRegistry instructorIdentityRegistry(JsonMapper mapper, @Value("${app.discovery.identity-file:}") String path) {
         return new FileInstructorIdentityRegistry(mapper, path);
     }
     @Bean InstructorIdentityResolutionService instructorIdentityResolutionService(InstructorIdentityRegistry registry,
-        @Value("${app.discovery.subject:CSE}") String subject) {
+        @Value("${app.discovery.subject:ALL}") String subject) {
         return new InstructorIdentityResolutionService(registry, subject.toUpperCase(java.util.Locale.ROOT));
     }
     @Bean @ConditionalOnProperty(name="app.discovery.enabled", havingValue="true")
     InstructorDiscoverySource instructorDiscoverySource() { return new PeopleSoftInstructorDiscoveryAdapter(); }
     @Bean @ConditionalOnProperty(name="app.discovery.enabled", havingValue="true")
     InstructorEnrichmentService instructorEnrichmentService(InstructorDiscoverySource source, JsonMapper mapper,
-        @Value("${app.discovery.subject:CSE}") String subject,
+        @Value("${app.discovery.subject:ALL}") String subject,
         @Value("${app.discovery.catalog-number:}") String catalogNumber,
         @Value("${app.discovery.surnames:}") String surnameList,
         @Value("${app.discovery.candidate-file:}") String candidateFile,
+        @Value("${app.discovery.candidate-subject:CSE}") String candidateSubject,
         @Value("${app.discovery.max-candidates:200}") int maxCandidates,
         @Value("${app.discovery.include-catalog-candidates:true}") boolean includeCatalog) throws Exception {
         var surnames = new java.util.ArrayList<>(new DiscoveryCandidateFile(mapper).read(candidateFile));
         java.util.Arrays.stream(surnameList.split(",")).map(String::strip).filter(s -> !s.isBlank()).forEach(surnames::add);
         return new InstructorEnrichmentService(source, new InstructorEnrichmentService.Options(subject.toUpperCase(java.util.Locale.ROOT),
-            catalogNumber, surnames, maxCandidates, includeCatalog));
+            catalogNumber, surnames, maxCandidates, includeCatalog, candidateSubject));
     }
     @Bean QueryCatalog queryCatalog(SnapshotStore store, ObjectProvider<CatalogArchive> archive,
                                     @Value("${app.catalog.path}") String path) throws Exception {

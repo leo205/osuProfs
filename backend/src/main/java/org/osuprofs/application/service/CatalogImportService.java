@@ -12,6 +12,7 @@ public final class CatalogImportService implements ImportCatalog {
     private final CatalogArchive archive;
     private final InstructorEnrichmentService enrichment;
     private final InstructorIdentityResolutionService identityResolution;
+    private final String historyPath;
     public CatalogImportService(CatalogSource source, SnapshotStore snapshots, CatalogArchive archive) {
         this(source, snapshots, archive, null, null);
     }
@@ -20,26 +21,48 @@ public final class CatalogImportService implements ImportCatalog {
     }
     public CatalogImportService(CatalogSource source, SnapshotStore snapshots, CatalogArchive archive, InstructorEnrichmentService enrichment,
                                 InstructorIdentityResolutionService identityResolution) {
+        this(source, snapshots, archive, enrichment, identityResolution, "");
+    }
+    public CatalogImportService(CatalogSource source, SnapshotStore snapshots, CatalogArchive archive, InstructorEnrichmentService enrichment,
+                                InstructorIdentityResolutionService identityResolution, String historyPath) {
         this.source = source; this.snapshots = snapshots; this.archive = archive; this.enrichment = enrichment;
-        this.identityResolution = identityResolution;
+        this.identityResolution = identityResolution; this.historyPath = historyPath;
     }
     @Override public Catalog run(Request request) throws Exception {
         if (!request.term().matches("[0-9]{4}") || !request.campus().matches("[a-z]{2,8}") || request.subjects().isEmpty())
             throw new IllegalArgumentException("Specify a four-digit term, campus code, and at least one subject");
         if (request.maxDropFraction() < 0 || request.maxDropFraction() > 1)
             throw new IllegalArgumentException("max-drop-fraction must be between 0 and 1");
+        var previous = snapshots.read(request.output());
         Set<String> requested = new TreeSet<>();
-        for (String subject : request.subjects()) {
-            if (!subject.matches("[A-Z0-9&_-]{1,15}")) throw new IllegalArgumentException("Invalid subject: " + subject);
+        boolean allSubjects = request.subjects().contains("ALL");
+        if (allSubjects && request.subjects().size() != 1) throw new IllegalArgumentException("ALL must be the only requested subject");
+        List<String> subjects = new ArrayList<>(allSubjects ? source.subjects(request.term(), request.campus()) : request.subjects());
+        if (subjects.isEmpty()) throw new IllegalStateException("Official subject discovery returned no subjects; existing snapshot retained");
+        if (allSubjects && previous.isPresent()) previous.get().coverage().stream()
+            .filter(scope -> scope.termCode().equals(request.term()) && scope.campus().equals(request.campus()))
+            .flatMap(scope -> scope.subjects().stream()).forEach(subjects::add);
+        for (String subject : subjects) {
+            if (!subject.matches("[A-Z0-9& _-]{1,20}") || subject.equals("ALL")) throw new IllegalArgumentException("Invalid subject: " + subject);
             requested.add(subject);
         }
         Catalog next = source.fetch(request.term(), request.campus(), List.copyOf(requested));
         if (next.schemaVersion() != 1 || next.courses().isEmpty() || next.coverage().isEmpty() ||
             next.coverage().stream().anyMatch(c -> !c.complete()))
             throw new IllegalStateException("Import is empty or incomplete; existing snapshot retained");
-        var previous = snapshots.read(request.output());
+        Set<String> covered = new TreeSet<>();
+        for (var scope : next.coverage()) {
+            if (!scope.termCode().equals(request.term()) || !scope.campus().equals(request.campus()))
+                throw new IllegalStateException("Import coverage is outside the requested term and campus");
+            covered.addAll(scope.subjects());
+        }
+        if (!covered.equals(requested) || next.courses().stream().anyMatch(c -> !c.termCode().equals(request.term())
+                || !c.campus().equals(request.campus()) || !requested.contains(c.subject())))
+            throw new IllegalStateException("Import does not cover exactly the requested subjects; existing snapshot retained");
+        Catalog history = historyPath.isBlank() ? null : snapshots.read(historyPath)
+            .orElseThrow(() -> new IllegalStateException("Configured discovery history file does not exist: " + historyPath));
         if (previous.isPresent()) next = retainDiscovery(next, previous.get());
-        if (enrichment != null) next = enrichment.enrich(next, previous.orElse(null));
+        if (enrichment != null) next = enrichment.enrich(next, previous.orElse(null), history);
         List<Catalog.Course> courses = new ArrayList<>(next.courses());
         List<Catalog.Coverage> coverage = new ArrayList<>(next.coverage());
         if (previous.isPresent()) {
@@ -68,7 +91,7 @@ public final class CatalogImportService implements ImportCatalog {
         Catalog old = previous.orElse(next);
         Catalog merged = new Catalog(1, next.generatedAt(), next.source(), mergeOptions(next.terms(), old.terms()),
             mergeOptions(next.subjects(), old.subjects()), mergeOptions(next.campuses(), old.campuses()), coverage, courses);
-        if (identityResolution != null) merged = identityResolution.resolve(merged);
+        if (identityResolution != null) merged = identityResolution.resolve(merged, history);
         // A failing database write must not replace the published static snapshot.
         if (archive != null) archive.save(merged);
         snapshots.write(request.output(), merged);
@@ -77,12 +100,12 @@ public final class CatalogImportService implements ImportCatalog {
     private Catalog retainDiscovery(Catalog fresh, Catalog previous) {
         Map<String, Catalog.InstructorDiscovery> cached = new HashMap<>();
         previous.courses().forEach(c -> c.sections().stream().filter(s -> s.instructorDiscovery() != null)
-            .forEach(s -> cached.put(c.termCode() + "-" + s.classNumber(), s.instructorDiscovery())));
+            .forEach(s -> cached.put(c.termCode() + ":" + c.campus() + ":" + c.subject() + ":" + s.classNumber(), s.instructorDiscovery())));
         var courses = fresh.courses().stream().map(c -> new Catalog.Course(c.id(), c.termCode(), c.campus(), c.subject(),
             c.catalogNumber(), c.title(), c.description(), c.credits(), c.career(), c.prerequisites(), c.attributes(),
-            c.sections().stream().map(s -> s.instructorDiscovery() != null || !s.instructors().isEmpty() || !cached.containsKey(c.termCode() + "-" + s.classNumber()) ? s :
+            c.sections().stream().map(s -> s.instructorDiscovery() != null || !s.instructors().isEmpty() || !cached.containsKey(c.termCode() + ":" + c.campus() + ":" + c.subject() + ":" + s.classNumber()) ? s :
                 new Catalog.Section(s.id(), s.classNumber(), s.section(), s.component(), s.instructionMode(), s.instructors(),
-                    s.meetings(), s.enrollment(), s.sourceUrl(), s.lastUpdated(), cached.get(c.termCode() + "-" + s.classNumber()))).toList())).toList();
+                    s.meetings(), s.enrollment(), s.sourceUrl(), s.lastUpdated(), cached.get(c.termCode() + ":" + c.campus() + ":" + c.subject() + ":" + s.classNumber()), s.details())).toList())).toList();
         return new Catalog(fresh.schemaVersion(), fresh.generatedAt(), fresh.source(), fresh.terms(), fresh.subjects(), fresh.campuses(), fresh.coverage(), courses);
     }
     private int countSections(Catalog c, String term, String campus, String subject) {

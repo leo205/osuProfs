@@ -24,6 +24,7 @@ import {
   instructorEvidenceLabel,
   instructorRatingUrl,
   isInstructorIdentified,
+  normalize,
   readFilters,
   updatedLabel,
 } from "../domain/catalog";
@@ -84,6 +85,33 @@ function readSaved(): SavedReference[] {
   } catch {
     return [];
   }
+}
+
+function publishedSearch(catalog: Catalog) {
+  const defaults = defaultFilters(catalog);
+  const initial = readFilters(window.location.search, defaults);
+  let corrected = false;
+  if (!catalog.terms.some((term) => term.code === initial.filters.termCode)) {
+    initial.filters.termCode = defaults.termCode;
+    corrected = true;
+  }
+  if (
+    initial.filters.campus &&
+    !catalog.campuses.some((campus) => campus.code === initial.filters.campus)
+  ) {
+    initial.filters.campus = defaults.campus;
+    corrected = true;
+  }
+  if (corrected)
+    window.history.replaceState(
+      null,
+      "",
+      filtersUrl(
+        initial.filters,
+        Object.hasOwn(VIEW_LABELS, initial.view) ? initial.view : "search",
+      ),
+    );
+  return initial;
 }
 
 export default function App() {
@@ -158,14 +186,7 @@ export default function App() {
 
   useEffect(() => {
     if (!catalog || initialized.current) return;
-    const initial = readFilters(
-      window.location.search,
-      defaultFilters(catalog),
-    );
-    if (!catalog.terms.some((t) => t.code === initial.filters.termCode))
-      initial.filters.termCode = defaultFilters(catalog).termCode;
-    if (!catalog.campuses.some((c) => c.code === initial.filters.campus))
-      initial.filters.campus = defaultFilters(catalog).campus;
+    const initial = publishedSearch(catalog);
     setFilters(initial.filters);
     setDraft(initial.filters);
     if (Object.hasOwn(VIEW_LABELS, initial.view)) setView(initial.view as View);
@@ -175,10 +196,7 @@ export default function App() {
   useEffect(() => {
     if (!catalog) return;
     const popstate = () => {
-      const parsed = readFilters(
-        window.location.search,
-        defaultFilters(catalog),
-      );
+      const parsed = publishedSearch(catalog);
       setView(
         Object.hasOwn(VIEW_LABELS, parsed.view)
           ? (parsed.view as View)
@@ -266,44 +284,84 @@ export default function App() {
     () => (catalog ? filterCourses(catalog, filters, sectionFilters) : []),
     [catalog, filters, sectionFilters],
   );
-  const people = useMemo(
+  const allPeople = useMemo(
     () =>
       catalog
-        ? instructorIndex(catalog, filters.termCode, instructorSearch)
+        ? instructorIndex(catalog, filters.termCode, "", filters.campus)
         : [],
-    [catalog, filters.termCode, instructorSearch],
+    [catalog, filters.termCode, filters.campus],
   );
-  const matchingSections = results.reduce(
-    (total, c) => total + c.sections.length,
-    0,
+  const people = useMemo(() => {
+    const query = normalize(instructorSearch);
+    return allPeople.filter((person) =>
+      normalize(person.instructor.name).includes(query),
+    );
+  }, [allPeople, instructorSearch]);
+  const matchingSections = useMemo(
+    () => results.reduce((total, c) => total + c.sections.length, 0),
+    [results],
   );
+  const resultPages = Math.max(1, Math.ceil(results.length / 8));
+  const currentPage = Math.min(page, resultPages);
+  const instructorPages = Math.max(1, Math.ceil(people.length / 24));
+  const currentInstructorPage = Math.min(instructorPage, instructorPages);
   const termLabel =
     catalog?.terms.find((t) => t.code === filters.termCode)?.label ??
     "Semester";
-  const termCollectedAt = catalog
-    ? collectedAt(catalog, filters.termCode, filters.campus)
-    : "";
-  const coverage =
-    catalog?.coverage.filter(
-      (c) =>
-        c.termCode === filters.termCode &&
-        (!filters.campus || c.campus === filters.campus),
-    ) ?? [];
-  const coveredSubjects = [...new Set(coverage.flatMap((c) => c.subjects))];
-  const termSections = coverage.reduce((n, c) => n + c.sectionCount, 0);
-  const termNamed = coverage.reduce((n, c) => n + c.namedInstructorSections, 0);
-  const scopedSections =
-    catalog?.courses
-      .filter(
+  const campusLabels = useMemo(
+    () => new Map(catalog?.campuses.map((c) => [c.code, c.label]) ?? []),
+    [catalog],
+  );
+  const termCollectedAt = useMemo(
+    () =>
+      catalog ? collectedAt(catalog, filters.termCode, filters.campus) : "",
+    [catalog, filters.termCode, filters.campus],
+  );
+  const coverage = useMemo(
+    () =>
+      catalog?.coverage.filter(
         (c) =>
           c.termCode === filters.termCode &&
           (!filters.campus || c.campus === filters.campus),
+      ) ?? [],
+    [catalog, filters.termCode, filters.campus],
+  );
+  const coveredSubjects = useMemo(
+    () => [...new Set(coverage.flatMap((c) => c.subjects))],
+    [coverage],
+  );
+  const draftSubjects = useMemo(
+    () =>
+      new Set(
+        catalog?.coverage
+          .filter(
+            (c) =>
+              c.termCode === draft.termCode &&
+              (!draft.campus || c.campus === draft.campus),
+          )
+          .flatMap((c) => c.subjects) ?? [],
+      ),
+    [catalog, draft.termCode, draft.campus],
+  );
+  const termSections = coverage.reduce((n, c) => n + c.sectionCount, 0);
+  const termNamed = coverage.reduce((n, c) => n + c.namedInstructorSections, 0);
+  const { termIdentified, termSurnameMatches } = useMemo(() => {
+    let identified = 0;
+    let surnameMatches = 0;
+    for (const course of catalog?.courses ?? []) {
+      if (
+        course.termCode !== filters.termCode ||
+        (filters.campus && course.campus !== filters.campus)
       )
-      .flatMap((c) => c.sections) ?? [];
-  const termIdentified = scopedSections.filter(isInstructorIdentified).length;
-  const termSurnameMatches = scopedSections.filter(
-    (s) => !s.instructors.length && hasSurnameMatch(s),
-  ).length;
+        continue;
+      for (const section of course.sections) {
+        if (isInstructorIdentified(section)) identified++;
+        if (!section.instructors.length && hasSurnameMatch(section))
+          surnameMatches++;
+      }
+    }
+    return { termIdentified: identified, termSurnameMatches: surnameMatches };
+  }, [catalog, filters.termCode, filters.campus]);
   const advancedCount = Object.values(sectionFilters).filter(Boolean).length;
 
   function saveSection(course: Course, section: Section) {
@@ -532,9 +590,9 @@ export default function App() {
             <strong>Official OSU data</strong>
             <span className="context-divider" />
             <span>
-              {catalog.campuses.find((c) => c.code === filters.campus)?.label ??
-                "All campuses"}{" "}
-              campus
+              {filters.campus
+                ? `${campusLabels.get(filters.campus) ?? filters.campus} campus`
+                : "All campuses"}
             </span>
             <span className="context-divider" />
             <span>{coveredSubjects.length} imported subjects</span>
@@ -639,7 +697,7 @@ export default function App() {
                       >
                         <option value="">All imported subjects</option>
                         {catalog.subjects
-                          .filter((s) => coveredSubjects.includes(s.code))
+                          .filter((s) => draftSubjects.has(s.code))
                           .map((s) => (
                             <option key={s.code} value={s.code}>
                               {s.code} · {s.label}
@@ -682,6 +740,7 @@ export default function App() {
                           setDraft({ ...draft, campus: e.target.value })
                         }
                       >
+                        <option value="">All campuses</option>
                         {catalog.campuses.map((c) => (
                           <option key={c.code} value={c.code}>
                             {c.label}
@@ -869,50 +928,55 @@ export default function App() {
               </button>
             </div>
             <div className="results-list">
-              {results.slice((page - 1) * 8, page * 8).map((course) => (
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  identityProfiles={identityProfiles}
-                  termLabel={termLabel}
-                  saved={savedIds}
-                  compared={comparedIds}
-                  onSave={saveSection}
-                  onCompare={compareSection}
-                  onInstructor={(instructor) =>
-                    setDialog({ type: "instructor", instructor })
-                  }
-                  notify={notify}
-                  onPreviousTerm={
-                    catalog.courses.some(
-                      (c) =>
-                        c.termCode < course.termCode &&
-                        c.subject === course.subject &&
-                        c.catalogNumber === course.catalogNumber,
-                    )
-                      ? () =>
-                          applyFilters({
-                            ...filters,
-                            termCode:
-                              catalog.courses
-                                .filter(
-                                  (c) =>
-                                    c.termCode < course.termCode &&
-                                    c.subject === course.subject &&
-                                    c.catalogNumber === course.catalogNumber,
-                                )
-                                .sort((a, b) =>
-                                  b.termCode.localeCompare(a.termCode),
-                                )[0]?.termCode ?? filters.termCode,
-                            subject: course.subject,
-                            number: course.catalogNumber,
-                            query: "",
-                            instructor: "",
-                          })
-                      : undefined
-                  }
-                />
-              ))}
+              {results
+                .slice((currentPage - 1) * 8, currentPage * 8)
+                .map((course) => (
+                  <CourseCard
+                    key={course.id}
+                    course={course}
+                    identityProfiles={identityProfiles}
+                    termLabel={termLabel}
+                    campusLabel={
+                      campusLabels.get(course.campus) ?? course.campus
+                    }
+                    saved={savedIds}
+                    compared={comparedIds}
+                    onSave={saveSection}
+                    onCompare={compareSection}
+                    onInstructor={(instructor) =>
+                      setDialog({ type: "instructor", instructor })
+                    }
+                    notify={notify}
+                    onPreviousTerm={
+                      catalog.courses.some(
+                        (c) =>
+                          c.termCode < course.termCode &&
+                          c.subject === course.subject &&
+                          c.catalogNumber === course.catalogNumber,
+                      )
+                        ? () =>
+                            applyFilters({
+                              ...filters,
+                              termCode:
+                                catalog.courses
+                                  .filter(
+                                    (c) =>
+                                      c.termCode < course.termCode &&
+                                      c.subject === course.subject &&
+                                      c.catalogNumber === course.catalogNumber,
+                                  )
+                                  .sort((a, b) =>
+                                    b.termCode.localeCompare(a.termCode),
+                                  )[0]?.termCode ?? filters.termCode,
+                              subject: course.subject,
+                              number: course.catalogNumber,
+                              query: "",
+                              instructor: "",
+                            })
+                        : undefined
+                    }
+                  />
+                ))}
             </div>
             {!results.length && (
               <div className="empty-state">
@@ -921,8 +985,8 @@ export default function App() {
                 </span>
                 <h2>No sections match this search.</h2>
                 <p>
-                  Try a broader course number or remove a filter. This pilot
-                  covers {coveredSubjects.join(", ") || "no subjects"} for{" "}
+                  Try a broader course number or remove a filter. The selected
+                  coverage includes {coveredSubjects.length} subjects for{" "}
                   {termLabel}.
                 </p>
                 <button
@@ -939,14 +1003,14 @@ export default function App() {
             {results.length > 8 && (
               <div className="pagination">
                 <span>
-                  Page {page} of {Math.ceil(results.length / 8)}
+                  Page {currentPage} of {resultPages}
                 </span>
                 <div>
                   <button
                     className="button button-secondary small"
-                    disabled={page <= 1}
+                    disabled={currentPage <= 1}
                     onClick={() => {
-                      setPage((p) => p - 1);
+                      setPage(currentPage - 1);
                       window.scrollTo({ top: 300, behavior: "smooth" });
                     }}
                   >
@@ -954,9 +1018,9 @@ export default function App() {
                   </button>
                   <button
                     className="button button-secondary small"
-                    disabled={page >= Math.ceil(results.length / 8)}
+                    disabled={currentPage >= resultPages}
                     onClick={() => {
-                      setPage((p) => p + 1);
+                      setPage(currentPage + 1);
                       window.scrollTo({ top: 300, behavior: "smooth" });
                     }}
                   >
@@ -983,65 +1047,90 @@ export default function App() {
                   aria-label="Filter instructors by name"
                 />
               </label>
+              <label className="field">
+                <span>Instructor campus</span>
+                <select
+                  value={filters.campus}
+                  onChange={(e) => {
+                    setInstructorPage(1);
+                    navigate("instructors", {
+                      ...filters,
+                      campus: e.target.value,
+                    });
+                  }}
+                >
+                  <option value="">All campuses</option>
+                  {catalog.campuses.map((campus) => (
+                    <option value={campus.code} key={campus.code}>
+                      {campus.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <span className="muted">
                 {people.length.toLocaleString()} instructor profiles ·{" "}
                 {termLabel}
               </span>
             </div>
             <div className="instructors-grid">
-              {people.slice(0, instructorPage * 24).map((person) => (
-                <button
-                  className="instructor-card"
-                  key={person.instructor.id}
-                  onClick={() =>
-                    setDialog({
-                      type: "instructor",
-                      instructor: person.instructor,
-                    })
-                  }
-                >
-                  <div className="instructor-card-top">
-                    <span className="avatar">
-                      {person.instructor.name
-                        .split(" ")
-                        .filter(Boolean)
-                        .map((w) => w[0])
-                        .slice(0, 2)
-                        .join("")}
-                    </span>
-                    <Icon name="arrow" size={17} />
-                  </div>
-                  <h2>{person.instructor.name}</h2>
-                  {person.likelySections > 0 && (
-                    <span className="tag">
-                      {person.likelySections} likely{" "}
-                      {person.likelySections === 1 ? "match" : "matches"}
-                    </span>
-                  )}
-                  <p>
-                    {[...new Set(person.courses.map((c) => c.subject))].join(
-                      " · ",
-                    )}
-                  </p>
-                  <div className="instructor-course-codes">
-                    {person.courses.slice(0, 3).map((c) => (
-                      <span className="tag" key={c.id}>
-                        {courseCode(c)}
+              {people
+                .slice(
+                  (currentInstructorPage - 1) * 24,
+                  currentInstructorPage * 24,
+                )
+                .map((person) => (
+                  <button
+                    className="instructor-card"
+                    key={person.instructor.id}
+                    onClick={() =>
+                      setDialog({
+                        type: "instructor",
+                        instructor: person.instructor,
+                      })
+                    }
+                  >
+                    <div className="instructor-card-top">
+                      <span className="avatar">
+                        {person.instructor.name
+                          .split(" ")
+                          .filter(Boolean)
+                          .map((w) => w[0])
+                          .slice(0, 2)
+                          .join("")}
                       </span>
-                    ))}
-                    {person.courses.length > 3 && (
-                      <span className="muted">
-                        +{person.courses.length - 3}
+                      <Icon name="arrow" size={17} />
+                    </div>
+                    <h2>{person.instructor.name}</h2>
+                    {person.likelySections > 0 && (
+                      <span className="tag">
+                        {person.likelySections} likely{" "}
+                        {person.likelySections === 1 ? "match" : "matches"}
                       </span>
                     )}
-                  </div>
-                  <span className="instructor-card-footer">
-                    {person.sections}{" "}
-                    {person.sections === 1 ? "section" : "sections"} in{" "}
-                    {termLabel}
-                  </span>
-                </button>
-              ))}
+                    <p>
+                      {[...new Set(person.courses.map((c) => c.subject))].join(
+                        " · ",
+                      )}
+                    </p>
+                    <div className="instructor-course-codes">
+                      {person.courses.slice(0, 3).map((c) => (
+                        <span className="tag" key={c.id}>
+                          {courseCode(c)}
+                        </span>
+                      ))}
+                      {person.courses.length > 3 && (
+                        <span className="muted">
+                          +{person.courses.length - 3}
+                        </span>
+                      )}
+                    </div>
+                    <span className="instructor-card-footer">
+                      {person.sections}{" "}
+                      {person.sections === 1 ? "section" : "sections"} in{" "}
+                      {termLabel}
+                    </span>
+                  </button>
+                ))}
             </div>
             {!people.length && (
               <div className="empty-state">
@@ -1053,15 +1142,28 @@ export default function App() {
                 </p>
               </div>
             )}
-            {people.length > instructorPage * 24 && (
-              <div className="load-more">
-                <button
-                  className="button button-secondary"
-                  onClick={() => setInstructorPage((p) => p + 1)}
-                >
-                  Show more instructors <Icon name="down" size={15} />
-                </button>
-              </div>
+            {instructorPages > 1 && (
+              <nav className="pagination" aria-label="Instructor pages">
+                <span>
+                  Page {currentInstructorPage} of {instructorPages}
+                </span>
+                <div>
+                  <button
+                    className="button button-secondary small"
+                    disabled={currentInstructorPage <= 1}
+                    onClick={() => setInstructorPage(currentInstructorPage - 1)}
+                  >
+                    Previous instructors
+                  </button>
+                  <button
+                    className="button button-secondary small"
+                    disabled={currentInstructorPage >= instructorPages}
+                    onClick={() => setInstructorPage(currentInstructorPage + 1)}
+                  >
+                    Next instructors <Icon name="arrow" size={14} />
+                  </button>
+                </div>
+              </nav>
             )}
           </section>
         )}
@@ -1090,6 +1192,7 @@ export default function App() {
           <DataStatus
             catalog={catalog}
             termCode={filters.termCode}
+            campus={filters.campus}
             termLabel={termLabel}
             via={loaded.via}
             sections={termSections}
@@ -1175,7 +1278,7 @@ export default function App() {
               <p>{termLabel} · Imported subjects only</p>
             </div>
           </div>
-          {instructorIndex(catalog, filters.termCode)
+          {allPeople
             .find((p) => p.instructor.id === dialog.instructor.id)
             ?.courses.map((course) => (
               <div className="profile-course" key={course.id}>
@@ -1379,7 +1482,8 @@ export default function App() {
             </p>
             <p>
               Official-source and directory links take you to other sites with
-              their own policies. A calendar download is created in your
+              their own policies. Checking current seats contacts OSU directly
+              for the selected section. A calendar download is created in your
               browser.
             </p>
           </div>
@@ -1734,6 +1838,7 @@ function SchedulePage({
 function DataStatus({
   catalog,
   termCode,
+  campus,
   termLabel,
   via,
   sections,
@@ -1744,6 +1849,7 @@ function DataStatus({
 }: {
   catalog: Catalog;
   termCode: string;
+  campus: string;
   termLabel: string;
   via: string;
   sections: number;
@@ -1752,7 +1858,9 @@ function DataStatus({
   surnameMatches: number;
   onReport: () => void;
 }) {
-  const coverage = catalog.coverage.filter((c) => c.termCode === termCode);
+  const coverage = catalog.coverage.filter(
+    (c) => c.termCode === termCode && (!campus || c.campus === campus),
+  );
   const percent = sections
     ? Math.round((identified / sections) * 1000) / 10
     : 0;
@@ -1771,11 +1879,12 @@ function DataStatus({
           <span className="stat-icon green">
             <Icon name="people" size={22} />
           </span>
-          <span className="stat-label">IDENTIFIED INSTRUCTORS</span>
+          <span className="stat-label">FULL NAME COVERAGE</span>
           <strong>{percent}%</strong>
           <span>
-            {named.toLocaleString()} published names ·{" "}
-            {surnameMatches.toLocaleString()} surname matches
+            {named.toLocaleString()} published ·{" "}
+            {Math.max(0, identified - named).toLocaleString()} likely full-name
+            matches
           </span>
         </div>
         <div className="stat-card">
@@ -1784,7 +1893,7 @@ function DataStatus({
           </span>
           <span className="stat-label">INSTRUCTOR NOT RESOLVED</span>
           <strong>{Math.max(0, sections - identified).toLocaleString()}</strong>
-          <span>Not identified in current search coverage</span>
+          <span>May need further searches or an OSU assignment update</span>
         </div>
       </div>
       <div className="data-panels">
@@ -1792,12 +1901,12 @@ function DataStatus({
           <div className="panel-title">
             <Icon name="status" size={20} />
             <h2>What’s in this snapshot</h2>
-            <span className="tag">Pilot coverage</span>
+            <span className="tag">Published coverage</span>
           </div>
           <dl className="data-dl">
             <dt>Oldest source check</dt>
             <dd>
-              {formatDate(collectedAt(catalog, termCode), {
+              {formatDate(collectedAt(catalog, termCode, campus), {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
@@ -1812,6 +1921,11 @@ function DataStatus({
             </dd>
             <dt>Semester</dt>
             <dd>{termLabel}</dd>
+            <dt>Surname search evidence</dt>
+            <dd>
+              {surnameMatches.toLocaleString()} sections matched by surname;
+              full identities may remain unresolved.
+            </dd>
             {coverage.map((c) => (
               <div
                 className="coverage-dl-group"
@@ -1835,9 +1949,9 @@ function DataStatus({
             ))}
           </dl>
           <p className="fine-print">
-            This is a scoped pilot, not the full university catalog. Refresh
-            frequency depends on the configured import workflow; no live
-            synchronization is implied.
+            Coverage above lists the semesters, campuses and subjects included
+            in this snapshot. Sections refresh through the configured import
+            schedule; check the source timestamps for freshness.
           </p>
         </article>
         <article className="panel">
@@ -1915,7 +2029,9 @@ function DataStatus({
             <strong>Availability is a snapshot.</strong>
             <p>
               Open, closed, and waitlist labels reflect the last collection.
-              Seat capacities and remaining seats are not supplied.
+              Open a section’s details and choose “Check current seats” for
+              current capacity, available seats and waitlist counts when
+              supplied by OSU.
             </p>
           </div>
           <div>

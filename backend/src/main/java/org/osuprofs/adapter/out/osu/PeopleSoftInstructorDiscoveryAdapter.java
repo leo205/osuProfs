@@ -70,14 +70,8 @@ public final class PeopleSoftInstructorDiscoveryAdapter implements InstructorDis
         if (names.isEmpty()) return List.of();
         if (names.size() > 200) throw new IllegalArgumentException("A discovery batch is limited to 200 surnames.");
 
-        CookieManager cookies = new CookieManager(null, CookiePolicy.ACCEPT_ALL) {
-            @Override public void put(URI uri, Map<String, List<String>> responseHeaders) throws IOException {
-                super.put(uri, responseHeaders);
-                // PeopleSoft rejects Java's RFC2965 quoted Cookie/$Version format.
-                // Browsers send these same anonymous session cookies in RFC6265 format.
-                getCookieStore().getCookies().forEach(cookie -> cookie.setVersion(0));
-            }
-        };
+        CookieManager cookies = anonymousCookies();
+
         try (HttpClient client = HttpClient.newBuilder().cookieHandler(cookies)
                 .connectTimeout(Duration.ofSeconds(25)).followRedirects(HttpClient.Redirect.NORMAL).build()) {
             if (!search(client, query, NEGATIVE_CONTROL).isEmpty()) {
@@ -100,6 +94,17 @@ public final class PeopleSoftInstructorDiscoveryAdapter implements InstructorDis
         }
     }
 
+    static CookieManager anonymousCookies() {
+        return new CookieManager(null, CookiePolicy.ACCEPT_ALL) {
+            @Override public void put(URI uri, Map<String, List<String>> responseHeaders) throws IOException {
+                super.put(uri, responseHeaders);
+                // PeopleSoft rejects Java's RFC2965 quoted Cookie/$Version format.
+                // Browsers send these same anonymous session cookies in RFC6265 format.
+                getCookieStore().getCookies().forEach(cookie -> cookie.setVersion(0));
+            }
+        };
+    }
+
     private Set<String> search(HttpClient client, Query query, String surname) throws Exception {
         Document initial = request(client, null);
         Map<String, String> form = fields(initial);
@@ -107,12 +112,15 @@ public final class PeopleSoftInstructorDiscoveryAdapter implements InstructorDis
         String campus = query.campus().toUpperCase(Locale.ROOT);
         String campusLabel = optionLabel(initial, CAMPUS, campus);
         String subject = query.subject().toUpperCase(Locale.ROOT);
-        String subjectLabel = optionLabel(initial, SUBJECT, subject);
         form.put("ICAction", "DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$149$$2");
         form.put(TERM, query.termCode());
         form.put(CAMPUS, campus);
         Document expanded = request(client, form);
         form = fields(expanded);
+        if (!query.termCode().equals(form.get(TERM)) || !campus.equals(form.get(CAMPUS)))
+            throw new IOException("Public class search did not select the requested term and campus.");
+        // Subject choices change by semester; the initial form defaults to a different term.
+        String subjectLabel = optionLabel(expanded, SUBJECT, subject);
         if (!form.containsKey(SURNAME)) throw new IOException("Public instructor-search fields are unavailable.");
         form.put("ICAction", "CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH");
         form.put(TERM, query.termCode());
@@ -216,6 +224,7 @@ public final class PeopleSoftInstructorDiscoveryAdapter implements InstructorDis
         if (select != null) for (Element option : select.select("option")) {
             if (value.equals(option.attr("value"))) return normalized(option.text());
         }
+        if (name.equals(SUBJECT)) throw new IOException("Requested subject " + value + " is absent from the requested-term public class search.");
         throw new IOException("Requested discovery scope is absent from public class search.");
     }
 

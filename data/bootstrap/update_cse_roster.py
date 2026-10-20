@@ -135,14 +135,15 @@ def collect_directory():
 
 def main():
     args = argparse.ArgumentParser(description=__doc__)
-    args.add_argument("--catalog", type=Path, default=Path("frontend/public/data/catalog.json"))
+    args.add_argument("--catalog", type=Path, default=Path("frontend/public/data/catalog-index.json"))
     args.add_argument("--registry", type=Path, default=Path("data/discovery/cse-instructor-identities.json"))
     args.add_argument("--seeds", type=Path, default=Path("data/discovery/cse-surnames.txt"))
     args.add_argument("--receipt", type=Path, default=Path("data/discovery/cse-directory-collection.json"))
     args.add_argument("--history", type=Path, default=Path("data/discovery/cse-expanded-3521/spring2026-cse-course-associations.json"))
-    args.add_argument("--max-surnames", type=int, default=200)
+    args.add_argument("--max-surnames", type=int, default=2000)
     options = args.parse_args()
-    catalog = json.loads(options.catalog.read_text())
+    from publish_catalog import load_catalog
+    catalog = load_catalog(options.catalog)
     existing = json.loads(options.registry.read_text())
     if existing["schemaVersion"] != 1 or existing["subject"] != "CSE":
         raise ValueError("Expected the versioned CSE identity registry")

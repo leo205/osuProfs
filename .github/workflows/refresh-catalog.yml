@@ -7,17 +7,25 @@ on:
   workflow_dispatch:
     inputs:
       term:
-        description: OSU term code
+        description: Upcoming OSU term code
         required: true
         default: "1272"
-      subjects:
-        description: Comma-separated OSU subject codes
+      history_term:
+        description: Build-only instructor-history term (classes stay hidden from the app)
         required: true
-        default: CSE,MATH,STAT,PHYSICS,ECE,ENGR
-      campus:
-        description: OSU campus code
+        default: "1268"
+      campuses:
+        description: ALL or comma-separated OSU campus codes
         required: true
-        default: col
+        default: ALL
+      discovery_minutes:
+        description: Instructor-search budget in minutes (0 processes the full pending queue)
+        required: true
+        default: "20"
+      refresh_history:
+        description: Refresh build-only instructor history now (otherwise weekly or when missing)
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -30,11 +38,14 @@ jobs:
   refresh:
     if: github.event_name == 'workflow_dispatch' || vars.ENABLE_SCHEDULED_IMPORTS == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     env:
       IMPORT_TERM: ${{ inputs.term || '1272' }}
-      IMPORT_SUBJECTS: ${{ inputs.subjects || 'CSE,MATH,STAT,PHYSICS,ECE,ENGR' }}
-      IMPORT_CAMPUS: ${{ inputs.campus || 'col' }}
+      HISTORY_TERM: ${{ inputs.history_term || '1268' }}
+      IMPORT_CAMPUSES: ${{ inputs.campuses || 'ALL' }}
+      DISCOVERY_MINUTES: ${{ inputs.discovery_minutes || '20' }}
+      REFRESH_HISTORY: ${{ inputs.refresh_history && 'true' || 'false' }}
+      EVENT_NAME: ${{ github.event_name }}
       VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
     steps:
       - uses: actions/checkout@v4
@@ -48,42 +59,88 @@ jobs:
           node-version: "22"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+      - name: Validate refresh inputs
+        run: |
+          python3 - <<'PY'
+          import math
+          import os
+          import re
+          for key in ("IMPORT_TERM", "HISTORY_TERM"):
+              if not re.fullmatch(r"\d{4}", os.environ[key]):
+                  raise SystemExit(f"{key} must be a four-digit OSU term code")
+          campuses = os.environ["IMPORT_CAMPUSES"]
+          if campuses != "ALL" and not re.fullmatch(r"[a-z]{2,10}(,[a-z]{2,10})*", campuses):
+              raise SystemExit("Campuses must be ALL or comma-separated lowercase campus codes")
+          minutes = float(os.environ["DISCOVERY_MINUTES"])
+          if not math.isfinite(minutes) or minutes < 0:
+              raise SystemExit("Discovery minutes must be a finite nonnegative number")
+          PY
+      - name: Restore previous checked collection and instructor-search progress
+        id: university-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: artifacts/university
+          key: university-v1-${{ runner.os }}-${{ github.ref_name }}-${{ env.IMPORT_TERM }}-${{ env.HISTORY_TERM }}-${{ env.IMPORT_CAMPUSES }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            university-v1-${{ runner.os }}-${{ github.ref_name }}-${{ env.IMPORT_TERM }}-${{ env.HISTORY_TERM }}-${{ env.IMPORT_CAMPUSES }}-
+      - name: Verify collection, publication, and resume logic
+        run: python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
       - name: Verify Java importer
         run: mvn -B -ntp -f backend/pom.xml verify
-      - name: Verify roster collector
-        run: python3 -m unittest discover -s data/bootstrap -p test_update_cse_roster.py
-      - name: Refresh official CSE roster and surname seeds
-        run: python3 data/bootstrap/update_cse_roster.py
-      - name: Refresh catalog and revalidate instructor surnames atomically
+      - name: Prepare a working snapshot from the checked-in catalog if needed
+        run: |
+          if [ ! -f artifacts/university/catalog.json ]; then
+            baseline=frontend/public/data/catalog-index.json
+            if [ ! -f "$baseline" ]; then
+              baseline=frontend/public/data/catalog.json
+            fi
+            python3 data/bootstrap/publish_catalog.py \
+              --input "$baseline" \
+              --flatten artifacts/university/catalog.json
+          fi
+      - name: Refresh official CSE roster and reviewed surname seeds
         run: >-
-          java -jar backend/target/osu-profs-0.1.0.jar
-          --spring.main.web-application-type=none
-          --app.import.enabled=true
-          --app.import.output=frontend/public/data/catalog.json
-          --app.import.term="$IMPORT_TERM"
-          --app.import.subjects="$IMPORT_SUBJECTS"
-          --app.import.campus="$IMPORT_CAMPUS"
-          --app.discovery.enabled=true
-          --app.discovery.subject=CSE
-          --app.discovery.candidate-file=data/discovery/cse-surnames.txt
-          --app.discovery.identity-file=data/discovery/cse-instructor-identities.json
-          --app.discovery.include-catalog-candidates=true
-          --app.discovery.max-candidates=200
+          python3 data/bootstrap/update_cse_roster.py
+          --catalog artifacts/university/catalog.json
+          --max-surnames=2000
+      - name: Collect all offered classes and resume instructor searches
+        run: |
+          refresh_args=(
+            --term "$IMPORT_TERM"
+            --history-term "$HISTORY_TERM"
+            --campuses "$IMPORT_CAMPUSES"
+            --work-dir artifacts/university
+            --output-dir frontend/public/data
+            --discover
+            --discovery-minutes "$DISCOVERY_MINUTES"
+          )
+          if [ "$REFRESH_HISTORY" = "true" ] || { [ "$EVENT_NAME" = "schedule" ] && [ "$(date -u +%u)" = "7" ]; }; then
+            refresh_args+=(--refresh-history)
+          fi
+          python3 data/bootstrap/refresh_university.py "${refresh_args[@]}"
       - name: Verify and build refreshed site
         working-directory: frontend
         run: |
           npm ci
           npm test
           npm run build
-      - name: Preserve successful snapshot and site for review
+      - name: Save checked collection and resumable instructor-search progress
+        uses: actions/cache/save@v4
+        with:
+          path: artifacts/university
+          key: ${{ steps.university-cache.outputs.cache-primary-key }}
+      - name: Preserve successful snapshot, search receipts, and site for review
         uses: actions/upload-artifact@v4
         with:
           name: refreshed-catalog-and-site
           path: |
-            frontend/public/data/catalog.json
+            frontend/public/data
             frontend/dist
+            artifacts/university/collection.json
+            artifacts/university/discovery-state.json
             data/discovery/cse-instructor-identities.json
             data/discovery/cse-surnames.txt
+            data/discovery/cse-directory-collection.json
           retention-days: 7
       - name: Check optional publishing configuration
         id: publishing

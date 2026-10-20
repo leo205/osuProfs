@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-20T19:48:39.382270+00:00",
+  "publishedTerm": {
+    "code": "1272",
+    "label": "Spring 2027"
+  },
+  "source": {
+    "classSearchUrl": "https://classes.osu.edu/",
+    "apiEndpoint": "https://content.osu.edu/v2/classes/search",
+    "termMetadataUrl": "https://content.osu.edu/v2/classes/searchableTermsV2",
+    "subjectDirectoryUrl": "https://courses.erppub.osu.edu/psc/ps_1/EMPLOYEE/CAMP/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL?PAGE=SSR_CLSRCH_ENTRY"
+  },
+  "checks": {
+    "independentCampusFacetTotals": true,
+    "uniqueSectionIdsWithinEachTerm": true,
+    "uniqueCourseIdsWithinEachTerm": true,
+    "allSixCampusesPresent": true,
+    "allSectionsHaveDetailsAndAvailabilityUrl": true,
+    "oldCseFullNameEvidenceRetained": true
+  },
+  "terms": [
+    {
+      "termCode": "1272",
+      "label": "Spring 2027",
+      "snapshotFile": "spring-catalog.json",
+      "snapshotSha256": "ed6eef942617541fdaabd903008fa8384d708aa0c114bb597f20242a4dee62cb",
+      "snapshotBytes": 33022488,
+      "snapshotWrittenAt": "2026-10-20T19:46:44.655429+00:00",
+      "sourceCountUrl": "https://content.osu.edu/v2/classes/search?q=&term=1272&p=1&pagenum=200",
+      "sourceCountResponseFile": "all-page1.json",
+      "sourceCountResponseSha256": "0caa5e32fe83f86e774e06f0e542f06ca98669ab3c7db330be0b861b09316078",
+      "sourceCountRetrievedAt": "2026-10-20T18:58:56.996373+00:00",
+      "expectedSectionCount": 26594,
+      "actualSectionCount": 26594,
+      "courseOfferingCount": 7787,
+      "subjectsWithCourses": 254,
+      "publishedInstructorSections": 20864,
+      "qualifiedFullNameSections": 360,
+      "distinctPublishedInstructorIds": 5273,
+      "sectionFetchedAtRange": {
+        "earliest": "2026-10-20T19:33:45.449954Z",
+        "latest": "2026-10-20T19:46:43.474666Z"
+      },
+      "campuses": [
+        {
+          "campus": "col",
+          "expectedSections": 25048,
+          "actualSections": 25048,
+          "uniqueSections": 25048,
+          "courses": 6814,
+          "subjectsWithCourses": 242,
+          "publishedInstructorSections": 19438,
+          "sectionsWithDetails": 25048,
+          "sectionsWithAvailabilityUrl": 25048,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:33:45.449954Z",
+            "latest": "2026-10-20T19:44:41.747943Z"
+          }
+        },
+        {
+          "campus": "lma",
+          "expectedSections": 239,
+          "actualSections": 239,
+          "uniqueSections": 239,
+          "courses": 181,
+          "subjectsWithCourses": 50,
+          "publishedInstructorSections": 199,
+          "sectionsWithDetails": 239,
+          "sectionsWithAvailabilityUrl": 239,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:36:18.761816Z",
+            "latest": "2026-10-20T19:44:47.499256Z"
+          }
+        },
+        {
+          "campus": "mns",
+          "expectedSections": 241,
+          "actualSections": 241,
+          "uniqueSections": 241,
+          "courses": 176,
+          "subjectsWithCourses": 56,
+          "publishedInstructorSections": 214,
+          "sectionsWithDetails": 241,
+          "sectionsWithAvailabilityUrl": 241,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:44:52.428028Z",
+            "latest": "2026-10-20T19:45:17.083748Z"
+          }
+        },
+        {
+          "campus": "mrn",
+          "expectedSections": 274,
+          "actualSections": 274,
+          "uniqueSections": 274,
+          "courses": 212,
+          "subjectsWithCourses": 53,
+          "publishedInstructorSections": 238,
+          "sectionsWithDetails": 274,
+          "sectionsWithAvailabilityUrl": 274,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:45:22.096014Z",
+            "latest": "2026-10-20T19:45:44.930927Z"
+          }
+        },
+        {
+          "campus": "nwk",
+          "expectedSections": 556,
+          "actualSections": 556,
+          "uniqueSections": 556,
+          "courses": 280,
+          "subjectsWithCourses": 77,
+          "publishedInstructorSections": 539,
+          "sectionsWithDetails": 556,
+          "sectionsWithAvailabilityUrl": 556,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:45:50.988525Z",
+            "latest": "2026-10-20T19:46:24.795106Z"
+          }
+        },
+        {
+          "campus": "wst",
+          "expectedSections": 236,
+          "actualSections": 236,
+          "uniqueSections": 236,
+          "courses": 124,
+          "subjectsWithCourses": 32,
+          "publishedInstructorSections": 236,
+          "sectionsWithDetails": 236,
+          "sectionsWithAvailabilityUrl": 236,
+          "fetchedAtRange": {
+            "earliest": "2026-10-20T19:46:29.557787Z",
+            "latest": "2026-10-20T19:46:43.474666Z"
+          }
+        }
+      ],
+      "collectionSteps": [
+        {
+          "term": "1272",
+          "campus": "col",
+          "startedAt": "2026-10-20T19:44:18.802621+00:00",
+          "finishedAt": "2026-10-20T19:44:43.527253+00:00",
+          "courses": 6814,
+          "sections": 25048,
+          "uniqueSections": 25048,
+          "publishedNames": 19438,
+          "details": 25048,
+          "subjectsWithCourses": 242
+        },
+        {
+          "term": "1272",
+          "campus": "lma",
+          "startedAt": "2026-10-20T19:44:43.536960+00:00",
+          "finishedAt": "2026-10-20T19:44:49.209277+00:00",
+          "courses": 181,
+          "sections": 239,
+          "uniqueSections": 239,
+          "publishedNames": 199,
+          "details": 239,
+          "subjectsWithCourses": 50
+        },
+        {
+          "term": "1272",
+          "campus": "mns",
+          "startedAt": "2026-10-20T19:44:49.209744+00:00",
+          "finishedAt": "2026-10-20T19:45:18.859809+00:00",
+          "courses": 176,
+          "sections": 241,
+          "uniqueSections": 241,
+          "publishedNames": 214,
+          "details": 241,
+          "subjectsWithCourses": 56
+        },
+        {
+          "term": "1272",
+          "campus": "mrn",
+          "startedAt": "2026-10-20T19:45:18.860373+00:00",
+          "finishedAt": "2026-10-20T19:45:46.839253+00:00",
+          "courses": 212,
+          "sections": 274,
+          "uniqueSections": 274,
+          "publishedNames": 238,
+          "details": 274,
+          "subjectsWithCourses": 53
+        },
+        {
+          "term": "1272",
+          "campus": "nwk",
+          "startedAt": "2026-10-20T19:45:46.839768+00:00",
+          "finishedAt": "2026-10-20T19:46:26.548920+00:00",
+          "courses": 280,
+          "sections": 556,
+          "uniqueSections": 556,
+          "publishedNames": 539,
+          "details": 556,
+          "subjectsWithCourses": 77
+        },
+        {
+          "term": "1272",
+          "campus": "wst",
+          "startedAt": "2026-10-20T19:46:26.549473+00:00",
+          "finishedAt": "2026-10-20T19:46:45.259167+00:00",
+          "courses": 124,
+          "sections": 236,
+          "uniqueSections": 236,
+          "publishedNames": 236,
+          "details": 236,
+          "subjectsWithCourses": 32
+        }
+      ]
+    }
+  ],
+  "privateHistoryInput": {
+    "termCode": "1268",
+    "label": "Autumn 2026",
+    "courseOfferingCount": 7599,
+    "sectionCount": 28064,
+    "snapshotSha256": "74fe23a8c2f72ffb4fa7f1e4992d8336a7ad970307e042cf970fa997d696b02e",
+    "purpose": "Instructor-search candidates and historical identity context only; excluded from public catalog files and semester options."
+  },
+  "limitations": [
+    "Published instructor arrays contain only names actually published by OSU. Retained current-term surname and identity evidence remains explicitly LIKELY.",
+    "Imported information is a snapshot. Instructor assignments and seat availability may change.",
+    "Term-specific PeopleSoft subjects are supplemented by offered-subject discovery in regional API pages; exact section totals were independently checked against term-wide campus facets.",
+    "Instructor searches are incomplete; unresolved sections may have assignments that this collection has not identified."
+  ],
+  "retainedCseEvidence": {
+    "fullNameSections": 360,
+    "lostNames": 0,
+    "detailsValidationFile": "1272-base-validation.json"
+  },
+  "subjectInventoryFile": "university-source-inventories.json",
+  "subjectInventorySha256": "1cf0eb72fda302e95628c150a0080f7d5d2bf862089d9cfb3f0724c2b6b4c2b4",
+  "publishedCatalog": {
+    "publishedAt": "2026-10-20T20:01:41Z",
+    "manifest": "frontend/public/data/catalog-index.json",
+    "manifestSha256": "52970439365de7ec43aa5c6668edf07e36f4cfbcd3bd4074ef76bd5f49741e5f",
+    "shards": 13,
+    "courseOfferingCount": 7787,
+    "sectionCount": 26594,
+    "publishedInstructorSections": 20864,
+    "qualifiedFullNameSections": 360,
+    "unresolvedSections": 5370,
+    "sectionFetchedAtRange": {
+      "earliest": "2026-10-20T19:33:45.449954Z",
+      "latest": "2026-10-20T20:00:37.885582Z"
+    }
+  },
+  "discovery": {
+    "updatedAt": "2026-10-20T20:01:41Z",
+    "completedBatches": 15,
+    "pendingBatches": 597,
+    "pendingSurnameQueries": 20063,
+    "failures": [
+      {
+        "campus": "col",
+        "subject": "CSE",
+        "surnames": [
+          "Ramnath",
+          "Rizzoni",
+          "Robbeloth",
+          "Roman",
+          "Roundtree",
+          "Rountev",
+          "Ryslik",
+          "Saleh",
+          "Salih",
+          "Sastry",
+          "Shareef",
+          "Sharkey",
+          "Shattal",
+          "Shen",
+          "Shroff",
+          "Siam",
+          "Sivilotti",
+          "Song",
+          "Soni",
+          "Soundarajan",
+          "Stavarache",
+          "Stewart",
+          "Strader",
+          "Su",
+          "Subramoni",
+          "Sun",
+          "Supowit",
+          "Talukdar",
+          "Techera",
+          "Teodorescu",
+          "Torku",
+          "Van Hulse",
+          "Vandergriff",
+          "VanPutte",
+          "Venkatakrishnan",
+          "Vernier",
+          "Vickroy",
+          "Wang",
+          "Weaver",
+          "Weide"
+        ],
+        "attemptedAt": "2026-10-20T20:00:35Z",
+        "reason": "java.io.IOException: Instructor search failed for CSE / 1272 / exact surname 'Sivilotti': Public class-search form is missing.",
+        "previousEvidenceRetained": true
+      }
+    ],
+    "successfulScopedSurnameQueries": 515,
+    "pendingIncludesCompoundSurnameAlternatives": true,
+    "priority": "Never-searched queries, inventory-changed repeats, then oldest expired checks."
+  }
+}

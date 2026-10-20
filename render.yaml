@@ -7,12 +7,12 @@ services:
     plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: .
-    autoDeployTrigger: 'off'
+    autoDeployTrigger: "off"
     healthCheckPath: /api/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: local
       - key: APP_CATALOG_PATH
-        value: /app/data/catalog.json
+        value: /app/data/catalog-index.json
       - key: APP_CORS_ORIGINS
         sync: false

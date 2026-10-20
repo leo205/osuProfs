@@ -37,7 +37,11 @@ class RosterTests(unittest.TestCase):
             registry = root / "registry.json"
             registry.write_text(json.dumps({"schemaVersion": 1, "subject": "CSE", "identities": []}))
             catalog = root / "catalog.json"
-            catalog.write_text('{"courses": []}')
+            sample = json.loads((Path(__file__).parents[1] / "catalog-contract.example.json").read_text())
+            sample["generatedAt"] = "2026-10-20T00:00:00Z"
+            sample["coverage"][0]["courseCount"] = len(sample["courses"])
+            sample["coverage"][0]["sectionCount"] = sum(len(course["sections"]) for course in sample["courses"])
+            catalog.write_text(json.dumps(sample))
             history = root / "history.json"
             history.write_text(json.dumps({"schemaVersion": 1, "subject": "CSE", "sourceUrl": "https://registrar.osu.edu/report.pdf", "retrievedAt": "2026-10-20T18:00:00Z", "associations": []}))
             seeds = root / "seeds.txt"

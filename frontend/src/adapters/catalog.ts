@@ -1,5 +1,9 @@
-import type { Catalog, InstructorIdentityMatch } from "../domain/types";
-import { collectedAt } from "../domain/catalog";
+import type {
+  Catalog,
+  CodeLabel,
+  InstructorIdentityMatch,
+} from "../domain/types";
+import { isAvailabilityUrl } from "./availability";
 
 export interface LoadedCatalog {
   catalog: Catalog;
@@ -104,6 +108,32 @@ function validDiscovery(value: unknown): boolean {
   }
 }
 
+function validDetails(value: unknown): boolean {
+  if (value === undefined || value === null) return true;
+  if (typeof value !== "object") return false;
+  const details = value as NonNullable<
+    Catalog["courses"][number]["sections"][number]["details"]
+  >;
+  return (
+    [
+      details.sessionCode,
+      details.sessionDescription,
+      details.startDate,
+      details.endDate,
+      details.associatedClass,
+      details.consent,
+      details.primaryInstructorSection,
+      details.location,
+    ].every((field) => field === null || typeof field === "string") &&
+    Array.isArray(details.autoEnrollSections) &&
+    details.autoEnrollSections.every((field) => typeof field === "string") &&
+    Array.isArray(details.attributes) &&
+    details.attributes.every((field) => typeof field === "string") &&
+    (details.availabilityUrl === null ||
+      isAvailabilityUrl(details.availabilityUrl))
+  );
+}
+
 export function validateCatalog(value: unknown): Catalog {
   if (!value || typeof value !== "object")
     throw new Error("The catalog response is not an object.");
@@ -120,25 +150,27 @@ export function validateCatalog(value: unknown): Catalog {
   ) {
     throw new Error("The catalog has an unsupported or incomplete format.");
   }
-  if (
-    c.courses.some(
-      (course) =>
-        !course.id ||
-        !course.termCode ||
-        !course.subject ||
-        !course.catalogNumber ||
-        !Array.isArray(course.sections) ||
-        course.sections.some(
-          (s) =>
-            !s.id ||
-            !Array.isArray(s.instructors) ||
-            !Array.isArray(s.meetings) ||
-            !s.enrollment ||
-            !validDiscovery(s.instructorDiscovery),
-        ),
-    )
-  ) {
-    throw new Error("Some course or section records are incomplete.");
+  const invalidCourse = c.courses.find(
+    (course) =>
+      !course.id ||
+      !course.termCode ||
+      !course.subject ||
+      !course.catalogNumber ||
+      !Array.isArray(course.sections) ||
+      course.sections.some(
+        (s) =>
+          !s.id ||
+          !Array.isArray(s.instructors) ||
+          !Array.isArray(s.meetings) ||
+          !s.enrollment ||
+          !validDiscovery(s.instructorDiscovery) ||
+          !validDetails(s.details),
+      ),
+  );
+  if (invalidCourse) {
+    throw new Error(
+      `Some course or section records are incomplete (${invalidCourse.id ?? "unknown course"}).`,
+    );
   }
   return c;
 }
@@ -153,41 +185,269 @@ async function fetchCatalog(url: string, timeout = 6500): Promise<Catalog> {
   return validateCatalog(await response.json());
 }
 
+interface CatalogShard {
+  url: string;
+  termCode: string;
+  campus: string;
+  subjects: string[];
+  courseCount: number;
+  sectionCount: number;
+}
+
+export interface CatalogIndex {
+  schemaVersion: 1;
+  generatedAt: string;
+  catalogs: CatalogShard[];
+}
+
+export function validateCatalogIndex(value: unknown): CatalogIndex {
+  if (!value || typeof value !== "object")
+    throw new Error("The catalog index is not an object.");
+  const index = value as CatalogIndex;
+  if (
+    index.schemaVersion !== 1 ||
+    !Number.isFinite(Date.parse(index.generatedAt)) ||
+    !Array.isArray(index.catalogs) ||
+    !index.catalogs.length ||
+    index.catalogs.length > 1000
+  )
+    throw new Error(
+      "The catalog index has an unsupported or incomplete format.",
+    );
+  const paths = new Set<string>();
+  const scopes = new Set<string>();
+  for (const shard of index.catalogs) {
+    if (
+      !shard ||
+      typeof shard.url !== "string" ||
+      !/^\/data\/[a-zA-Z0-9_/-]+\.json$/.test(shard.url) ||
+      shard.url.includes("//") ||
+      typeof shard.termCode !== "string" ||
+      !shard.termCode.trim() ||
+      typeof shard.campus !== "string" ||
+      !shard.campus.trim() ||
+      !Array.isArray(shard.subjects) ||
+      !shard.subjects.length ||
+      shard.subjects.some(
+        (subject) => typeof subject !== "string" || !subject.trim(),
+      ) ||
+      new Set(shard.subjects).size !== shard.subjects.length ||
+      !Number.isSafeInteger(shard.courseCount) ||
+      shard.courseCount < 0 ||
+      !Number.isSafeInteger(shard.sectionCount) ||
+      shard.sectionCount < 0
+    )
+      throw new Error("The catalog index contains an invalid shard.");
+    if (paths.has(shard.url))
+      throw new Error("The catalog index repeats a file.");
+    paths.add(shard.url);
+    for (const subject of shard.subjects) {
+      const scope = `${shard.termCode}/${shard.campus}/${subject}`;
+      if (scopes.has(scope))
+        throw new Error(
+          "The catalog index repeats a semester/campus/subject scope.",
+        );
+      scopes.add(scope);
+    }
+  }
+  return index;
+}
+
+function validateShard(catalog: Catalog, shard: CatalogShard): Catalog {
+  if (
+    catalog.courses.length !== shard.courseCount ||
+    catalog.courses.reduce(
+      (total, course) => total + course.sections.length,
+      0,
+    ) !== shard.sectionCount ||
+    !catalog.coverage.length ||
+    catalog.courses.some(
+      (course) =>
+        course.termCode !== shard.termCode ||
+        course.campus !== shard.campus ||
+        !shard.subjects.includes(course.subject),
+    ) ||
+    catalog.coverage.some(
+      (scope) =>
+        scope.termCode !== shard.termCode ||
+        scope.campus !== shard.campus ||
+        scope.subjects.some((subject) => !shard.subjects.includes(subject)),
+    ) ||
+    shard.subjects.some(
+      (subject) =>
+        !catalog.coverage.some((scope) => scope.subjects.includes(subject)),
+    )
+  )
+    throw new Error(
+      `The catalog file ${shard.url} does not match its declared coverage.`,
+    );
+  return catalog;
+}
+
+function mergeCatalogs(index: CatalogIndex, catalogs: Catalog[]): Catalog {
+  function labels(kind: "terms" | "subjects" | "campuses"): CodeLabel[] {
+    const items = new Map<string, CodeLabel>();
+    for (const catalog of catalogs)
+      for (const item of catalog[kind]) {
+        if (
+          !item ||
+          typeof item.code !== "string" ||
+          typeof item.label !== "string"
+        )
+          throw new Error(`The catalog has invalid ${kind} metadata.`);
+        const existing = items.get(item.code);
+        if (existing && existing.label !== item.label)
+          throw new Error(
+            `Catalog files disagree about ${kind} label ${item.code}.`,
+          );
+        items.set(item.code, item);
+      }
+    return [...items.values()].sort((a, b) =>
+      kind === "terms"
+        ? b.code.localeCompare(a.code)
+        : a.code.localeCompare(b.code),
+    );
+  }
+  const courses = new Map<string, Catalog["courses"][number]>();
+  const coverage = new Map<string, Catalog["coverage"][number]>();
+  for (const catalog of catalogs) {
+    for (const course of catalog.courses) {
+      if (courses.has(course.id))
+        throw new Error(`Catalog files repeat course ${course.id}.`);
+      courses.set(course.id, course);
+    }
+    for (const scope of catalog.coverage) {
+      const key = `${scope.termCode}/${scope.campus}/${[...scope.subjects].sort().join(",")}`;
+      const previous = coverage.get(key);
+      if (previous && JSON.stringify(previous) !== JSON.stringify(scope))
+        throw new Error(`Catalog files disagree about coverage ${key}.`);
+      coverage.set(key, scope);
+    }
+  }
+  return {
+    schemaVersion: 1,
+    generatedAt: index.generatedAt,
+    source: catalogs[0].source,
+    terms: labels("terms"),
+    subjects: labels("subjects"),
+    campuses: labels("campuses"),
+    coverage: [...coverage.values()],
+    courses: [...courses.values()],
+  };
+}
+
+/** Load all scopes atomically: a failed shard must never look like complete coverage. */
+async function fetchSnapshot(): Promise<Catalog> {
+  const response = await fetch("/data/catalog-index.json", {
+    signal: AbortSignal.timeout(15000),
+    cache: "no-cache",
+  });
+  if (response.status === 404) return fetchCatalog("/data/catalog.json", 30000);
+  if (!response.ok)
+    throw new Error(`The catalog index request returned ${response.status}.`);
+  const index = validateCatalogIndex(await response.json());
+  const catalogs = new Array<Catalog>(index.catalogs.length);
+  let next = 0;
+  await Promise.all(
+    Array.from({ length: Math.min(4, index.catalogs.length) }, async () => {
+      while (next < index.catalogs.length) {
+        const position = next++;
+        const shard = index.catalogs[position];
+        catalogs[position] = validateShard(
+          await fetchCatalog(shard.url, 30000),
+          shard,
+        );
+      }
+    }),
+  );
+  return mergeCatalogs(index, catalogs);
+}
+
+function scopeTimestamps(catalog: Catalog): Map<string, number> {
+  const times = new Map<string, number>();
+  for (const course of catalog.courses) {
+    const key = `${course.termCode}/${course.campus}/${course.subject}`;
+    for (const section of course.sections) {
+      const timestamp = Date.parse(section.lastUpdated);
+      if (Number.isFinite(timestamp))
+        times.set(key, Math.min(times.get(key) ?? Infinity, timestamp));
+    }
+  }
+  return times;
+}
+
+/** The published snapshot defines which upcoming semesters this site exposes. */
+function restrictApiTerms(api: Catalog, snapshot: Catalog): Catalog {
+  const terms = new Set(snapshot.terms.map((term) => term.code));
+  const courses = api.courses.filter((course) => terms.has(course.termCode));
+  const coverage = api.coverage.filter((scope) => terms.has(scope.termCode));
+  const subjects = new Set(coverage.flatMap((scope) => scope.subjects));
+  const campuses = new Set(coverage.map((scope) => scope.campus));
+  return {
+    ...api,
+    courses,
+    coverage,
+    terms: api.terms.filter((term) => terms.has(term.code)),
+    subjects: api.subjects.filter((subject) => subjects.has(subject.code)),
+    campuses: api.campuses.filter((campus) => campuses.has(campus.code)),
+  };
+}
+
 export async function loadCatalog(): Promise<LoadedCatalog> {
   const apiBase = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "");
   if (apiBase) {
     const [api, snapshot] = await Promise.allSettled([
       fetchCatalog(`${apiBase}/api/catalog`, 2500),
-      fetchCatalog("/data/catalog.json"),
+      fetchSnapshot(),
     ]);
     if (api.status === "fulfilled" && snapshot.status === "fulfilled") {
+      const apiCatalog = restrictApiTerms(api.value, snapshot.value);
       // Prefer the API only when it preserves every published scope and is no older in any scope.
+      const apiTimes = scopeTimestamps(apiCatalog);
+      const snapshotTimes = scopeTimestamps(snapshot.value);
+      const completeApiScopes = new Set(
+        apiCatalog.coverage
+          .filter((scope) => scope.complete)
+          .flatMap((scope) =>
+            scope.subjects.map(
+              (subject) => `${scope.termCode}/${scope.campus}/${subject}`,
+            ),
+          ),
+      );
       const apiSections = new Map(
-        api.value.courses.flatMap((course) =>
+        apiCatalog.courses.flatMap((course) =>
           course.sections.map(
             (section) => [`${course.id}/${section.id}`, section] as const,
           ),
         ),
       );
-      const preservesDiscovery = snapshot.value.courses.every((course) =>
+      const preservesSectionInfo = snapshot.value.courses.every((course) =>
         course.sections.every((section) => {
-          if (!section.instructorDiscovery) return true;
           const candidate = apiSections.get(`${course.id}/${section.id}`);
           if (!candidate) {
             // A genuinely newer collection may remove a cancelled section. An equally
-            // fresh response missing an evidenced section is incomplete for our purpose.
+            // fresh response missing a published section is incomplete for our purpose.
             return (
-              Date.parse(
-                collectedAt(
-                  api.value,
-                  course.termCode,
-                  course.campus,
-                  course.subject,
-                ),
-              ) > Date.parse(section.lastUpdated)
+              (apiTimes.get(
+                `${course.termCode}/${course.campus}/${course.subject}`,
+              ) ?? Date.parse(apiCatalog.generatedAt)) >
+              Date.parse(section.lastUpdated)
             );
           }
-          if (candidate.instructors.length > 0) return true;
+          if (section.details && !candidate.details) return false;
+          if (
+            Date.parse(candidate.lastUpdated) <=
+              Date.parse(section.lastUpdated) &&
+            section.instructors.some(
+              (instructor) =>
+                !candidate.instructors.some(
+                  (updated) => updated.id === instructor.id,
+                ),
+            )
+          )
+            return false;
+          if (!section.instructorDiscovery || candidate.instructors.length > 0)
+            return true;
           const apiIdentities = new Map(
             (candidate.instructorDiscovery?.fullNameMatches ?? []).map(
               (identity) => [identity.id, identity],
@@ -211,32 +471,20 @@ export async function loadCatalog(): Promise<LoadedCatalog> {
         }),
       );
       const usable =
-        preservesDiscovery &&
+        preservesSectionInfo &&
         snapshot.value.coverage.every((scope) =>
-          scope.subjects.every(
-            (subject) =>
-              api.value.coverage.some(
-                (candidate) =>
-                  candidate.complete &&
-                  candidate.termCode === scope.termCode &&
-                  candidate.campus === scope.campus &&
-                  candidate.subjects.includes(subject),
-              ) &&
-              Date.parse(
-                collectedAt(api.value, scope.termCode, scope.campus, subject),
-              ) >=
-                Date.parse(
-                  collectedAt(
-                    snapshot.value,
-                    scope.termCode,
-                    scope.campus,
-                    subject,
-                  ),
-                ),
-          ),
+          scope.subjects.every((subject) => {
+            const key = `${scope.termCode}/${scope.campus}/${subject}`;
+            return (
+              completeApiScopes.has(key) &&
+              (apiTimes.get(key) ?? Date.parse(apiCatalog.generatedAt)) >=
+                (snapshotTimes.get(key) ??
+                  Date.parse(snapshot.value.generatedAt))
+            );
+          }),
         );
       return usable
-        ? { catalog: api.value, via: "api", fallback: false }
+        ? { catalog: apiCatalog, via: "api", fallback: false }
         : {
             catalog: snapshot.value,
             via: "snapshot",
@@ -244,8 +492,6 @@ export async function loadCatalog(): Promise<LoadedCatalog> {
             fallbackReason: "older-or-partial",
           };
     }
-    if (api.status === "fulfilled")
-      return { catalog: api.value, via: "api", fallback: false };
     if (snapshot.status === "fulfilled")
       return {
         catalog: snapshot.value,
@@ -254,11 +500,11 @@ export async function loadCatalog(): Promise<LoadedCatalog> {
         fallbackReason: "unavailable",
       };
     throw new Error(
-      "Neither the API nor the published catalog could be loaded. Please try again.",
+      "The published upcoming-semester catalog could not be loaded. Reload the page or try again shortly.",
     );
   }
   return {
-    catalog: await fetchCatalog("/data/catalog.json"),
+    catalog: await fetchSnapshot(),
     via: "snapshot",
     fallback: false,
   };
