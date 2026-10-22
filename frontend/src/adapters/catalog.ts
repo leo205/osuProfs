@@ -342,8 +342,10 @@ function mergeCatalogs(index: CatalogIndex, catalogs: Catalog[]): Catalog {
 
 /** Load all scopes atomically: a failed shard must never look like complete coverage. */
 const snapshotCache = new Map<string, { index: string; catalog: Catalog }>();
+const acceptedSnapshots = new Map<string, Catalog>();
 export function clearSnapshotCache() {
   snapshotCache.clear();
+  acceptedSnapshots.clear();
 }
 
 async function fetchSnapshot(base = "", baseline?: Catalog): Promise<Catalog> {
@@ -412,8 +414,23 @@ async function fetchCurrentSnapshot(): Promise<Catalog> {
       url.hash
     )
       throw new Error("Live catalog must use a public HTTPS base URL.");
-    const remote = await fetchSnapshot(url.href.replace(/\/$/, ""), bundled);
-    if (!bundled) return remote;
+    const base = url.href.replace(/\/$/, "");
+    const previous = acceptedSnapshots.get(base);
+    if (
+      previous &&
+      (!bundled ||
+        (previous.terms.length === bundled.terms.length &&
+          previous.terms.every((term) =>
+            bundled!.terms.some((current) => current.code === term.code),
+          ) &&
+          Date.parse(previous.generatedAt) >= Date.parse(bundled.generatedAt)))
+    )
+      bundled = previous;
+    const remote = await fetchSnapshot(base, bundled);
+    if (!bundled) {
+      acceptedSnapshots.set(base, remote);
+      return remote;
+    }
     const candidate = restrictApiTerms(remote, bundled);
     const complete = new Set(
       candidate.coverage
@@ -426,17 +443,20 @@ async function fetchCurrentSnapshot(): Promise<Catalog> {
     );
     const remoteTimes = scopeTimestamps(candidate),
       localTimes = scopeTimestamps(bundled);
+    const baselineGeneratedAt = Date.parse(bundled.generatedAt);
     const preservesCoverage = bundled.coverage.every((scope) =>
       scope.subjects.every((subject) => {
         const key = `${scope.termCode}/${scope.campus}/${subject}`;
         return (
           complete.has(key) &&
           (remoteTimes.get(key) ?? Date.parse(candidate.generatedAt)) >=
-            (localTimes.get(key) ?? Date.parse(bundled.generatedAt))
+            (localTimes.get(key) ?? baselineGeneratedAt)
         );
       }),
     );
-    return preservesCoverage ? candidate : bundled;
+    const selected = preservesCoverage ? candidate : bundled;
+    acceptedSnapshots.set(base, selected);
+    return selected;
   } catch {
     if (bundled) return bundled;
     throw new Error(

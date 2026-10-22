@@ -551,6 +551,13 @@ describe("schoolwide catalog shards", () => {
         ([url]) => url === `${base}/data/catalog-index.json`,
       ),
     ).toHaveLength(2);
+    fetch.mockImplementation(async (url: string) => {
+      if (url.startsWith(base)) throw new Error("Network unavailable");
+      return response(url === "/data/catalog-index.json" ? localIndex : local);
+    });
+    expect(
+      (await loadCatalog()).catalog.courses[0].sections[0].instructors[0].name,
+    ).toBe("Newly Published Teacher");
   });
 
   it("keeps saved local instructors when the remote snapshot is partial or unavailable", async () => {
