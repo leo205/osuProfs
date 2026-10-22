@@ -9,6 +9,8 @@ on:
     paths:
       - .github/workflows/refresh-catalog.yml
       - data/bootstrap/durable_state.py
+      - data/bootstrap/publish_catalog.py
+      - data/bootstrap/refresh_university.py
   workflow_dispatch:
     inputs:
       term:

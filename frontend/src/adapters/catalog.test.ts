@@ -202,7 +202,12 @@ describe("published catalog integrity", () => {
     ).toThrow();
   });
   it("does not relabel an untouched semester as fresh after a partial import", () => {
-    const catalog = { ...fullCatalog, generatedAt: "2027-01-01T00:00:00Z" };
+    const catalog = {
+      ...fullCatalog,
+      generatedAt: new Date(
+        Date.parse(fullCatalog.generatedAt) + 86400000,
+      ).toISOString(),
+    };
     expect(
       Date.parse(collectedAt(catalog, fullCatalog.terms[0].code)),
     ).toBeLessThan(Date.parse(catalog.generatedAt));
@@ -347,7 +352,9 @@ describe("static-first catalog access", () => {
     vi.stubEnv("VITE_API_BASE_URL", "https://api.example.test");
     const partial: Catalog = {
       ...behaviorCatalog,
-      generatedAt: "2027-01-01T00:00:00Z",
+      generatedAt: new Date(
+        Date.parse(behaviorCatalog.generatedAt) + 86400000,
+      ).toISOString(),
       courses: behaviorCatalog.courses.filter(
         (c) => c.subject === "CSE" && c.termCode === "1272",
       ),
@@ -504,7 +511,9 @@ describe("schoolwide catalog shards", () => {
     const local = shardFixture("MATH");
     local.courses[0].sections[0].instructors = [];
     const updated = structuredClone(local);
-    updated.generatedAt = "2026-10-22T12:00:00Z";
+    updated.generatedAt = new Date(
+      Date.parse(local.generatedAt) + 86400000,
+    ).toISOString();
     updated.courses[0].sections[0].lastUpdated = updated.generatedAt;
     updated.courses[0].sections[0].instructors = [
       { id: "new-teacher", name: "Newly Published Teacher", role: "PI" },
@@ -550,7 +559,9 @@ describe("schoolwide catalog shards", () => {
     vi.stubEnv("VITE_API_BASE_URL", "");
     const local = shardFixture("MATH");
     const unrelated = shardFixture("OTHER");
-    unrelated.generatedAt = "2026-10-22T12:00:00Z";
+    unrelated.generatedAt = new Date(
+      Date.parse(local.generatedAt) + 86400000,
+    ).toISOString();
     unrelated.courses[0].sections[0].lastUpdated = unrelated.generatedAt;
     const localIndex = shardIndex([local]);
     const liveIndex = {

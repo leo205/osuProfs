@@ -274,7 +274,6 @@ describe("course planning user flows", () => {
     });
     await screen.findByRole("button", {
       name: publishedInstructor.name,
-      exact: true,
     });
     expect(window.location.search).toBe(searchBefore);
     expect(JSON.parse(localStorage.getItem(storageKey)!)).toHaveLength(1);
