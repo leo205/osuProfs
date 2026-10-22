@@ -254,6 +254,37 @@ async function openInitialSearch() {
 }
 
 describe("course planning user flows", () => {
+  it("refreshes instructor names automatically when returning to an older tab without losing the saved plan", async () => {
+    const { user } = await openInitialSearch();
+    await user.click(
+      screen.getByRole("button", {
+        name: "Add CSE 2421 section 0001 to schedule",
+      }),
+    );
+    const searchBefore = window.location.search;
+    const updated = structuredClone(pilot);
+    updated.courses.find(
+      (course) => course.catalogNumber === "2421" && course.termCode === "1272",
+    )!.sections[0].instructors = [publishedInstructor];
+    fetchMock.mockImplementation(async () => snapshotResponse(updated));
+    vi.spyOn(Date, "now").mockReturnValue(Date.now() + 16 * 60 * 1000);
+    vi.spyOn(document, "visibilityState", "get").mockReturnValue("visible");
+    await act(async () => {
+      window.dispatchEvent(new Event("focus"));
+    });
+    await screen.findByRole("button", {
+      name: publishedInstructor.name,
+      exact: true,
+    });
+    expect(window.location.search).toBe(searchBefore);
+    expect(JSON.parse(localStorage.getItem(storageKey)!)).toHaveLength(1);
+    expect(
+      screen.getByRole("button", {
+        name: "Remove CSE 2421 section 0001 from schedule",
+      }),
+    ).toBeTruthy();
+  });
+
   it("uses a likely full name consistently across rows, profiles, search, comparison, saved plans, and rating links", async () => {
     fetchMock.mockImplementation(async () => snapshotResponse(fullNamePilot()));
     window.history.replaceState(
