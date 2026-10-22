@@ -18,6 +18,7 @@ import type {
   Section,
 } from "../domain/types";
 import App from "./App";
+import { clearSnapshotCache } from "../adapters/catalog";
 
 const collectedAt = "2026-10-20T15:50:39Z";
 const peopleSoftSource =
@@ -224,9 +225,11 @@ function fullNamePilot(ambiguous = false): Catalog {
 const fetchMock = vi.fn();
 
 beforeEach(() => {
+  clearSnapshotCache();
   window.history.replaceState(null, "", "/");
   localStorage.clear();
   vi.stubEnv("VITE_API_BASE_URL", "");
+  vi.stubEnv("VITE_CATALOG_BASE_URL", "");
   fetchMock.mockReset().mockImplementation(async () => snapshotResponse());
   vi.stubGlobal("fetch", (url: string, options: unknown) =>
     url === "/data/catalog-index.json"

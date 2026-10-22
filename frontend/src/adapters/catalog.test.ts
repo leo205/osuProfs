@@ -1,6 +1,11 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
-import { loadCatalog, validateCatalog, validateCatalogIndex } from "./catalog";
+import {
+  clearSnapshotCache,
+  loadCatalog,
+  validateCatalog,
+  validateCatalogIndex,
+} from "./catalog";
 import { collectedAt } from "../domain/catalog";
 import type { Catalog, CodeLabel } from "../domain/types";
 
@@ -91,6 +96,10 @@ function legacyFetch(handler: (url: string) => unknown) {
     url === "/data/catalog-index.json" ? missingIndex : handler(url),
   );
 }
+beforeEach(() => {
+  clearSnapshotCache();
+  vi.stubEnv("VITE_CATALOG_BASE_URL", "");
+});
 afterEach(() => {
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
@@ -488,6 +497,112 @@ function shardIndex(catalogs: Catalog[]) {
 }
 
 describe("schoolwide catalog shards", () => {
+  it("loads newly saved instructor names without a new frontend build and reuses unchanged files", async () => {
+    const base = "https://saved.example/catalog";
+    vi.stubEnv("VITE_CATALOG_BASE_URL", base);
+    vi.stubEnv("VITE_API_BASE_URL", "");
+    const local = shardFixture("MATH");
+    local.courses[0].sections[0].instructors = [];
+    const updated = structuredClone(local);
+    updated.generatedAt = "2026-10-22T12:00:00Z";
+    updated.courses[0].sections[0].lastUpdated = updated.generatedAt;
+    updated.courses[0].sections[0].instructors = [
+      { id: "new-teacher", name: "Newly Published Teacher", role: "PI" },
+    ];
+    updated.coverage[0].namedInstructorSections = 1;
+    const localIndex = shardIndex([local]);
+    const liveIndex = {
+      ...shardIndex([updated]),
+      generatedAt: updated.generatedAt,
+    };
+    const fetch = vi.fn(async (url: string) =>
+      response(
+        url === "/data/catalog-index.json"
+          ? localIndex
+          : url === `${base}/data/catalog-index.json`
+            ? liveIndex
+            : url.startsWith(base)
+              ? updated
+              : local,
+      ),
+    );
+    vi.stubGlobal("fetch", fetch);
+    const first = await loadCatalog();
+    expect(first.catalog.courses[0].sections[0].instructors[0].name).toBe(
+      "Newly Published Teacher",
+    );
+    await loadCatalog();
+    expect(
+      fetch.mock.calls.filter(
+        ([url]) => url === `${base}${liveIndex.catalogs[0].url}`,
+      ),
+    ).toHaveLength(1);
+    expect(
+      fetch.mock.calls.filter(
+        ([url]) => url === `${base}/data/catalog-index.json`,
+      ),
+    ).toHaveLength(2);
+  });
+
+  it("keeps saved local instructors when the remote snapshot is partial or unavailable", async () => {
+    const base = "https://saved.example/catalog";
+    vi.stubEnv("VITE_CATALOG_BASE_URL", base);
+    vi.stubEnv("VITE_API_BASE_URL", "");
+    const local = shardFixture("MATH");
+    const unrelated = shardFixture("OTHER");
+    unrelated.generatedAt = "2026-10-22T12:00:00Z";
+    unrelated.courses[0].sections[0].lastUpdated = unrelated.generatedAt;
+    const localIndex = shardIndex([local]);
+    const liveIndex = {
+      ...shardIndex([unrelated]),
+      generatedAt: unrelated.generatedAt,
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) =>
+        response(
+          url === "/data/catalog-index.json"
+            ? localIndex
+            : url === `${base}/data/catalog-index.json`
+              ? liveIndex
+              : url.startsWith(base)
+                ? unrelated
+                : local,
+        ),
+      ),
+    );
+    expect((await loadCatalog()).catalog.courses[0].subject).toBe("MATH");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        if (url.startsWith(base)) throw new Error("Network unavailable");
+        return response(
+          url === "/data/catalog-index.json" ? localIndex : local,
+        );
+      }),
+    );
+    expect((await loadCatalog()).catalog.courses[0].subject).toBe("MATH");
+  });
+
+  it("does not download remote course files when their saved snapshot is no newer", async () => {
+    const base = "https://saved.example/catalog";
+    vi.stubEnv("VITE_CATALOG_BASE_URL", base);
+    vi.stubEnv("VITE_API_BASE_URL", "");
+    const local = shardFixture("MATH");
+    const index = shardIndex([local]);
+    const fetch = vi.fn(async (url: string) => {
+      if (url.endsWith("catalog-index.json")) return response(index);
+      if (url.startsWith(base))
+        throw new Error("Should not download unchanged files");
+      return response(local);
+    });
+    vi.stubGlobal("fetch", fetch);
+    await loadCatalog();
+    expect(
+      fetch.mock.calls.filter(([url]) => url.startsWith(base)),
+    ).toHaveLength(1);
+  });
+
   it("loads every subject and campus, merges shared metadata, and preserves instructor evidence", async () => {
     const shards = [
       shardFixture("CSE"),

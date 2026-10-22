@@ -2,7 +2,7 @@
 
 An independent OSU course and instructor explorer built with React, TypeScript, Java 21 and Spring Boot. It shows public course records for the upcoming semester, across every campus and offered subject returned by OSU’s public class search.
 
-The free-first deployment serves the website and validated catalog files from static hosting. Java handles collection and normalization; scheduled GitHub Actions jobs refresh classes and resume instructor searches. Browsing needs no always-running API or database. Spring Boot REST and PostgreSQL adapters remain available when needed.
+The free-first deployment serves the website and validated catalog files from static hosting. Java handles collection and normalization; enabled daily GitHub Actions jobs refresh classes, resume instructor searches, and commit verified results and search progress back to this repository. Browsing needs no always-running API or database. Spring Boot REST and PostgreSQL adapters remain available when needed.
 
 ## Run locally
 
@@ -14,7 +14,7 @@ npm ci
 npm run dev
 ```
 
-Open Vite’s local URL, normally <http://localhost:5173>. The website reads `frontend/public/data/catalog-index.json` and its catalog files. Records include their actual source collection times. Search, RateMyProfessors links and local schedule planning work without an account or paid service.
+Open Vite’s local URL, normally <http://localhost:5173>. The website reads the saved `frontend/public/data/catalog-index.json` and its catalog files. It also checks this public repository for newer saved data on startup and every 15 minutes while visible, so new instructor records appear without asking Codex or rebuilding the frontend. Unchanged files are reused; a failed or partial remote request keeps the saved local catalog. Set `VITE_CATALOG_BASE_URL=` in `frontend/.env.local` to use bundled data only. Records include their actual source collection times. Search, RateMyProfessors links and local schedule planning work without an account or paid service.
 
 For the optional API, use another terminal:
 
@@ -88,7 +88,7 @@ npm run build
 npm run preview
 ```
 
-CI runs these checks on pushes and pull requests. The refresh workflow builds and publishes only checked output. [Manual checks](docs/operations.md) cover source comparisons, accessibility and visual behavior.
+CI runs these checks on pushes and pull requests. The refresh workflow builds and saves only checked output. The catalog and `data/discovery/refresh-state/` are durable Git records; the Actions cache is only an accelerator. [Manual checks](docs/operations.md) cover source comparisons, accessibility and visual behavior.
 
 ## Structure and deployment
 
@@ -97,7 +97,8 @@ frontend/              React UI, catalog index and static catalog files
 backend/               Java domain, ports, adapters and Spring Boot entry point
 data/bootstrap/        Collection orchestration, roster and publication tools
 data/discovery/        Reviewed identity evidence and CSE roster inputs
-artifacts/university/  Local/cache working catalog, history and discovery progress
+data/discovery/refresh-state/  Durable checked queries and refresh status
+artifacts/university/  Disposable working cache and build-only instructor history
 .github/workflows/     Verification and optional scheduled refresh/deployment
 docs/                  Architecture, source coverage, deployment and operations
 render.yaml            Optional API service blueprint

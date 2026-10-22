@@ -26,7 +26,7 @@ Current and historical published instructor names seed each subject’s searches
 
 Python tests, Maven verification and the frontend tests/build run before the new working state is cached or the site is deployed. A failed base collection or required check blocks publication. A failed surname batch preserves its previous evidence and appears in the receipt for retry; validated class data and successful batches can still publish. The seven-day review artifact contains the catalog index/files, built site, collection/discovery receipts and roster/registry.
 
-The daily schedule is **10:23 UTC** and stays disabled until `ENABLE_SCHEDULED_IMPORTS=true`. GitHub schedules can be delayed or skipped. Observe actual timestamps and queue progress instead of assuming every instructor has been rechecked each day.
+The daily schedule is **10:23 UTC** and is enabled by default. Set `PAUSE_CATALOG_REFRESH=true` to pause it. GitHub schedules can be delayed or skipped. Observe actual timestamps and queue progress instead of assuming every instructor has been rechecked each day.
 
 The static publisher groups whole subjects into files with a target size of 4 MiB, separated by term and campus, and refuses an individual file over 24 MiB. A small `catalog-index.json` lists their URLs, scopes and counts. The browser validates the entire manifest and catalog set before using it, downloads up to four files at once, and falls back to legacy `catalog.json` only when the index returns HTTP 404. Publish the index and its referenced files together.
 
@@ -76,3 +76,7 @@ Limits checked against provider documentation on October 20, 2026; review them a
 | Domain           | Optional                 | $0 with provider subdomain; a custom domain adds a separate renewal cost.                                                                                                                                                                        |
 
 A daily import is roughly 30 builds per month, plus development builds. Start with one daily run, watch actual duration and data size, and retain workflow artifacts for only seven days. The publisher already splits catalog assets by term/campus/subject. Monitor Actions cache and artifact storage as catalogs grow; a cache eviction repeats work and does not require paid storage. Configure account spend controls or disable paid overages where supported. A free quota can lead to suspension or require an upgrade; $0 is a target within quotas, not a promise of unlimited service.
+
+## Saved instructor data
+
+Daily collection is enabled by default. Verified catalog files and search progress are committed automatically to GitHub after tests pass. `PAUSE_CATALOG_REFRESH=true` pauses collection. The browser checks newer saved data at `https://raw.githubusercontent.com/leo205/osuProfs/main/frontend/public` and keeps the bundled catalog as a fallback. Override that public base with `VITE_CATALOG_BASE_URL`, or explicitly set it empty for offline/bundled-only use. No always-running database is required for this setup.

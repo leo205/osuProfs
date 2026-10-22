@@ -175,10 +175,14 @@ export function validateCatalog(value: unknown): Catalog {
   return c;
 }
 
-async function fetchCatalog(url: string, timeout = 6500): Promise<Catalog> {
+async function fetchCatalog(
+  url: string,
+  timeout = 6500,
+  cache: RequestCache = "no-cache",
+): Promise<Catalog> {
   const response = await fetch(url, {
     signal: AbortSignal.timeout(timeout),
-    cache: "no-cache",
+    cache,
   });
   if (!response.ok)
     throw new Error(`The catalog request returned ${response.status}.`);
@@ -337,15 +341,29 @@ function mergeCatalogs(index: CatalogIndex, catalogs: Catalog[]): Catalog {
 }
 
 /** Load all scopes atomically: a failed shard must never look like complete coverage. */
-async function fetchSnapshot(): Promise<Catalog> {
-  const response = await fetch("/data/catalog-index.json", {
-    signal: AbortSignal.timeout(15000),
+const snapshotCache = new Map<string, { index: string; catalog: Catalog }>();
+export function clearSnapshotCache() {
+  snapshotCache.clear();
+}
+
+async function fetchSnapshot(base = "", baseline?: Catalog): Promise<Catalog> {
+  const response = await fetch(`${base}/data/catalog-index.json`, {
+    signal: AbortSignal.timeout(base ? 5000 : 15000),
     cache: "no-cache",
   });
-  if (response.status === 404) return fetchCatalog("/data/catalog.json", 30000);
+  if (response.status === 404 && !base)
+    return fetchCatalog("/data/catalog.json", 30000);
   if (!response.ok)
     throw new Error(`The catalog index request returned ${response.status}.`);
   const index = validateCatalogIndex(await response.json());
+  if (
+    baseline &&
+    Date.parse(index.generatedAt) <= Date.parse(baseline.generatedAt)
+  )
+    return baseline;
+  const key = JSON.stringify(index);
+  const cached = snapshotCache.get(base);
+  if (cached?.index === key) return cached.catalog;
   const catalogs = new Array<Catalog>(index.catalogs.length);
   let next = 0;
   await Promise.all(
@@ -354,13 +372,77 @@ async function fetchSnapshot(): Promise<Catalog> {
         const position = next++;
         const shard = index.catalogs[position];
         catalogs[position] = validateShard(
-          await fetchCatalog(shard.url, 30000),
+          await fetchCatalog(
+            `${base}${shard.url}`,
+            30000,
+            /-[a-f0-9]{16}\.json$/.test(shard.url) ? "force-cache" : "no-cache",
+          ),
           shard,
         );
       }
     }),
   );
-  return mergeCatalogs(index, catalogs);
+  const catalog = mergeCatalogs(index, catalogs);
+  snapshotCache.set(base, { index: key, catalog });
+  return catalog;
+}
+
+async function fetchCurrentSnapshot(): Promise<Catalog> {
+  let bundled: Catalog | undefined;
+  let bundleError: unknown;
+  try {
+    bundled = await fetchSnapshot();
+  } catch (error) {
+    bundleError = error;
+  }
+  const configured =
+    import.meta.env.VITE_CATALOG_BASE_URL ??
+    "https://raw.githubusercontent.com/leo205/osuProfs/main/frontend/public";
+  if (!configured) {
+    if (bundled) return bundled;
+    throw bundleError;
+  }
+  try {
+    const url = new URL(configured);
+    if (
+      url.protocol !== "https:" ||
+      url.username ||
+      url.password ||
+      url.search ||
+      url.hash
+    )
+      throw new Error("Live catalog must use a public HTTPS base URL.");
+    const remote = await fetchSnapshot(url.href.replace(/\/$/, ""), bundled);
+    if (!bundled) return remote;
+    const candidate = restrictApiTerms(remote, bundled);
+    const complete = new Set(
+      candidate.coverage
+        .filter((scope) => scope.complete)
+        .flatMap((scope) =>
+          scope.subjects.map(
+            (subject) => `${scope.termCode}/${scope.campus}/${subject}`,
+          ),
+        ),
+    );
+    const remoteTimes = scopeTimestamps(candidate),
+      localTimes = scopeTimestamps(bundled);
+    const preservesCoverage = bundled.coverage.every((scope) =>
+      scope.subjects.every((subject) => {
+        const key = `${scope.termCode}/${scope.campus}/${subject}`;
+        return (
+          complete.has(key) &&
+          (remoteTimes.get(key) ?? Date.parse(candidate.generatedAt)) >=
+            (localTimes.get(key) ?? Date.parse(bundled.generatedAt))
+        );
+      }),
+    );
+    return preservesCoverage ? candidate : bundled;
+  } catch {
+    if (bundled) return bundled;
+    throw new Error(
+      "The saved course catalog could not be loaded. Try again shortly.",
+    );
+  }
 }
 
 function scopeTimestamps(catalog: Catalog): Map<string, number> {
@@ -398,7 +480,7 @@ export async function loadCatalog(): Promise<LoadedCatalog> {
   if (apiBase) {
     const [api, snapshot] = await Promise.allSettled([
       fetchCatalog(`${apiBase}/api/catalog`, 2500),
-      fetchSnapshot(),
+      fetchCurrentSnapshot(),
     ]);
     if (api.status === "fulfilled" && snapshot.status === "fulfilled") {
       const apiCatalog = restrictApiTerms(api.value, snapshot.value);
@@ -504,7 +586,7 @@ export async function loadCatalog(): Promise<LoadedCatalog> {
     );
   }
   return {
-    catalog: await fetchSnapshot(),
+    catalog: await fetchCurrentSnapshot(),
     via: "snapshot",
     fallback: false,
   };

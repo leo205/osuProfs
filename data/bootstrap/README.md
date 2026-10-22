@@ -83,3 +83,7 @@ Run all collection, publisher and resume tests with:
 ```sh
 python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
 ```
+
+## Durable instructor results and progress
+
+The scheduled workflow saves verified catalog data and completed query state back to GitHub each day. `data/discovery/refresh-state/` is durable; `artifacts/university/` is a disposable working cache. Recover locally with `python3 data/bootstrap/durable_state.py restore`. After collection, publication and all required tests pass, run `python3 data/bootstrap/durable_state.py save` and commit the generated data together. The save command rejects working results that differ from the validated public catalog and strips private diagnostics from its public status file. Historical classes remain build-only inputs.

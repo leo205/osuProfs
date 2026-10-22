@@ -45,6 +45,23 @@ class PublishCatalogTest(unittest.TestCase):
                 publish(catalog, directory)
             self.assertEqual(before, path.read_bytes())
 
+    def test_daily_updates_retain_only_current_and_previous_generated_files(self):
+        catalog = self.catalog()
+        with tempfile.TemporaryDirectory() as directory:
+            first = publish(catalog, directory)
+            first_file = Path(directory) / first["catalogs"][0]["url"].removeprefix("/data/")
+            catalog["generatedAt"] = "2026-10-21T00:00:00Z"
+            second = publish(catalog, directory)
+            second_file = Path(directory) / second["catalogs"][0]["url"].removeprefix("/data/")
+            self.assertTrue(first_file.exists())
+            unrelated = Path(directory) / "catalogs/notes.json"
+            unrelated.write_text("unrelated")
+            catalog["generatedAt"] = "2026-10-22T00:00:00Z"
+            publish(catalog, directory)
+            self.assertFalse(first_file.exists())
+            self.assertTrue(second_file.exists())
+            self.assertTrue(unrelated.exists())
+
     def test_groups_whole_subjects_without_overlapping_scopes(self):
         catalog = self.catalog()
         other = copy.deepcopy(catalog["courses"][0])

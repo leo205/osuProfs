@@ -147,6 +147,10 @@ def publish(catalog, output_dir, target_bytes=4 * 1024 * 1024):
     if target_bytes < 1024 or target_bytes > 24 * 1024 * 1024:
         raise ValueError("Shard target must be between 1 KiB and 24 MiB")
     output_dir = Path(output_dir)
+    previous_files = set()
+    previous_index = output_dir / "catalog-index.json"
+    if previous_index.exists():
+        previous_files = {entry["url"] for entry in json.loads(previous_index.read_text()).get("catalogs", [])}
     grouped, coverage_by_subject = defaultdict(lambda: defaultdict(list)), {}
     for scope in catalog["coverage"]:
         for subject in scope["subjects"]:
@@ -188,6 +192,13 @@ def publish(catalog, output_dir, target_bytes=4 * 1024 * 1024):
     for relative, content, _ in prepared:
         atomic_write(output_dir / relative, content)
     atomic_write(output_dir / "catalog-index.json", encoded(manifest))
+    # Retain one previous generation for clients reading a cached index. Daily
+    # refreshes must not accumulate a complete extra university snapshot forever.
+    retained = previous_files | {entry["url"] for entry in manifest["catalogs"]}
+    for old in (output_dir / "catalogs").glob("*.json"):
+        if (re.fullmatch(r"\d{4}-[a-z]+-\d+-[a-f0-9]{16}\.json", old.name)
+                and "/data/catalogs/" + old.name not in retained):
+            old.unlink()
     # The legacy combined file can exceed Pages' per-file limit at university scale.
     (output_dir / "catalog.json").unlink(missing_ok=True)
     return manifest

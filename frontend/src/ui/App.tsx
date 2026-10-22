@@ -122,6 +122,8 @@ export default function App() {
   const [storageError, setStorageError] = useState(false);
   const [notice, setNotice] = useState("");
   const initialized = useRef(false);
+  const refreshInFlight = useRef(false);
+  const lastRefresh = useRef(0);
   const noticeTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
   );
@@ -165,23 +167,46 @@ export default function App() {
     noticeTimeout.current = setTimeout(() => setNotice(""), 5000);
   }, []);
 
-  const refresh = useCallback(async () => {
-    setRefreshing(true);
+  const refresh = useCallback(async (background = false) => {
+    if (refreshInFlight.current) return false;
+    refreshInFlight.current = true;
+    if (!background) setRefreshing(true);
     try {
       setLoaded(await loadCatalog());
       setError("");
       return true;
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Unable to load the catalog.");
+      if (!background)
+        setError(
+          e instanceof Error ? e.message : "Unable to load the catalog.",
+        );
       return false;
     } finally {
       setRefreshing(false);
+      refreshInFlight.current = false;
+      lastRefresh.current = Date.now();
     }
   }, []);
 
   useEffect(() => {
     void refresh();
-    return () => clearTimeout(noticeTimeout.current);
+    const interval = 15 * 60 * 1000;
+    const check = () => {
+      if (
+        document.visibilityState === "visible" &&
+        Date.now() - lastRefresh.current >= interval
+      )
+        void refresh(true);
+    };
+    const timer = setInterval(check, interval);
+    window.addEventListener("focus", check);
+    document.addEventListener("visibilitychange", check);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener("focus", check);
+      document.removeEventListener("visibilitychange", check);
+      clearTimeout(noticeTimeout.current);
+    };
   }, [refresh]);
 
   useEffect(() => {

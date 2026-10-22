@@ -104,3 +104,7 @@ All application endpoints are read-only. The importer is a CLI use case, not a p
 Course pagination is zero-based (`page=0`); `size` defaults to 25 with a maximum of 100. `number` is an exact catalog-number filter, while `q` searches titles, normalized subject/number combinations, and instructor names/surname evidence/likely full names. The frontend instructor browser combines published identities and reviewed full-name candidates, with section-specific published/likely labels and source links. Example: `/api/courses?term=1272&subject=CSE&number=2221&page=0&size=25`.
 
 This is one deployable backend rather than separate microservices. The importer and REST API are different entry points into the same application core. Use one scheduled refresh job with persisted batch progress. Its queue and published static files provide broader coverage without requiring an always-running service or distributed workers.
+
+## Durable refresh and client updates
+
+The refresh workflow commits verified catalog snapshots and sanitized query progress to the repository. Actions cache recovery is optional: `durable_state.py` restores the saved catalog and query timestamps, preserving newer validated cache work when available. No student or public-session credentials enter the durable files. The React adapter checks a public HTTPS snapshot base for newer complete data, preserving the configured upcoming terms and falling back to the bundled files. Manifest-based memory caching and immutable file caching avoid downloading unchanged university snapshots every 15 minutes.

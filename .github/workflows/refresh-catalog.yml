@@ -1,9 +1,14 @@
-name: Refresh catalog and optionally publish
+name: Refresh and save instructor data
 
 on:
   schedule:
-    # 10:23 UTC; daily collection is opt-in via ENABLE_SCHEDULED_IMPORTS.
+    # 10:23 UTC daily. PAUSE_CATALOG_REFRESH=true pauses collection.
     - cron: "23 10 * * *"
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/refresh-catalog.yml
+      - data/bootstrap/durable_state.py
   workflow_dispatch:
     inputs:
       term:
@@ -36,14 +41,16 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_SCHEDULED_IMPORTS == 'true'
+    if: github.ref_name == github.event.repository.default_branch && vars.PAUSE_CATALOG_REFRESH != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    permissions:
+      contents: write
     env:
       IMPORT_TERM: ${{ inputs.term || '1272' }}
       HISTORY_TERM: ${{ inputs.history_term || '1268' }}
       IMPORT_CAMPUSES: ${{ inputs.campuses || 'ALL' }}
-      DISCOVERY_MINUTES: ${{ inputs.discovery_minutes || '20' }}
+      DISCOVERY_MINUTES: ${{ inputs.discovery_minutes || (github.event_name == 'push' && '2') || '20' }}
       REFRESH_HISTORY: ${{ inputs.refresh_history && 'true' || 'false' }}
       EVENT_NAME: ${{ github.event_name }}
       VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
@@ -87,17 +94,8 @@ jobs:
         run: python3 -m unittest discover -s data/bootstrap -p 'test_*.py'
       - name: Verify Java importer
         run: mvn -B -ntp -f backend/pom.xml verify
-      - name: Prepare a working snapshot from the checked-in catalog if needed
-        run: |
-          if [ ! -f artifacts/university/catalog.json ]; then
-            baseline=frontend/public/data/catalog-index.json
-            if [ ! -f "$baseline" ]; then
-              baseline=frontend/public/data/catalog.json
-            fi
-            python3 data/bootstrap/publish_catalog.py \
-              --input "$baseline" \
-              --flatten artifacts/university/catalog.json
-          fi
+      - name: Restore durable instructor results and checked search progress
+        run: python3 data/bootstrap/durable_state.py restore
       - name: Refresh official CSE roster and reviewed surname seeds
         run: >-
           python3 data/bootstrap/update_cse_roster.py
@@ -114,6 +112,11 @@ jobs:
             --discover
             --discovery-minutes "$DISCOVERY_MINUTES"
           )
+          # Configuration pushes prove durable publication promptly using the
+          # verified saved inventory. Daily/manual runs also recollect all classes.
+          if [ "$EVENT_NAME" = "push" ]; then
+            refresh_args+=(--skip-base)
+          fi
           if [ "$REFRESH_HISTORY" = "true" ] || { [ "$EVENT_NAME" = "schedule" ] && [ "$(date -u +%u)" = "7" ]; }; then
             refresh_args+=(--refresh-history)
           fi
@@ -124,6 +127,24 @@ jobs:
           npm ci
           npm test
           npm run build
+      - name: Prepare durable search state and public refresh status
+        run: python3 data/bootstrap/durable_state.py save
+      - name: Save verified instructor data back to the repository
+        env:
+          SAVE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- frontend/public/data data/discovery/refresh-state data/discovery/cse-instructor-identities.json data/discovery/cse-surnames.txt data/discovery/cse-directory-collection.json
+          if git diff --cached --quiet; then
+            echo 'No saved data changed.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git commit -m 'Refresh upcoming course instructors and saved search progress'
+          git fetch origin "$SAVE_BRANCH"
+          git rebase "origin/$SAVE_BRANCH"
+          git push origin "HEAD:$SAVE_BRANCH"
+          echo 'Verified instructor data and search progress saved permanently in the repository.' >> "$GITHUB_STEP_SUMMARY"
       - name: Save checked collection and resumable instructor-search progress
         uses: actions/cache/save@v4
         with:
@@ -138,6 +159,7 @@ jobs:
             frontend/dist
             artifacts/university/collection.json
             artifacts/university/discovery-state.json
+            data/discovery/refresh-state
             data/discovery/cse-instructor-identities.json
             data/discovery/cse-surnames.txt
             data/discovery/cse-directory-collection.json
